@@ -1,14 +1,21 @@
 Title: Chromebook Install Crouton in china
+
 Date: 2017-03-13
+
 Category: chromebook
+
 Tags: crouton
+
 Slug: my-first-post
+
 Author: seqyuan
+
 Summary: ASUS Chromebook C202通过crouton安装linux
 
 #在 Chromebook 上面安装 Linux 发行版有2种方法：
 
 crouton：https://github.com/dnschneid/crouton
+
 ChrUbuntu：https://github.com/iantrich/ChrUbuntu-Guides
 
 crouton 是比较流行的安装方法，主要特点如下：
@@ -19,19 +26,22 @@ crouton 是比较流行的安装方法，主要特点如下：
 - 需要科学上网
 - 每次 Chrome OS 升级后需要更新一下
 
-一般crouton的安装教程从网上都能找到，但是真正安装的时候总会出现各种问题导致安装不成功，也许你会遇到同样的问题。
-下面的教程是我失N多总结的经验。
+一般crouton的安装教程从网上都能找到，但是真正安装的时候总会出现各种问题导致安装不成功，也许你会遇到同样的问题。下面的教程是我失N多总结的经验。
 
 #install crouton
 
 ##开启开发者模式
 如果你决定要通过 crouton 的方式安装Linux 发行版，你需要：
+
 一个已经开启开发者模式的 ChromeBook（关于开启开发者模式网上有很多教程，这里不另外叙述）
+
 有充足的电量
+
 良好的网络环境
 
 ##下载 crouton
 从github打下载crouton，网址：https://github.com/dnschneid/crouton
+
 下载后解压
 
 ##修改crouton
@@ -41,17 +51,25 @@ crouton 是比较流行的安装方法，主要特点如下：
 第47行：
 
 ( wget -O "$archive" "$urlbase/$ADHD_HEAD.tar.gz" 2>&1 \
+
                                     || echo "Error fetching CRAS" ) | tee "$log"
+                                    
 改为：
 
+
 ( wget -O "$archive" "http://t.cn/R46YOzM" 2>&1 \
+
                                     || echo "Error fetching CRAS" ) | tee "$log"
 
 ##make crouton
 继上一步更targets/audio后，在crouton目录中执行
+
 `make`
+
 （在linux环境下执行make）
+
 会生成一个*crouton*文件
+
 把这个*crouton*文件放到你的chromebook的 ~/Downloads目录下
 
 ##开始安装
@@ -115,6 +133,7 @@ sudo enter-chroot
 
 ##删除发行版
 可以使用 sudo delete-chroot chrootname 来删除发行版，其中 chrootname 一般是发行版代号
+
 也可以直接删除 /usr/local/chroot 里面的文件夹
 
 
