@@ -49,18 +49,16 @@ crouton 是比较流行的安装方法，主要特点如下：
 更改解压后的crouton中targets/audio文件:
 
 第47行：
-
+```
 ( wget -O "$archive" "$urlbase/$ADHD_HEAD.tar.gz" 2>&1 \
-
                                     || echo "Error fetching CRAS" ) | tee "$log"
-                                    
+```
 改为：
 
-
+```
 ( wget -O "$archive" "http://t.cn/R46YOzM" 2>&1 \
-
                                     || echo "Error fetching CRAS" ) | tee "$log"
-
+```
 ##make crouton
 继上一步更targets/audio后，在crouton目录中执行
 
