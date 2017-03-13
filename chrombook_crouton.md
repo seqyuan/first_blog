@@ -122,11 +122,13 @@ sudo apt-get install language-pack-gnome-zh-hans
 ##使用linux
 我一般情况下只用以下方式使用linux命令行，而不用桌面版环境
 
-```
-Ctrl + Alt + T 打开命令行标签页
-输入 shell 进入命令行
-sudo enter-chroot
-```
+
+- Ctrl + Alt + T 打开命令行标签页
+
+输入 `shell` 进入命令行
+
+`sudo enter-chroot`
+
 进入linux命令行
 
 好处是一个网页标签就可以使用linux系统了，复制粘贴都方便
