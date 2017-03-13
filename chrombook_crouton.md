@@ -107,15 +107,18 @@ You can start Xfce via the startxfce4 host command: sudo startxfce4
 
 ###安装中文语言包
 因为安装后是什么都不带的系统，因此是英文系统，要使用中文语言先安装语言包：
-
-1. sudo apt-get install language-pack-zh-hans
-2. sudo apt-get install language-pack-gnome-zh-hans
+```
+sudo apt-get install language-pack-zh-hans
+sudo apt-get install language-pack-gnome-zh-hans
+```
 接下来安装语言选择器：
 
 - sudo apt-get install language-selector-gnome
+
 安装好后应该就可以从 Settings-Language Support更改语言了
 
 - sudo update-locale LANG="zh_CN.UTF-8" LANGUAGE="zh_cn:en"
+
 之后重启即可变更为中文语言
 
 ##使用linux
