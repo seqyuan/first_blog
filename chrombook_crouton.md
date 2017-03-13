@@ -6,7 +6,7 @@ Category: chromebook
 
 Tags: crouton
 
-Slug: my-first-post
+Slug: Chromebook Install Crouton in china
 
 Author: seqyuan
 
