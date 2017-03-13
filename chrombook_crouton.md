@@ -111,11 +111,11 @@ sudo apt-get install language-pack-gnome-zh-hans
 ```
 接下来安装语言选择器：
 
-- sudo apt-get install language-selector-gnome
+`sudo apt-get install language-selector-gnome`
 
 安装好后应该就可以从 Settings-Language Support更改语言了
 
-- sudo update-locale LANG="zh_CN.UTF-8" LANGUAGE="zh_cn:en"
+`sudo update-locale LANG="zh_CN.UTF-8" LANGUAGE="zh_cn:en"`
 
 之后重启即可变更为中文语言
 
@@ -133,7 +133,7 @@ sudo enter-chroot
 
 
 ##删除发行版
-可以使用 sudo delete-chroot chrootname 来删除发行版，其中 chrootname 一般是发行版代号
+可以使用 `sudo delete-chroot chrootname` 来删除发行版，其中 chrootname 一般是发行版代号
 
 也可以直接删除 /usr/local/chroot 里面的文件夹
 
