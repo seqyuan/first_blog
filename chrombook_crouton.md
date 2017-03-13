@@ -12,7 +12,8 @@ Author: seqyuan
 
 Summary: ASUS Chromebook C202通过crouton安装linux
 
-#在 Chromebook 上面安装 Linux 发行版有2种方法：
+
+在 Chromebook 上面安装 Linux 发行版有2种方法：
 
 crouton：https://github.com/dnschneid/crouton
 
@@ -28,7 +29,7 @@ crouton 是比较流行的安装方法，主要特点如下：
 
 一般crouton的安装教程从网上都能找到，但是真正安装的时候总会出现各种问题导致安装不成功，也许你会遇到同样的问题。下面的教程是我失N多总结的经验。
 
-#install crouton
+#Install crouton
 
 ##开启开发者模式
 如果你决定要通过 crouton 的方式安装Linux 发行版，你需要：
