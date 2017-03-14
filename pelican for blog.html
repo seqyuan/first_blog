@@ -75,10 +75,16 @@ pelican-quickstart
 
 
 <p><code>git clone --branch gh-pages git@github.com:seqyuan/blog.git output</code>
-<code>make html</code>
-<code>make github</code></p>
-<p>Makefile:1: *** missing separator.  Stop.
-<code>perl -pi -e 's/^  */\t/' Makefile</code></p>
+<code>make html</code></p>
+<div class="highlight"><pre><span></span>cd output
+git add -A
+git commit -m &quot;change log&quot;
+git push origin gh-pages
+</pre></div>
+
+
+<p>Makefile:1: *** missing separator.  Stop.</p>
+<p><code>perl -pi -e 's/^  */\t/' Makefile</code></p>
             
             
             <hr/>
