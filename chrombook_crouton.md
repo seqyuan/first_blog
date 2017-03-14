@@ -1,15 +1,9 @@
 Title: Chromebook Install Crouton in china
-
 Date: 2017-03-13
-
 Category: chromebook
-
 Tags: crouton
-
 Slug: Chromebook Install Crouton in china
-
 Author: seqyuan
-
 Summary: ASUS Chromebook C202通过crouton安装linux
 
 
