@@ -69,8 +69,9 @@
 
             
             <h3>实现linux集群间不同节切换无密码登录</h3>
-<p><code>ssh-keygen -t rsa</code>
-出现以下结果</p>
+<p>在客户执行以下命令</p>
+<p><code>ssh-keygen -t rsa</code></p>
+<p>出现以下结果</p>
 <div class="highlight"><pre><span></span>Generating public/private rsa key pair.
 Enter file in which to save the key (/home/yuanzan/.ssh/id_rsa):
 /home/yuanzan/.ssh/id_rsa already exists.
@@ -96,9 +97,9 @@ The key&#39;s randomart image is:
 </pre></div>
 
 
-<p>然后执行以下命令，添加pulic key 到 authorized_keys即可
-<code>cat ～/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code>
-重新打开一个远程窗口就能在节点之间无密码切换了</p>
+<p>然后执行以下命令，添加pulic key 到 authorized_keys即可</p>
+<p><code>cat ～/.ssh/id_rsa.pub &gt;&gt; ~/.ssh/authorized_keys</code></p>
+<p>重新打开一个远程窗口就能在节点之间无密码切换了</p>
             
             
             <hr/>
