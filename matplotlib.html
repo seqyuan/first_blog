@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="seqyuan" />
+        <meta name="copyright" content="seqyuan" />
+
+<meta name="keywords" content="crouton, popular genes, " />
+        <title>复现"The most popular genes in the human genome"  · seqyuan
+</title>
+        <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/solarizedlight.css" media="screen">
+        <link rel="shortcut icon" href="/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="/theme/images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="/theme/images/apple-touch-icon-144x144.png" />
+        <link rel="icon" href="/theme/images/apple-touch-icon-144x144.png" />
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/"><span class=site-name>seqyuan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="">Home</a></li>
+                            <li ><a href="/categories.html">Categories</a></li>
+                            <li ><a href="/tags.html">Tags</a></li>
+                            <li ><a href="/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page_header span10 offset2">
+    <h1><a href="/matplotlib.html"> 复现"The most popular genes in the human genome"  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            <p>从14年入行接触编程至今除早期入门阶段外很少记编程笔记，更多的是从以前写过的程序里去找自己想要的东西，两年前写的主要代码的架构和重要元素依稀记得。</p>
+<p>前几天看到一篇文章《NATURE》长文：The most popular genes in the human genome，除了对文章的内容有很大兴趣之外，对于文中的图的精美也很向往，为了做matplotlib画图demo, 记录一些常用画图设置模板，我打算重现文中的两张图。</p>
+<h3>要重现原图如下</h3>
+<p>第一幅图是一个条形图,展示了被研究次数最多10个的基因</p>
+<p>第二幅图展示了所有基因的研究次数及基因在染色体上的位置</p>
+<p><img alt="结果示例" src="./N1.jpg" />
+ <img alt="结果示例" src="./N2.jpg" /></p>
+<h3>下载的数据</h3>
+<ul>
+<li>顺藤摸瓜，找到做这个项目的github：https://github.com/pkerpedjiev/gene-citation-counts</li>
+<li>发现人基因组所有基因被研究次数的文件https://github.com/pkerpedjiev/gene-citation-counts/all_gene_counts.tsv 果断下载</li>
+<li>要重现第二幅图还需要基因组大小文件以及着丝粒在基因组上的位置信息，所以需要下载http://hgdownload.cse.ucsc.edu/goldenpath/hg19/database/chromInfo.txt.gz，http://hgdownload.cse.ucsc.edu/goldenPath/hg19/database/cytoBand.txt.gz</li>
+<li>在作者github这个项目的Issues里发现有人提了一个问题：你做的都是针对gene，尝试做一下ncRNA会有更有意思的东西发现吧。作者果断甩出一个文件链接gene_info_total_human.tsv，回答说所有的基因组元件citations信息都在这里，你感兴趣自己玩去。我果断下载之，发现文件中被研究最多的基因按照研究次数进行了排序，所以这个文件就作为了我重现第一幅图的数据源。ps：唯一的Issues已经被作者删除，当然包括gene_info_total_human.tsv的下载地址</li>
+</ul>
+<h3>第一幅图被重现，程序用法如下</h3>
+<p><code>python3 The_Most_Studied_Genes.py -i gene_info_total_human.tsv -n 20</code></p>
+<h3>第一幅效果如下</h3>
+<p><img alt="结果示例" src="./The_top10_citations.png" />
+ <img alt="结果示例" src="./The_top20_citations.png" /></p>
+<h3>第二幅图照虎画猫</h3>
+<p>输入参数就固定写了，程序和数据（all_gene_counts.tsv）放同一目录下，直接执行就会出结果，之所以没用gene_info_total_human.tsv作为数据源是因为gene_info_total_human.tsv不带有基因位置信息（省点事）</p>
+<p><code>python3 gene_on_chrom.py</code> </p>
+<h3>第二幅效果如下</h3>
+<p><img alt="结果示例" src="./gene_on_chrom.png" /></p>
+<p>通过与原图的对比我发现和文章结果是一些出入的，在top10基因的排名上，有些不同，也许作者两组数据的产生时间稍有不同。如果想彻底问清楚可以一步步重现作者的搜集数据步骤，自己做数据搜集工作。</p>
+<p>还有点不同是对于着丝粒区域的处理，我是按照比例显示，原图是给了固定的数值</p>
+<h3>发现</h3>
+<p>X染色体上被研究最多的一个基因为AR(Androgen receptor),蛋白结构如下：</p>
+<p><img alt="结果示例" src="./AR_PDB.png" /></p>
+<p>在基因组上的位置</p>
+<p><img alt="结果示例" src="./AR-gene.png" /></p>
+<h3>源代码</h3>
+<p>https://github.com/seqyuan/programs/tree/master/plot/The_Most_Studied_Genes</p>
+<h3>微信公众号</h3>
+<p>下图是我的微信公众号，会写一些生物信息相关的文章，欢迎关注。</p>
+<p><img alt="结果示例" src="./seqyuan.jpg" /></p>
+            <aside>
+            <hr/>
+            <nav>
+            <ul class="articles_timeline">
+ 
+                <li class="previous_article">« <a href="/linux.html" title="Previous: linux常用总结">linux常用总结</a></li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+ 
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2017-11-30T00:00:00+08:00">Nov 30, 2017</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#popular-genes-ref">popular genes</a> 
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article"> 
+                <li><a href="/tags.html#crouton-ref">crouton
+                    <span>2</span>
+</a></li>
+            </ul>
+
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    </body>
+</html>
