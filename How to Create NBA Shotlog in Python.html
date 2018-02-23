@@ -79,17 +79,11 @@
 <li>锁定目标网站(哪个网站有NBA球员shot log数据)</li>
 <li>具体网页对象(具体哪个网页有shot log数据)</li>
 <li>分析shot log API</li>
-<li>
-<p>通过API获取感兴趣球员的shot log数据</p>
-</li>
-<li>
-<p><strong>锁定目标网站</strong></p>
-</li>
+<li>通过API获取感兴趣球员的shot log数据</li>
 </ul>
+<p>1.<strong>锁定目标网站</strong></p>
 <p>目标网站：<a href="http://stats.nba.com">stats.nba.com</a></p>
-<ol>
-<li><strong>具体网页对象</strong></li>
-</ol>
+<p>2.<strong>具体网页对象</strong></p>
 <p>shot log所在的页面标签可能会有改变，有时不在很显眼的位置，这也是很多教程失效的原因(只给了最后API的网址，没有说这个网址是怎么来的)，所以这个得花时间找一下。</p>
 <p>首先打开目标网站<a href="http://stats.nba.com">stats.nba.com</a>，按下图所示依次点击<code>Player</code>，<code>See All Stats</code></p>
 <p><a href="https://stats.nba.com"><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/player_all_stats.png" title="" /></a></p>
@@ -106,9 +100,7 @@
 <p>点击<code>James Harden</code>的<code>FGA</code>数据，跳转后的页面除了以上3个图还包括以下这个表格</p>
 <p><img alt="Harden Shot" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/harden_shot.png" /></p>
 <p>这个表格的内容结合<code>Shot Plot</code>的图，可以确定，要找的<code>具体网页对象</code>应该是这个页面了，但是表格中并没有直接给出投篮位置信息，这个网页访问的API应该包括这些信息，所以我们进入下面的步骤</p>
-<ol>
-<li><strong>分析shot log API</strong></li>
-</ol>
+<p>3.<strong>分析shot log API</strong></p>
 <p>我们以Chrome浏览器为例，在上一步找到的<code>具体网页对象</code>页面打开浏览器的开发者选项(更多工具-&gt;开发者工具)，然后按F5键，刷新页面，你将得到如下页面</p>
 <p><img alt="shot log API" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/API.png" /></p>
 <p><img alt="request url" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/request_url.png" /></p>
@@ -125,9 +117,7 @@
 <li>Requset Headers - 请的表头，用程序爬取网页请求数据时会用到</li>
 </ul>
 <p>通过API获取感兴趣球员的shot log数据</p>
-<ol>
-<li><strong>通过API获取感兴趣球员的shot log数据</strong></li>
-</ol>
+<p>4.<strong>通过API获取感兴趣球员的shot log数据</strong></p>
 <p>上一步得到了<code>James Harden</code>shot log的Request URL和Requset Headers，下面我们要做的是通过python代码获取shot log数据，以下是代码</p>
 <div class="highlight"><pre>    <span class="kn">import</span> <span class="nn">requests</span>
     <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
