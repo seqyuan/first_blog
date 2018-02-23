@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="seqyuan" />
+        <meta name="copyright" content="seqyuan" />
+
+<meta name="keywords" content="matplotlib stats.nba patches, shotlog, " />
+        <title>绘制NBA球员投篮触手位置图  · seqyuan
+</title>
+        <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/solarizedlight.css" media="screen">
+        <link rel="shortcut icon" href="/theme/images/favicon.ico" type="image/x-icon" />
+        <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png" />
+        <link rel="apple-touch-icon" sizes="57x57" href="/theme/images/apple-touch-icon-57x57.png" />
+        <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png" />
+        <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png" />
+        <link rel="apple-touch-icon" sizes="144x144" href="/theme/images/apple-touch-icon-144x144.png" />
+        <link rel="icon" href="/theme/images/apple-touch-icon-144x144.png" />
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/"><span class=site-name>seqyuan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="">Home</a></li>
+                            <li ><a href="/categories.html">Categories</a></li>
+                            <li ><a href="/tags.html">Tags</a></li>
+                            <li ><a href="/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page_header span10 offset2">
+    <h1><a href="/How to Create NBA Shotlog in Python.html"> 绘制NBA球员投篮触手位置图  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            <p>很多篮球迷对NBA球员的习惯出手位置感兴趣，想要得到如下的这种图：</p>
+<p><a href="http://www.austinclemens.com/shotcharts/"><img alt="shotlog example" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/Antetokounmpo_shotlog.png" title="" /></a></p>
+<p>经搜索发现网上已有相关资源，基本都来源于<a href="http://savvastjortjoglou.com/nba-shot-sharts.html">How to Create NBA Shot Charts in Python</a>，但是现在按照这些教程都不能重现。</p>
+<p>本文将介绍怎样具体可操作的用python的matplotlib包实现绘制NBA球员投篮出手位置图。</p>
+<h3>要做到这件事主要是解决两个大问题:</h3>
+<ul>
+<li>NBA球员的投篮数据从哪里获得 (大多网上已有资源卡在了这里)</li>
+<li>怎么样绘制到图表</li>
+</ul>
+<h3>我们将练习到如下知识:</h3>
+<ul>
+<li>怎么样通过网页分析获取数据API</li>
+<li>获取网页数据的基础方式</li>
+<li>绘制篮球半场图</li>
+</ul>
+<h1>第一部分--获取球员投篮位置数据</h1>
+<p>NBA官方并没有提供公共的API方便我们访问球员的shot log, <a href="http://www.gregreda.com/2015/02/15/web-scraping-finding-the-api/">Web Scraping 201: finding the API</a>这篇文章为我们提供了分析网页寻找数据API的方法，我们要分析NBA球员shot log可拆解成以下步骤：</p>
+<ul>
+<li>锁定目标网站(哪个网站有NBA球员shot log数据)</li>
+<li>具体网页对象(具体哪个网页有shot log数据)</li>
+<li>分析shot log API</li>
+<li>
+<p>通过API获取感兴趣球员的shot log数据</p>
+</li>
+<li>
+<p><strong>锁定目标网站</strong></p>
+</li>
+</ul>
+<p>目标网站：<a href="http://stats.nba.com">stats.nba.com</a></p>
+<ol>
+<li><strong>具体网页对象</strong></li>
+</ol>
+<p>shot log所在的页面标签可能会有改变，有时不在很显眼的位置，这也是很多教程失效的原因(只给了最后API的网址，没有说这个网址是怎么来的)，所以这个得花时间找一下。</p>
+<p>首先打开目标网站<a href="http://stats.nba.com">stats.nba.com</a>，按下图所示依次点击<code>Player</code>，<code>See All Stats</code></p>
+<p><a href="https://stats.nba.com"><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/player_all_stats.png" title="" /></a></p>
+<p>按照图中1、2顺序点击后会得到以下页面</p>
+<p><a href="https://stats.nba.com/leaders/"><img alt="leaders" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/leaders.png" title="" /></a></p>
+<p>页面表格是每个NBA球员的数据，表头都是简写，通过图示点击<code>GLOSSARY</code>我们得到表头详细信息，其中<code>FGA-Field Goals Attempted</code>表示尝试投篮的位置，表格中每个球员的<code>FGA</code>列的数字都是可点击的，我们按上图所示点击<code>James Harden</code>的<code>FGA</code>列数字，跳转的结果是显示了<code>James Harden</code>2017-18常规赛的<code>Hex Hap</code></p>
+<p><img alt="Hex Map" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/hex_map.png" /></p>
+<p><code>Shot Plot</code></p>
+<p><img alt="Shot Plot" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/shot_plot.png" /></p>
+<p><code>Shot Zones</code></p>
+<p><img alt="Shot Zones" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/shot_zones.png" /></p>
+<p>好了，可以结束了...</p>
+<p>等等，我们的目的不是简单得到<code>Shot Plot</code>，而是要练习一些知识，所以，继续</p>
+<p>点击<code>James Harden</code>的<code>FGA</code>数据，跳转后的页面除了以上3个图还包括以下这个表格</p>
+<p><img alt="Harden Shot" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/harden_shot.png" /></p>
+<p>这个表格的内容结合<code>Shot Plot</code>的图，可以确定，要找的<code>具体网页对象</code>应该是这个页面了，但是表格中并没有直接给出投篮位置信息，这个网页访问的API应该包括这些信息，所以我们进入下面的步骤</p>
+<ol>
+<li><strong>分析shot log API</strong></li>
+</ol>
+<p>我们以Chrome浏览器为例，在上一步找到的<code>具体网页对象</code>页面打开浏览器的开发者选项(更多工具-&gt;开发者工具)，然后按F5键，刷新页面，你将得到如下页面</p>
+<p><img alt="shot log API" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/API.png" /></p>
+<p><img alt="request url" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/request_url.png" /></p>
+<p><img alt="request headers" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/headers.png" /></p>
+<p>我们按上图红色数字标注，依次点击，选择<code>Network</code>，然后点击<code>XHR</code>进行过滤，<code>XHR</code>是<a href="https://en.wikipedia.org/wiki/XMLHttpRequest">XMLHttpRequest</a>的简写 - 这是一种用来获取XML或JSON数据的请求类型。经<code>XHR</code>筛选后表格中的有几个条目，红色数字标注为3的既是我们将要查找的shot log API，<code>Preview</code>标签中包括：</p>
+<ul>
+<li>resource - 请求的名称 shotchartdetail。</li>
+<li>parameters - 请求参数，提交给API的请求参数，我们可以理解成SQL语言的条件语句，例如赛季、球员ID等等，我们改变URL中的参数就能得到不同的数据</li>
+<li>resultSets - 请求得到的数据集，包含两个表格。仔细看表头（headers）第一个表格包含我们想要的shot log信息（LOC_X，LOC_Y）。</li>
+</ul>
+<p>与<code>Preview</code>并列的<code>Headers</code>标签包含：</p>
+<ul>
+<li>Request URL - API URL</li>
+<li>Requset Headers - 请的表头，用程序爬取网页请求数据时会用到</li>
+</ul>
+<p>通过API获取感兴趣球员的shot log数据</p>
+<ol>
+<li><strong>通过API获取感兴趣球员的shot log数据</strong></li>
+</ol>
+<p>上一步得到了<code>James Harden</code>shot log的Request URL和Requset Headers，下面我们要做的是通过python代码获取shot log数据，以下是代码</p>
+<div class="highlight"><pre>    <span class="kn">import</span> <span class="nn">requests</span>
+    <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+    <span class="n">shot_chart_url</span> <span class="o">=</span> <span class="s">&#39;http://stats.nba.com/stats/shotchartdetail?AheadBehind=&amp;&#39;</span>\
+                     <span class="s">&#39;CFID=&amp;CFPARAMS=&amp;ClutchTime=&amp;Conference=&amp;ContextFilter=&amp;ContextMeasure=FGA&#39;</span>\
+                     <span class="s">&#39;&amp;DateFrom=&amp;DateTo=&amp;Division=&amp;EndPeriod=10&amp;EndRange=28800&amp;GROUP_ID=&amp;GameEventID=&#39;</span>\
+                     <span class="s">&#39;&amp;GameID=&amp;GameSegment=&amp;GroupID=&amp;GroupMode=&amp;GroupQuantity=5&amp;LastNGames=0&amp;LeagueID=00&#39;</span>\
+                     <span class="s">&#39;&amp;Location=&amp;Month=0&amp;OnOff=&amp;OpponentTeamID=0&amp;Outcome=&amp;PORound=0&amp;Period=0&amp;PlayerID={PlayerID}&#39;</span>\
+                     <span class="s">&#39;&amp;PlayerID1=&amp;PlayerID2=&amp;PlayerID3=&amp;PlayerID4=&amp;PlayerID5=&amp;PlayerPosition=&amp;PointDiff=&amp;Position=&#39;</span>\
+                     <span class="s">&#39;&amp;RangeType=0&amp;RookieYear=&amp;Season={Season}&amp;SeasonSegment=&amp;SeasonType={SeasonType}&#39;</span>\
+                     <span class="s">&#39;&amp;ShotClockRange=&amp;StartPeriod=1&amp;StartRange=0&amp;StarterBench=&amp;TeamID=0&amp;VsConference=&#39;</span>\
+                     <span class="s">&#39;&amp;VsDivision=&amp;VsPlayerID1=&amp;VsPlayerID2=&amp;VsPlayerID3=&amp;VsPlayerID4=&amp;VsPlayerID5=&#39;</span>\
+                     <span class="s">&#39;&amp;VsTeamID=&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">PlayerID</span><span class="o">=</span><span class="mi">201935</span><span class="p">,</span><span class="n">Season</span><span class="o">=</span><span class="s">&#39;2017-18&#39;</span><span class="p">,</span><span class="n">SeasonType</span><span class="o">=</span><span class="s">&#39;Regular+Season&#39;</span><span class="p">)</span>
+
+    <span class="n">header</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;User-Agent&#39;</span> <span class="p">:</span> <span class="s">&#39;Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)&#39;</span>\
+                              <span class="s">&#39; Chrome/62.0.3202.94 Safari/537.36&#39;</span><span class="p">}</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">shot_chart_url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+    <span class="c"># headers是模拟浏览器访问行为，现在没有这一项获取不到数据</span>
+
+    <span class="n">headers</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">&#39;resultSets&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;headers&#39;</span><span class="p">]</span>
+    <span class="n">shots</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s">&#39;resultSets&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s">&#39;rowSet&#39;</span><span class="p">]</span>
+    <span class="n">shot_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">shots</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+
+    <span class="c"># View the head of the DataFrame and all its columns</span>
+    <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">option_context</span><span class="p">(</span><span class="s">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">):</span>
+        <span class="n">display</span><span class="p">(</span><span class="n">shot_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+    <span class="c"># Or </span>
+    <span class="c">#shot_df.head().to_excel(&#39;outfile.xls&#39;,index=True,header=True)</span>
+</pre></div>
+
+
+<p>我们得到的pandas DataFrame:<code>shot_df</code>，表头及前3行数据展示如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GRID_TYPE</th>
+<th>GAME_ID</th>
+<th>GAME_EVENT_ID</th>
+<th>PLAYER_ID</th>
+<th>PLAYER_NAME</th>
+<th>TEAM_ID</th>
+<th>TEAM_NAME</th>
+<th>PERIOD</th>
+<th>MINUTES_REMAINING</th>
+<th>SECONDS_REMAINING</th>
+<th>EVENT_TYPE</th>
+<th>ACTION_TYPE</th>
+<th>SHOT_TYPE</th>
+<th>SHOT_ZONE_BASIC</th>
+<th>SHOT_ZONE_AREA</th>
+<th>SHOT_ZONE_RANGE</th>
+<th>SHOT_DISTANCE</th>
+<th>LOC_X</th>
+<th>LOC_Y</th>
+<th>SHOT_ATTEMPTED_FLAG</th>
+<th>SHOT_MADE_FLAG</th>
+<th>GAME_DATE</th>
+<th>HTM</th>
+<th>VTM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Shot Chart Detail</td>
+<td>0021700002</td>
+<td>7</td>
+<td>201935</td>
+<td>James Harden</td>
+<td>1610612745</td>
+<td>Houston Rockets</td>
+<td>1</td>
+<td>11</td>
+<td>47</td>
+<td>Made Shot</td>
+<td>Driving Layup Shot</td>
+<td>2PT Field Goal</td>
+<td>Restricted Area</td>
+<td>Center(C)</td>
+<td>Less Than 8 ft.</td>
+<td>1</td>
+<td>-10</td>
+<td>16</td>
+<td>1</td>
+<td>1</td>
+<td>20171017</td>
+<td>GSW</td>
+<td>HOU</td>
+</tr>
+<tr>
+<td>1</td>
+<td>Shot Chart Detail</td>
+<td>0021700002</td>
+<td>10</td>
+<td>201935</td>
+<td>James Harden</td>
+<td>1610612745</td>
+<td>Houston Rockets</td>
+<td>1</td>
+<td>11</td>
+<td>13</td>
+<td>Missed Shot</td>
+<td>Running Jump Shot</td>
+<td>2PT Field Goal</td>
+<td>In The Paint (Non-RA)</td>
+<td>Center(C)</td>
+<td>8-16 ft.</td>
+<td>10</td>
+<td>46</td>
+<td>94</td>
+<td>1</td>
+<td>0</td>
+<td>20171017</td>
+<td>GSW</td>
+<td>HOU</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Shot Chart Detail</td>
+<td>0021700002</td>
+<td>28</td>
+<td>201935</td>
+<td>James Harden</td>
+<td>1610612745</td>
+<td>Houston Rockets</td>
+<td>1</td>
+<td>9</td>
+<td>51</td>
+<td>Missed Shot</td>
+<td>Jump Shot</td>
+<td>3PT Field Goal</td>
+<td>Above the Break 3</td>
+<td>Center(C)</td>
+<td>24+ ft.</td>
+<td>25</td>
+<td>-52</td>
+<td>245</td>
+<td>1</td>
+<td>0</td>
+<td>20171017</td>
+<td>GSW</td>
+<td>HOU</td>
+</tr>
+</tbody>
+</table>
+<p>shot_chart_url其中PlayerID、Season、SeasonType三项是可变参数，如果想获得其他球员的PlayerID可以登录<a href="http://www.nba.com/players/">nba.com/players</a>搜索感兴趣球员的名字，如下</p>
+<p><img alt="player" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/player.png" /></p>
+<p>点击搜索结果，跳转到页面的网址最后一项既是PlayerID，例如：<code>http://www.nba.com/players/giannis/antetokounmpo/203507</code>中的<code>203507</code>即是字母哥的PlayerID。</p>
+<p>我们这一步得到的<code>shot_df</code>包含了James Harden在2017-18赛季常规赛目前为止（20180219全明星赛）所有投篮尝试。我们需要的数据为<code>LOC_X</code>和<code>LOC_Y</code>两列，这些是每次投篮尝试的坐标值，然后可以将这些坐标值绘制到代表篮球场的坐标轴上，当然我们可能还需要<code>EVENT_TYPE</code>列，来区分投篮是否投进。</p>
+<h1>第二部分--绘制球员shot log到球场图</h1>
+<p>关于这一部分，<a href="http://savvastjortjoglou.com/nba-shot-sharts.html">How to Create NBA Shot Charts in Python</a>已经做了非常优秀的工作，我们会延续其框架，并对代码做少许修改以达到更好的适用性。</p>
+<p>首先我们对上一步得到的James Harden的shot log <code>LOC_X</code>和<code>LOC_Y</code>进行快速绘图，看其X、Y是怎么定义的。</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.3</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">shot_df</span><span class="o">.</span><span class="n">LOC_X</span><span class="p">,</span> <span class="n">shot_df</span><span class="o">.</span><span class="n">LOC_Y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p><img alt="quickly plot" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/quickly_plot.png" /></p>
+<p>通过快速预览图我们对<code>LOC_X</code>和<code>LOC_Y</code>有了一个大概的认识，有一点需要注意：<code>LOC_X</code>其实是观众视野从中场面向篮筐来说的，<code>LOC_X</code>是正值则在篮筐的左边。所以最终绘图时需要按以下代码做调整，我们以shot log中Right Side(R) 投篮区域(投篮区域划分请参考前文<code>Shot Zones</code>图)的出手作为示例说明。</p>
+<div class="highlight"><pre>right_shot_df = shot_df[shot_df.SHOT_ZONE_AREA == &quot;Right Side(R)&quot;]
+other_shot_df = shot_df[~(shot_df.SHOT_ZONE_AREA == &quot;Right Side(R)&quot;)]
+
+fig = plt.figure(figsize=(4.3,4))
+ax = fig.add_subplot(111)
+ax.scatter(right_shot_df.LOC_X, right_shot_df.LOC_Y, s=1, c=&#39;red&#39;, label=&#39;Right Side(R)&#39;)
+ax.scatter(other_shot_df.LOC_X, other_shot_df.LOC_Y, s=1, c=&#39;blue&#39;, label=&#39;Other AREA&#39;)
+ax.set_ylim(top=-50,bottom=580)
+ax.legend()
+plt.show()
+</pre></div>
+
+
+<p><img alt="right side" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/right_side.png" /></p>
+<h2>画篮球半场图</h2>
+<p>通过对<code>LOC_X</code>和<code>LOC_Y</code>数据的快速画图，我们大概知道了篮筐的位置大概就是<code>LOC_X</code>和<code>LOC_Y</code>的原点。知道了这一点，我们结合篮球半场的具体<a href="court_size.gif">尺寸</a> (<a href="https://www.sportsknowhow.com/basketball/dimensions/nba-basketball-court-dimensions.html">下图</a>)和比例就可以画出篮球半场图了。</p>
+<p><a href="http://www.sportscourtdimensions.com/wp-content/uploads/2015/02/nba_court_dimensions_h.png"><img alt="nba_court_dimensions_h" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/nba_court_dimensions_h.png" title="" /></a></p>
+<p>通过上图我们知道了篮球场宽度是<code>50FT</code>，转换成<code>INCH</code>是<code>600IN</code>，篮球场长<code>94FT</code>，转换成<code>INCH</code>是<code>1128IN</code>，再结合我们上一步画出的投篮点快速预览图，通过对很多球员的<code>LOC_Y</code>为0时，<code>LOC_X</code>与<code>SHOT_DISTANCE</code>，我们能够推测出<code>LOC_X</code>和<code>LOC_Y</code>的单位与<code>IN</code>的换算大概为10/12。</p>
+<p>画图函数如下：</p>
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">Arc</span><span class="p">,</span><span class="n">Wedge</span>
+
+<span class="k">class</span> <span class="nc">data_linewidth_plot</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ax</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;ax&quot;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw_data</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s">&quot;linewidth&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="c">#self.ax.figure.canvas.draw()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ppd</span><span class="o">=</span><span class="mf">72.</span><span class="o">/</span><span class="n">fig</span><span class="o">.</span><span class="n">dpi</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">transData</span><span class="o">.</span><span class="n">transform</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_resize</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_resize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lw</span> <span class="o">=</span>  <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">trans</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">lw_data</span><span class="p">))</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">trans</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)))</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">ppd</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lw</span> <span class="o">=</span> <span class="n">lw</span>
+
+<span class="k">def</span> <span class="nf">draw_half_court</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">lw</span> <span class="o">=</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">2</span> <span class="c">#line width</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s">&#39;k&#39;</span>
+    <span class="c"># 精确line width</span>
+    <span class="n">court_lw</span> <span class="o">=</span> <span class="n">data_linewidth_plot</span><span class="p">(</span><span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">,</span><span class="n">linewidth</span> <span class="o">=</span> <span class="n">lw</span><span class="p">)</span><span class="o">.</span><span class="n">lw</span>
+
+    <span class="c">## Create the basketball hoop</span>
+    <span class="c">#篮筐直径(内径)是18IN.,我们设置半径为9.2IN刨除line width 0.2IN,正好为篮筐半径</span>
+    <span class="n">hoop</span> <span class="o">=</span> <span class="n">Wedge</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">unit</span> <span class="o">*</span> <span class="mf">9.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="n">unit</span> <span class="o">*</span> <span class="mf">0.2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#767676&#39;</span><span class="p">)</span>
+    <span class="n">hoop_neck</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="n">unit</span> <span class="o">*</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="o">-</span><span class="mi">15</span> <span class="p">),</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">6</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#767676&#39;</span><span class="p">)</span>
+
+    <span class="c">## Create backboard</span>
+    <span class="c">#Rectangle, left lower at xy = (x, y) with specified width, height and rotation angle</span>
+    <span class="n">backboard</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="n">unit</span> <span class="o">*</span> <span class="o">-</span><span class="mi">36</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="o">-</span><span class="mi">15</span> <span class="p">),</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">72</span><span class="p">,</span> <span class="n">court_lw</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#767676&#39;</span><span class="p">)</span>
+    <span class="c"># List of the court elements to be plotted onto the axes</span>
+
+    <span class="c">## Restricted Zone, it is an arc with 4ft radius from center of the hoop </span>
+    <span class="n">restricted</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">96</span><span class="o">*</span><span class="n">unit</span><span class="o">+</span><span class="n">court_lw</span><span class="p">,</span> <span class="mi">96</span><span class="o">*</span><span class="n">unit</span><span class="o">+</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#767676&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">restricted_left</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="o">-</span><span class="mi">48</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="o">-</span><span class="mi">15</span> <span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">17</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#767676&#39;</span><span class="p">)</span>
+    <span class="n">restricted_right</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="n">unit</span><span class="o">*</span><span class="mi">48</span><span class="o">+</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="o">-</span><span class="mi">15</span> <span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">17</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;#767676&#39;</span><span class="p">)</span>
+
+    <span class="c"># Create free throw top arc  罚球线弧顶</span>
+    <span class="n">top_arc_diameter</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">*</span> <span class="mi">2</span><span class="o">*</span><span class="n">unit</span> <span class="o">-</span> <span class="n">court_lw</span>
+    <span class="n">top_free_throw</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">164</span><span class="p">),</span> <span class="n">top_arc_diameter</span><span class="p">,</span> <span class="n">top_arc_diameter</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="c"># Create free throw bottom arc 罚球底弧</span>
+    <span class="n">bottom_free_throw</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="n">unit</span> <span class="o">*</span> <span class="mi">164</span><span class="p">),</span> <span class="n">top_arc_diameter</span><span class="p">,</span> <span class="n">top_arc_diameter</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="nb">abs</span><span class="p">(</span><span class="n">court_lw</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="c"># Create the outer box 0f the paint, width=16ft outside , height=18ft 10in</span>
+    <span class="n">outer_box</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">unit</span><span class="o">*</span><span class="mi">96</span><span class="p">,</span> <span class="o">-</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">unit</span><span class="o">*</span><span class="mi">63</span><span class="p">),</span> <span class="mi">192</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="p">,</span> <span class="mi">230</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="c"># Create the inner box of the paint, widt=12ft, height=height=18ft 10in</span>
+    <span class="n">inner_box</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">unit</span><span class="o">*</span><span class="mi">72</span><span class="p">,</span> <span class="o">-</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span> <span class="o">-</span> <span class="n">unit</span><span class="o">*</span><span class="mi">63</span><span class="p">),</span> <span class="mi">144</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="p">,</span> <span class="mi">230</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="c">## Three point line</span>
+    <span class="c"># Create the side 3pt lines, they are 14ft long before they begin to arc</span>
+    <span class="n">corner_three_left</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="o">-</span><span class="mi">264</span><span class="o">*</span><span class="n">unit</span><span class="o">+</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">63</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">14</span><span class="o">*</span><span class="mi">12</span><span class="o">*</span><span class="n">unit</span> <span class="o">+</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">corner_three_right</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="mi">264</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">63</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">14</span><span class="o">*</span><span class="mi">12</span><span class="o">*</span><span class="n">unit</span> <span class="o">+</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="c"># 3pt arc - center of arc will be the hoop, arc is 23&#39;9&quot; away from hoop</span>
+    <span class="c"># I just played around with the theta values until they lined up with the </span>
+    <span class="c"># threes </span>
+    <span class="n">three_diameter</span> <span class="o">=</span> <span class="p">(</span><span class="mi">23</span> <span class="o">*</span> <span class="mi">12</span> <span class="o">+</span> <span class="mi">9</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="o">*</span><span class="n">unit</span> <span class="o">-</span> <span class="n">court_lw</span>
+    <span class="n">three_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="n">three_diameter</span><span class="p">,</span> <span class="n">three_diameter</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mf">21.9</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">158</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+    <span class="c"># Center Court</span>
+    <span class="n">center_outer_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">94</span><span class="o">*</span><span class="mi">12</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">63</span><span class="p">)</span><span class="o">*</span><span class="n">unit</span><span class="p">),</span> <span class="mi">48</span><span class="o">*</span><span class="n">unit</span><span class="o">+</span><span class="n">court_lw</span><span class="p">,</span> <span class="mi">48</span><span class="o">*</span><span class="n">unit</span><span class="o">+</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+    <span class="n">center_inner_arc</span> <span class="o">=</span> <span class="n">Arc</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="p">(</span><span class="mi">94</span><span class="o">*</span><span class="mi">12</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">63</span><span class="p">)</span><span class="o">*</span><span class="n">unit</span><span class="p">),</span> <span class="mi">144</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="p">,</span> <span class="mi">144</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+    <span class="c"># Draw the half court line, baseline and side out bound lines</span>
+    <span class="n">outer_lines</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="o">-</span><span class="mi">25</span><span class="o">*</span><span class="mi">12</span><span class="o">*</span><span class="n">unit</span> <span class="o">-</span> <span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">63</span><span class="o">*</span><span class="n">unit</span><span class="o">-</span><span class="n">court_lw</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">50</span><span class="o">*</span><span class="mi">12</span><span class="o">*</span><span class="n">unit</span><span class="o">+</span><span class="n">court_lw</span><span class="p">,</span> <span class="mi">94</span><span class="o">/</span><span class="mi">2</span><span class="o">*</span><span class="mi">12</span><span class="o">*</span><span class="n">unit</span> <span class="o">+</span> <span class="n">court_lw</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">court_lw</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+    <span class="c">#2 IN. WIDE BY 3 FT. DEEP, 28 FT. INSIDE, 3FT. extenf onto court</span>
+
+    <span class="n">court_elements</span> <span class="o">=</span> <span class="p">[</span><span class="n">hoop_neck</span><span class="p">,</span> <span class="n">backboard</span><span class="p">,</span> <span class="n">restricted</span><span class="p">,</span> <span class="n">restricted_left</span><span class="p">,</span> <span class="n">restricted_right</span><span class="p">,</span><span class="n">top_free_throw</span><span class="p">,</span><span class="n">bottom_free_throw</span><span class="p">,</span>
+                        <span class="n">outer_box</span><span class="p">,</span><span class="n">inner_box</span><span class="p">,</span> <span class="n">corner_three_left</span><span class="p">,</span><span class="n">corner_three_right</span><span class="p">,</span><span class="n">three_arc</span><span class="p">,</span><span class="n">center_outer_arc</span><span class="p">,</span><span class="n">center_inner_arc</span><span class="p">,</span><span class="n">outer_lines</span><span class="p">]</span>
+
+    <span class="c"># Add the court elements onto the axes</span>
+    <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">court_elements</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</pre></div>
+
+
+<p>画图：</p>
+<div class="highlight"><pre>fig = plt.figure(figsize=(9,9))
+ax = fig.add_subplot(111,aspect=&#39;equal&#39;)
+ax.set_xlim(-330,330)
+ax.set_ylim(-200,600)
+
+draw_half_court(ax=ax)
+
+plt.show()
+</pre></div>
+
+
+<p><img alt="court" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/court.png" /></p>
+<p>添加上投篮数据</p>
+<div class="highlight"><pre>fig = plt.figure(figsize=(9,8))
+ax = fig.add_subplot(111,aspect=&#39;equal&#39;)
+ax.set_xlim(-330,330)
+ax.set_ylim(top= -100,bottom = 500)
+
+draw_half_court(ax=ax,unit=10/12)
+
+df_missed = shot_df[shot_df.EVENT_TYPE==&#39;Missed Shot&#39;][[&#39;LOC_X&#39;,&#39;LOC_Y&#39;]]
+ax.scatter(df_missed.LOC_X, df_missed.LOC_Y,s=2,color=&#39;r&#39;,label = &#39;Missed Shot&#39;,alpha=0.5)
+df_made = shot_df[shot_df.EVENT_TYPE==&#39;Made Shot&#39;][[&#39;LOC_X&#39;,&#39;LOC_Y&#39;]]
+ax.scatter(df_made.LOC_X, df_made.LOC_Y,s=2,color=&#39;b&#39;,label = &#39;Made Shot&#39;,alpha=0.5)
+
+legend = ax.legend(bbox_to_anchor=(0.49, 0.13), loc=2, borderaxespad=0.,prop={&#39;size&#39;:8},ncol=2,frameon=False)
+plt.axis(&#39;off&#39;)
+
+FG = &quot;%.1f&quot; % ((df_made.shape[0]/shot_df.shape[0])*100)
+ax.text(-250,440,&#39;FG%:{0}%({1}-{2})&#39;.format(FG,df_made.shape[0],shot_df.shape[0]), fontsize=8)
+ax.text(-250,-63,&#39;FGA for Harden, James during the 2017-18 Regular Season&#39;.format(FG,df_made.shape[0],shot_df.shape[0]), fontsize=8)
+
+plt.show()
+</pre></div>
+
+
+<p><img alt="court_shotlog" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/court_shotlog.png" /></p>
+            <aside>
+            <hr/>
+            <nav>
+            <ul class="articles_timeline">
+ 
+                <li class="previous_article">« <a href="/vps shadowsocksr.html" title="Previous: 授人以渔-购买VPS搭建ssr科学上网">授人以渔-购买VPS搭建ssr科学上网</a></li>
+            </ul>
+            </nav>
+            </aside>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+ 
+            <h4>Published</h4>
+            <time pubdate="pubdate" datetime="2018-02-23T00:00:00+08:00">2月 23, 2018</time>
+            <h4>Category</h4>
+            <a class="category-link" href="/categories.html#shotlog-ref">shotlog</a> 
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article"> 
+                <li><a href="/tags.html#matplotlib-stats.nba-patches-ref">matplotlib stats.nba patches
+                    <span>1</span>
+</a></li>
+            </ul>
+
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    </body>
+</html>
