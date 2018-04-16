@@ -63,16 +63,147 @@
 <li>Chromosome Territories</li>
 <li>Compartment A/B</li>
 <li>Topologically Associating Domains (TADs)</li>
-<li>Local chromatin interactions (Loop)</li>
+<li>Local Chromatin Interactions (Loop)</li>
 </ul>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/1.png" />
-<code>Engreitz J M. Nature Reviews Molecular Cell Biology, 2016</code></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/1.png" /></p>
+<p><code>Engreitz J M. Nature Reviews Molecular Cell Biology, 2016</code></p>
 <p>不同层级的染色质构像特征需要由不同分辨率的Hi-C交互矩阵进行对应的算法分析得到。
 一般情况下不同层级的染色质构像特征对应的分析分辨如下:</p>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/2.png" />
-<code>Rivera C M et al. Cell, 2013</code></p>
-<p>分辨率越高对应的测序量要求越大,例如第一篇提出了Compartment概念的文章<code>Lieberman-Aiden E et al. science, 2009</code>,第一篇提出TAD概念的文章,测序数据量如下:</p>
-<h6>#####表格</h6>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/2.png" /></p>
+<p><code>Rivera C M et al. Cell, 2013</code></p>
+<p>分辨率越高对应的测序量要求越大,例如第一篇提出了Compartment概念的文章<code>Lieberman-Aiden E et al. science, 2009</code>,第一篇提出TAD概念的文章<code>Dixon J R et al. Nature, 2012</code>,测序数据量如下:</p>
+<table>
+<thead>
+<tr>
+<th>Organism Name</th>
+<th>Total Size, Mb</th>
+<th>Total Spots</th>
+<th>Total Bases</th>
+<th>Library Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Homo sapiens</td>
+<td>1,613</td>
+<td>18,145,940</td>
+<td>2,758,182,880</td>
+<td>Hi-C (HindIII,K562,1) 8</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>1,929</td>
+<td>18,677,569</td>
+<td>2,838,990,488</td>
+<td>Hi-C (HindIII,K562,1) 7</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>1,586</td>
+<td>15,132,243</td>
+<td>2,300,100,936</td>
+<td>Hi-C (NcoI,GM,1) 2</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>1,406</td>
+<td>13,527,036</td>
+<td>2,056,109,472</td>
+<td>Hi-C (NcoI,GM,1) 1</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>869</td>
+<td>8,607,443</td>
+<td>1,308,331,336</td>
+<td>Hi-C (HindIII,GM,2) 3</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>783</td>
+<td>7,889,352</td>
+<td>1,199,181,504</td>
+<td>Hi-C (HindIII,GM,2) 2</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>713</td>
+<td>7,068,675</td>
+<td>1,074,438,600</td>
+<td>Hi-C (HindIII,GM,Biological Repeat)</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>622</td>
+<td>6,443,641</td>
+<td>979,433,432</td>
+<td>Hi-C (HindIII,GM,1)</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>9,939</td>
+<td>259,123,992</td>
+<td>18,656,927,424</td>
+<td>GSM892307: RenLab-HiC-IMR90, replicate two</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>21,572</td>
+<td>496,522,946</td>
+<td>35,749,652,112</td>
+<td>GSM892306: RenLab-HiC-hESC, replicate two</td>
+</tr>
+<tr>
+<td>Mus musculus</td>
+<td>12,430</td>
+<td>294,763,499</td>
+<td>21,222,971,928</td>
+<td>GSM892305: RenLab-HiC-cortex, replicate two</td>
+</tr>
+<tr>
+<td>Mus musculus</td>
+<td>16,295</td>
+<td>401,291,092</td>
+<td>28,892,958,624</td>
+<td>GSM892304: RenLab-HiC-cortex, replicate one</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>16,479</td>
+<td>397,194,480</td>
+<td>28,598,002,560</td>
+<td>GSM862724: RenLab-HiC-IMR90</td>
+</tr>
+<tr>
+<td>Homo sapiens</td>
+<td>11,737</td>
+<td>237,662,270</td>
+<td>23,702,833,392</td>
+<td>GSM862723: RenLab-HiC-hESC</td>
+</tr>
+<tr>
+<td>Mus musculus</td>
+<td>18,029</td>
+<td>425,506,797</td>
+<td>30,636,489,384</td>
+<td>GSM862722: RenLab-HiC-mESC-NCoI</td>
+</tr>
+<tr>
+<td>Mus musculus</td>
+<td>13,243</td>
+<td>340,651,343</td>
+<td>24,526,896,696</td>
+<td>GSM862721: RenLab-HiC-mESC-HindIII, replicate two</td>
+</tr>
+<tr>
+<td>Mus musculus</td>
+<td>26,828</td>
+<td>465,473,330</td>
+<td>42,892,374,448</td>
+<td>GSM862720: RenLab-HiC-mESC-HindIII, replicate one</td>
+</tr>
+</tbody>
+</table>
 <p>第一篇分辨率测到kb级别得文章<code>Rao S S P et al. Cell, 2014</code>,为了达到kb别分辨率,对GM12878 B-lymphoblastoid细胞单个样本测序量达4.9 billion pairwise reads。随着要达到的Hi-C交互矩阵分辨率的提升,需要的测序量是以指数形式递增的。如果研究者的需求只要达到TAD级别就够的话,Hi-C交互矩阵能够达到40k的分辨率就行了没有必要达到更高的分辨率,但是对于特定分辨率的Hi-C需求,怎样合理预估测序量呢?</p>
 <p>要做到合理预估测序量我们需要对分辨率的概念进行明确。</p>
 <h2>分辨率概念</h2>
@@ -80,7 +211,7 @@
 <h3>第一种定义</h3>
 <p><code>Belton J M et al. Methods, 2012</code>这篇文章第一次提出了分辨率明确定义:</p>
 <blockquote>
-<p>对于一定测序量的Hi-C数据,把最终质控得到的unique valid pair　reads　map 到不同的分辨率矩阵,如果矩阵的80%以上的bin pair至少有１对交互reads,那么就说这些测序数据达到了这个矩阵的分辨率。</p>
+<p>对于一定测序量的Hi-C数据,把最终质控得到的unique valid pair　reads　map 到不同的分辨率矩阵,如果矩阵80%以上的bin pair至少有１对交互reads,那么就说这些测序数据达到了这个矩阵的分辨率。</p>
 </blockquote>
 <p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/3.png" /></p>
 <h3>第二种定义</h3>
@@ -94,19 +225,19 @@
 </blockquote>
 <h3>80%以上的bin至少覆盖度的unique  valid reads达到多少合适?</h3>
 <p>文章给出的答案是1000,但是这个1000具体是怎么来的呢?这个1000真的合适吗?</p>
-<p>一个可接受的Hi-C交互矩阵一般是这样的:</p>
+<p>一个可接受的Hi-C交互矩阵热图一般是这样的:</p>
 <p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/5.png" /></p>
 <p>这个矩阵的主要特点是距离近的基因组位点之间的交互数值一般比距离远的位点间的交互数值要高(测得的Hi-C unique  valid reads多),一般由IDEs(Interaction decay exponents)来描述这种随距离的增大交互数值衰减的程度。</p>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/6.png" />
-<code>Lieberman-Aiden E et al. science, 2009</code></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/6.png" /></p>
+<p><code>Lieberman-Aiden E et al. science, 2009</code></p>
 <p>大多数物种的Hi-C交互矩阵的IDE都和距离幂次线性相关,如下图:</p>
 <p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/4.png" /></p>
-<p>那么对于某一个特定的bin X来说,与X不距离的各bin与X的交互也会遵循这个IDE的规律,要满足这个规律那么X所测得的unique valid reads(深度)至少要有一个最低值(通过IDE的斜率+截距累积计算)。根据我们的经验不同物种不同分辨率矩阵的这个IDE的斜率多少有些差异,所计算出来的X的最低深度大概在1000-4000之间比较合适。</p>
+<p>那么对于某一个特定的bin X来说,与X不同距离的各bin与X的交互也会遵循这个IDE的规律,要满足这个规律那么X所测得的unique valid reads(深度)至少要有一个最低值(通过IDE的斜率+截距累积计算)。根据我们的经验不同物种不同分辨率矩阵的这个IDE的斜率多少有些差异,算出来的X的最低深度大概在1000-4000之间比较合适。</p>
 <h3>影响预测数据量的数据质控参数</h3>
-<p>前面我们确定了80%以上的bin至少覆盖度的unique valid reads在(1000-4000)比较合适,但是bin的总数以及raw reads到unique valid reads的数据质控损耗比例就需要确定了。</p>
+<p>前面我们确定了80%以上的bin至少覆盖度unique valid reads在1000-4000之间比较合适,但是bin的总数以及raw reads到unique valid reads的数据质控损耗比例就需要确定了。</p>
 <p>bin的总数可以由基因组大小除以要达到的分辨率大小确定。影响unique valid reads最终有效比例的因素包括:</p>
 <ul>
-<li>raw reads到celan reads的比例</li>
+<li>Celan Reads的比例</li>
 <li>比对到基因组的Unique Mapped Ratio</li>
 <li>Interaction Rate</li>
 <li>Interaction Reads的Pcr dup Ratio</li>
