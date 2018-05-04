@@ -1,4 +1,11 @@
-# 造轮子上传到PYPI
+Title: 造轮子上传到PYPI
+Date: 2018-05-04
+Category: multi jump 
+Tags: multi jump
+Slug: multiJump
+Author: seqyuan
+Summary: 
+
 > 我们经常以pip install package的形式安装python包，很多新同鞋有这样的疑问：怎样编写python包（自己造轮子）分享给别人，让别人也可以用pip的形式进行安装使用呢？
 
 要解决这个问题我们要从两方面入手：
