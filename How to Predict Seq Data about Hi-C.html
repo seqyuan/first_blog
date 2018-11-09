@@ -2,30 +2,39 @@
 <html lang="en-US">
     <head>
         <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="seqyuan" />
         <meta name="copyright" content="seqyuan" />
 
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
 <meta name="keywords" content="Hi-C， 分辨率, predict, " />
+
+<meta property="og:title" content="怎样预测Hi-C测序数据量 "/>
+<meta property="og:url" content="/How to Predict Seq Data about Hi-C.html" />
+<meta property="og:description" content="" />
+<meta property="og:site_name" content="seqyuan" />
+<meta property="og:article:author" content="seqyuan" />
+<meta property="og:article:published_time" content="2018-04-16T00:00:00+08:00" />
+<meta name="twitter:title" content="怎样预测Hi-C测序数据量 ">
+<meta name="twitter:description" content="">
+
         <title>怎样预测Hi-C测序数据量  · seqyuan
 </title>
-        <link href="http://cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="/theme/css/style.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="/theme/css/solarizedlight.css" media="screen">
-        <link rel="shortcut icon" href="/theme/images/favicon.ico" type="image/x-icon" />
-        <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png" />
-        <link rel="apple-touch-icon" sizes="57x57" href="/theme/images/apple-touch-icon-57x57.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/theme/images/apple-touch-icon-144x144.png" />
-        <link rel="icon" href="/theme/images/apple-touch-icon-144x144.png" />
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
     </head>
     <body>
         <div id="content-sans-footer">
         <div class="navbar navbar-static-top">
             <div class="navbar-inner">
-                <div class="container">
+                <div class="container-fluid">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -50,7 +59,7 @@
                 <div class="span10">
 <article>
 <div class="row-fluid">
-    <header class="page_header span10 offset2">
+    <header class="page-header span10 offset2">
     <h1><a href="/How to Predict Seq Data about Hi-C.html"> 怎样预测Hi-C测序数据量  </a></h1>
     </header>
 </div>
@@ -58,6 +67,7 @@
 <div class="row-fluid">
         <div class="span8 offset2 article-content">
 
+            
             <p>细胞核内的染色质构像一般分以下几个层级</p>
 <ul>
 <li>Chromosome Territories</li>
@@ -65,11 +75,11 @@
 <li>Topologically Associating Domains (TADs)</li>
 <li>Local Chromatin Interactions (Loop)</li>
 </ul>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/1.png" /></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/1.png"></p>
 <p><code>Engreitz J M. Nature Reviews Molecular Cell Biology， 2016</code></p>
 <p>不同层级的染色质构像特征需要由不同分辨率的Hi-C交互矩阵进行对应的算法分析得到。
 一般情况下不同层级的染色质构像特征对应的分析分辨如下：</p>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/2.png" /></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/2.png"></p>
 <p><code>Rivera C M et al. Cell， 2013</code></p>
 <p>分辨率越高对应的测序量要求越大，例如第一篇提出了Compartment概念的文章<code>Lieberman-Aiden E et al. science， 2009</code>，第一篇提出TAD概念的文章<code>Dixon J R et al. Nature， 2012</code>，测序数据量如下：</p>
 <table>
@@ -213,7 +223,7 @@
 <blockquote>
 <p>对于一定测序量的Hi-C数据，把最终质控得到的unique valid pair　reads　map 到不同的分辨率矩阵，如果矩阵80%以上的bin pair至少有１对交互reads，那么就说这些测序数据达到了这个矩阵的分辨率。</p>
 </blockquote>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/3.png" /></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/3.png"></p>
 <h3>第二种定义</h3>
 <p><code>Rao S S P et al. Cell， 2014</code>这篇文章达到了950bp的分辨率，它的定义是这样的：</p>
 <blockquote>
@@ -226,12 +236,12 @@
 <h3>80%以上的bin至少覆盖度的unique  valid reads达到多少合适?</h3>
 <p>文章给出的答案是1000，但是这个1000具体是怎么来的呢?这个1000真的合适吗?</p>
 <p>一个可接受的Hi-C交互矩阵热图一般是这样的：</p>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/5.png" /></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/5.png"></p>
 <p>这个矩阵的主要特点是距离近的基因组位点之间的交互数值一般比距离远的位点间的交互数值要高(测得的Hi-C unique  valid reads多)，一般由IDEs(Interaction decay exponents)来描述这种随距离的增大交互数值衰减的程度。</p>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/6.png" /></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/6.png"></p>
 <p><code>Lieberman-Aiden E et al. science， 2009</code></p>
 <p>大多数物种的Hi-C交互矩阵的IDE都和距离幂次线性相关，如下图：</p>
-<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/4.png" /></p>
+<p><img alt="player all stats" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/images/4.png"></p>
 <p>那么对于某一个特定的bin X来说，与X不同距离的各bin与X的交互也会遵循这个IDE的规律，要满足这个规律那么X所测得的unique valid reads(深度)至少要有一个最低值(通过IDE的斜率+截距累积计算)。根据我们的经验不同物种不同分辨率矩阵的这个IDE的斜率多少有些差异，算出来的X的最低深度大概在1000-4000之间比较合适。</p>
 <h3>影响预测数据量的数据质控参数</h3>
 <p>前面我们确定了80%以上的bin至少覆盖度unique valid reads在1000-4000之间比较合适，但是bin的总数以及raw reads到unique valid reads的数据质控损耗比例就需要确定了。</p>
@@ -244,32 +254,22 @@
 <li>Cis Ratio</li>
 </ul>
 <p>结合以上各因素的经验值我们就能预测最终需要测序的Raw data多少了，还可以根据每个Hi-C文库一般的数据产出确定要建几个Hi-C文库。</p>
-            <aside>
+            
+            
             <hr/>
-            <nav>
-            <ul class="articles_timeline">
- 
-                <li class="previous_article">« <a href="/How to Create NBA Shotlog in Python.html" title="Previous: 绘制NBA球员投篮出手位置图">绘制NBA球员投篮出手位置图</a></li>
- 
-                <li class="next_article"><a href="/multiJump.html" title="Next: 造轮子上传到PYPI">造轮子上传到PYPI</a> »</li>
-            </ul>
-            </nav>
-            </aside>
         </div>
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
- 
             <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2018-04-16T00:00:00+08:00">4月 16, 2018</time>
+            <time pubdate="pubdate" datetime="2018-04-16T00:00:00+08:00"> 4 16, 2018</time>
             <h4>Category</h4>
-            <a class="category-link" href="/categories.html#predict-ref">predict</a> 
+            <a class="category-link" href="/categories.html#predict-ref">predict</a>
             <h4>Tags</h4>
-            <ul class="list-of-tags tags-in-article"> 
-                <li><a href="/tags.html#Hi-C，-分辨率-ref">Hi-C， 分辨率
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags.html#hi-c-fen-bian-lu-ref">Hi-C， 分辨率
                     <span>1</span>
 </a></li>
             </ul>
-
         </div>
         </section>
 </div>
@@ -278,15 +278,16 @@
                 <div class="span1"></div>
             </div>
         </div>
+        <div id="push"></div>
     </div>
 <footer>
 <div id="footer">
     <ul class="footer-content">
-        <li class="elegant-power">Powered by <a href="http://getpelican.com/" title="Pelican Home Page">Pelican</a>. Theme: <a href="http://oncrashreboot.com/pelican-elegant" title="Theme Elegant Home Page">Elegant</a> by <a href="http://oncrashreboot.com" title="Talha Mansoor Home Page">Talha Mansoor</a></li>
+        <li class="elegant-power">Designed by <a href="https://github.com/seqyuan/" title="Seqyuan Home Page">Yuan Zan</a></li>
     </ul>
 </div>
 </footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
         <script>
             function validateForm(query)
             {
@@ -294,5 +295,8 @@
             }
         </script>
 
+    
     </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
 </html>
