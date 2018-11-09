@@ -270,7 +270,7 @@ cotools ut /abspath/toolname</p>
 <p>进入<code>./html</code>，把<code>make serve</code>命令放到后台执行</p>
 <h3>设置计划任务，定期生成网页</h3>
 <p>运用<code>crontab -e</code>命令在每周日的晚21点自动执行以下命令</p>
-<div class="highlight"><pre><span></span>cd ./html &amp;&amp; make html
+<div class="highlight"><pre><span></span>0 21 * * sun cd supertools/*tools/html &amp;&amp; make html
 </pre></div>
             
             
