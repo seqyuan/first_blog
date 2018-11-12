@@ -6,31 +6,32 @@ Slug: supertools
 Author: seqyuan
 Summary: cotools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools
 
+[TOC]
+
 ## cotools使用
 ### 网页检索
 我们设置了网页服务使开发者和用户更好的互动，访问以下ip中的任何一个都能看到相应工具集的汇总
+[tetools](192.168.2.202:1900) [192.168.2.202:1900](192.168.2.202:1900)
 
-[tetools](https://192.168.2.202:1900) [192.168.2.202:1900](https://192.168.2.202:1900)
+[pagtools](192.168.2.202:1901) [192.168.2.202:1901](192.168.2.202:1901)
 
-[pagtools](https://192.168.2.202:1901) [192.168.2.202:1901](https://192.168.2.202:1901)
+[medtools](192.168.2.202:1902) [192.168.2.202:1902](192.168.2.202:1902)
 
-[medtools](https://192.168.2.202:1902) [192.168.2.202:1902](https://192.168.2.202:1902)
-
-[plotools](https://192.168.2.202:1903) [192.168.2.202:1903](https://192.168.2.202:1903)
+[plotools](192.168.2.202:1903) [192.168.2.202:1903](192.168.2.202:1903)
 
 ### 空运行，帮助文档
 空运行cotools，会显示帮助文档，如下：
 ```
 Program: tetools (Tools set)
-Version: 0.0.1	 seqyuan@gmail.com	Nov 08 2018
+Version: 0.0.1   seqyuan@gmail.com  Nov 08 2018
 
 Usage:  tetools  <command> <command> [options]
                  at|addtool          [toolspath]            Add a new tool or a new version
                  ut|updatetool       [toolspath]            Update a tool not change the version
                  am|addmodule        [module description]   Add a new module
 
-	TAD         	TAD类个性化分析工具
-	compartment 	sfadf
+    TAD             TAD类个性化分析工具
+    compartment     sfadf
 
 ```
 ### 查看某个module里所有的tool
@@ -39,9 +40,9 @@ Usage:  tetools  <command> <command> [options]
 ```
 $./tetools TAD
 
-	Usage TAD:
-		Jujube_pill 	v0.0.1	吃枣药丸
-		argtest     	v0.0.1	argtest
+    Usage TAD:
+        Jujube_pill     v0.0.1  吃枣药丸
+        argtest         v0.0.1  argtest
 ```
 ### 查看某个tool的帮助文档
 运行 `cotools modulename toolname`即可查看相应tool的帮助信息，示例：
@@ -49,7 +50,7 @@ $./tetools TAD
 $./tetools TAD Jujube_pill
 
 usage:
-	python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill arg1 val1 arg2 val2
+    python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill arg1 val1 arg2 val2
 jujube pill
 
 /Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill 
@@ -202,9 +203,14 @@ TAD = TAD类个性化分析工具
 请编辑`cotools.ini`文件中的`module`section自行删除或修改
 如要删除整个模块，请手动删除`./module/modlueName`
 ### 建立持久网页服务
-进入`./html`，把`make serve`命令放到后台执行
-### 设置计划任务，定期生成网页
-运用`crontab -e`命令在每周日的晚21点自动执行以下命令
+由supertools总管理员进入makeService，然后`go build make_serve.go`，最后`nohup make_serve &` 就启动了网页服务
+```bash
+cd supertools/makeService
+go build make_serve.go
+nohup make_serve &
 ```
-cd ./html && make html
+### 设置计划任务，定期生成网页
+运用`crontab -e`命令在每周日的晚21点自动执行以下命令,注意`*tools`改成自己负责的工具
+```
+0 21 * * sun cd supertools/*tools/html && make html
 ```
