@@ -10,18 +10,18 @@
         <meta property="og:type" content="article" />
         <meta name="twitter:card" content="summary">
 
-<meta name="keywords" content="cotools, tetools, pagtools, medtools, plotools, tools, " />
+<meta name="keywords" content="tools, 说明, tools, " />
 
-<meta property="og:title" content="supertools "/>
+<meta property="og:title" content="supertools使用说明 "/>
 <meta property="og:url" content="/supertools.html" />
-<meta property="og:description" content="cotools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools" />
+<meta property="og:description" content="supertools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools" />
 <meta property="og:site_name" content="seqyuan" />
 <meta property="og:article:author" content="seqyuan" />
 <meta property="og:article:published_time" content="2018-11-09T00:00:00+08:00" />
-<meta name="twitter:title" content="supertools ">
-<meta name="twitter:description" content="cotools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools">
+<meta name="twitter:title" content="supertools使用说明 ">
+<meta name="twitter:description" content="supertools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools">
 
-        <title>supertools  · seqyuan
+        <title>supertools使用说明  · seqyuan
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -60,7 +60,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="/supertools.html"> supertools  </a></h1>
+    <h1><a href="/supertools.html"> supertools使用说明  </a></h1>
     </header>
 </div>
 
@@ -68,16 +68,15 @@
         <div class="span8 offset2 article-content">
 
             
-            <p>[TOC]</p>
-<h2>cotools使用</h2>
-<h3>网页检索</h3>
+            <h1>supertools使用</h1>
+<h2>网页检索</h2>
 <p>我们设置了网页服务使开发者和用户更好的互动，访问以下ip中的任何一个都能看到相应工具集的汇总</p>
-<p><a href="192.168.2.202:1900">tetools</a>  <a href="192.168.2.202:1900">192.168.2.202:1900</a></p>
-<p><a href="192.168.2.202:1901">pagtools</a>  <a href="192.168.2.202:1901">192.168.2.202:1901</a></p>
-<p><a href="192.168.2.202:1902">medtools</a>  <a href="192.168.2.202:1902">192.168.2.202:1902</a></p>
-<p><a href="192.168.2.202:1903">plotools</a>  <a href="192.168.2.202:1903">192.168.2.202:1903</a></p>
-<h3>空运行，帮助文档</h3>
-<p>空运行cotools，会显示帮助文档，如下：</p>
+<p><a href="http://192.168.2.202:1900">tetools</a></p>
+<p><a href="http://192.168.2.202:1901">pagtools</a></p>
+<p><a href="http://192.168.2.202:1902">medtools</a></p>
+<p><a href="http://192.168.2.202:1903">plotools</a></p>
+<h2>空运行，帮助文档</h2>
+<p>空运行supertools，会显示帮助文档，如下：</p>
 <div class="highlight"><pre><span></span><span class="nl">Program</span><span class="p">:</span> <span class="n">tetools</span> <span class="p">(</span><span class="n">Tools</span> <span class="n">set</span><span class="p">)</span>
 <span class="nl">Version</span><span class="p">:</span> <span class="mf">0.0.1</span>   <span class="n">seqyuan</span><span class="p">@</span><span class="n">gmail</span><span class="p">.</span><span class="n">com</span>  <span class="n">Nov</span> <span class="mi">08</span> <span class="mi">2018</span>
 
@@ -91,7 +90,7 @@
 </pre></div>
 
 
-<h3>查看某个module里所有的tool</h3>
+<h2>查看某个module里所有的tool</h2>
 <p>运行 cotools modulename即可查看相应module里所有的tool，示例：
 <code>tetools TAD</code></p>
 <div class="highlight"><pre><span></span>$./tetools TAD
@@ -102,7 +101,7 @@
 </pre></div>
 
 
-<h3>查看某个tool的帮助文档</h3>
+<h2>查看某个tool的帮助文档</h2>
 <p>运行 <code>cotools modulename toolname</code>即可查看相应tool的帮助信息，示例：</p>
 <div class="highlight"><pre><span></span>$./tetools TAD Jujube_pill
 
@@ -115,8 +114,8 @@ jujube pill
 
 
 <p>在运行命令的最后一行会提示实际要执行的程序</p>
-<h3>使用tool</h3>
-<h4>cotools的方式使用</h4>
+<h2>使用tool</h2>
+<h3>cotools的方式使用</h3>
 <p>首先执行<code>cotools modulename toolname</code>查看tool的参数说明，然后根据参数说明直接在命令行输入即可，例如：</p>
 <div class="highlight"><pre><span></span>$./tetools TAD Jujube_pill ag1 
 jujube pill
@@ -125,9 +124,10 @@ jujube pill
 </pre></div>
 
 
-<p>根据示例我们能清楚的看到<code>tetools TAD Jujube_pill ag1</code> 等价于执行<code>/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill  ag1</code>
-所以可以用以上两种方式调用执行程序</p>
-<h2>cotools目录结构</h2>
+<p>根据示例我们能清楚的看到<code>tetools TAD Jujube_pill ag1</code> 等价于执行</p>
+<p><code>/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill  ag1</code></p>
+<p>所以可以用以上两种方式调用执行程序</p>
+<h1>cotools目录结构</h1>
 <div class="highlight"><pre><span></span>.
 ├── bin                 
 │   ├── cotools.ini        #cotools配置文件
@@ -148,8 +148,8 @@ jujube pill
 </pre></div>
 
 
-<h2>程序开发规范</h2>
-<h3>目录及文件</h3>
+<h1>程序开发规范</h1>
+<h2>目录及文件</h2>
 <p>开发目录示例如下：</p>
 <div class="highlight"><pre><span></span>.
 └── argtest                        #NOT NULL
@@ -164,15 +164,15 @@ jujube pill
 
 
 <p><code>**提交给tools管理员此目录的绝对路径即可**</code></p>
-<h4>toolname</h4>
+<h3>toolname</h3>
 <p>提交给tools管理员的路径basename即为程序的名称<code>toolname</code>，此后统称为<code>toolname</code>，示例中为<code>argtest</code></p>
-<h4>bin</h4>
+<h3>bin</h3>
 <p>bin目录是固定且必须的</p>
-<h4>主程序</h4>
+<h3>主程序</h3>
 <p>bin目录下有主程序，示例中为<code>argtest.py</code>，此程序命名不做要求</p>
-<h4>主程序链接为<code>toolname</code></h4>
+<h3>主程序链接为<code>toolname</code></h3>
 <p>示例中bin/argtest为一个软链接文件，链接的是bin下的主程序，链接文件的命名与<code>toolname</code>的名称相同</p>
-<h4>toolname.ini文件</h4>
+<h3>toolname.ini文件</h3>
 <p>示例中的argtest.ini为必须文件，标准的ini书写格式，命名为<code>toolname</code> + <code>.ini</code>，其中内容如下：</p>
 <div class="highlight"><pre><span></span>[argtest]               
 # section name需命名为`toolname`
@@ -191,7 +191,7 @@ version = v0.0.1
 </pre></div>
 
 
-<h4>tool说明文件toolname.md</h4>
+<h3>tool说明文件toolname.md</h3>
 <p>示例中的argtest.md为markdown格式的文件，命名为<code>toolname</code>+ <code>.md</code>，与标准markdown不同的是文件中需要有头文件，示例如下：</p>
 <div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">argtest</span>
 <span class="err">#</span> <span class="err">值为`</span><span class="n">toolname</span><span class="err">`</span>
@@ -201,17 +201,17 @@ version = v0.0.1
 <span class="err">#</span> <span class="err">值为</span><span class="n">module</span> <span class="n">name</span>
 
 <span class="n">Tags</span><span class="o">:</span> <span class="n">args</span><span class="err">，</span><span class="n">python</span>
-<span class="err">#</span> <span class="err">本</span><span class="n">tools的关键词</span><span class="o">,</span><span class="err">如有多个以逗号隔开</span>
+<span class="err">#</span> <span class="err">本</span><span class="n">tools的关键词</span><span class="err">，如有多个以逗号隔开，不要多于</span><span class="mi">3</span><span class="err">个</span><span class="n">Tag</span>
 
 <span class="n">Slug</span><span class="o">:</span> 
 <span class="err">#</span> <span class="err">此项为空</span>
 <span class="err">#</span> <span class="err">此项为</span><span class="n">url的后缀</span><span class="err">，例如</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">2.202</span><span class="sr">/1900/</span><span class="n">argtest</span><span class="o">.</span><span class="na">html中的</span> <span class="n">argtest</span><span class="err">，如果此项为空默认为</span><span class="n">Title</span><span class="err">，所以</span><span class="n">tools里面的toolsname是不允许有重名的</span><span class="err">，即使相同的</span><span class="n">toolname在不同的module里</span><span class="err">，如果不同</span><span class="n">module里有重名的toolname会导致网页生成有问题</span>
 
 <span class="n">Author</span><span class="o">:</span> <span class="n">seqyuan</span>
-<span class="err">#</span> <span class="err">作者名称</span>
+<span class="err">#</span> <span class="err">作者，不要写邮箱</span>
 
 <span class="n">Summary</span><span class="o">:</span> 
-<span class="err">#</span> <span class="err">摘要</span>
+<span class="err">#</span> <span class="err">摘要，不要多于</span><span class="mi">42</span><span class="err">个字符</span>
 </pre></div>
 
 
@@ -233,21 +233,30 @@ version = v0.0.1
 <blockquote>
 <p>./module/模块名/toolname/bin/figure/图片名</p>
 </blockquote>
-<h4>toolname/bin/figure</h4>
+<p><strong>说明文档必须包涵以下内容：</strong></p>
+<ol>
+<li>程序的主要功能描述</li>
+<li>程序的使用示例</li>
+<li>程序的参数简介</li>
+<li>程序的参数详解，如果参数是文件，要包含输入文件的具体格式要求</li>
+<li>程序结果的解读，如果是图需要解读，如果是表，需要做表头说明</li>
+</ol>
+<p><code>示例请参考：</code> tetools中的<a href="http://192.168.2.202:1900/gwas_ldheatmap.html" target="_blank">GWAS_LDheatmap</a></p>
+<h3>toolname/bin/figure</h3>
 <p>此目录必须存在，即使为空。用于存放<code>toolname.md</code>中插入的图片</p>
-<h3>tool审核</h3>
+<h2>tool审核</h2>
 <p>tool审核工作由cotools管理员进行分配审核</p>
-<h2>cotools管理员</h2>
-<h3>添加tool</h3>
+<h1>cotools管理员</h1>
+<h2>添加tool</h2>
 <p>cotools管理员采用 <code>at</code>参数+<code>开发人员提交的tool路径</code>
 以下命令用于添加tool到cotools
 tetools at /abspath/toolname</p>
-<h3>更新tool</h3>
+<h2>更新tool</h2>
 <p>如果提交的toolname在cotools中已经存在，更新tool的版本需要用到<code>ut</code>参数
 cotools管理员采用 <code>ut</code>参数+<code>开发人员提交的tool路径</code>
 以下命令用于添加tool到cotools
 cotools ut /abspath/toolname</p>
-<h3>添加模块到cotools</h3>
+<h2>添加模块到cotools</h2>
 <p>如果开发人员提供的tool所属模块在cotools中不存在（空运行cotools可查看已有的模块），需要用到<code>am</code>参数添加新模块到cotools才能使用<code>at</code>参数添加tool。
 示例：<code>cotools am newmodulename moduleDescription</code></p>
 <h3>添加新的解释器</h3>
@@ -264,10 +273,10 @@ cotools ut /abspath/toolname</p>
 </pre></div>
 
 
-<h3>删除module</h3>
+<h2>删除module</h2>
 <p>请编辑<code>cotools.ini</code>文件中的<code>module</code>section自行删除或修改
 如要删除整个模块，请手动删除<code>./module/modlueName</code></p>
-<h3>建立持久网页服务</h3>
+<h2>建立持久网页服务</h2>
 <p>由supertools总管理员进入makeService，然后<code>go build make_serve.go</code>，最后<code>nohup make_serve &amp;</code> 就启动了网页服务</p>
 <div class="highlight"><pre><span></span><span class="nb">cd</span> supertools/makeService
 go build make_serve.go
@@ -275,7 +284,7 @@ nohup make_serve <span class="p">&amp;</span>
 </pre></div>
 
 
-<h3>设置计划任务，定期生成网页</h3>
+<h2>设置计划任务，定期生成网页</h2>
 <p>运用<code>crontab -e</code>命令在每周日的晚21点自动执行以下命令,注意<code>*tools</code>改成自己负责的工具</p>
 <div class="highlight"><pre><span></span>0 21 * * sun cd supertools/*tools/html &amp;&amp; make html
 </pre></div>
@@ -285,25 +294,19 @@ nohup make_serve <span class="p">&amp;</span>
         </div>
         <section>
         <div class="span2" style="float:right;font-size:0.9em;">
-            <h4>Published</h4>
-            <time pubdate="pubdate" datetime="2018-11-09T00:00:00+08:00">11 9, 2018</time>
-            <h4>Category</h4>
+            <h4><a href="/author/seqyuan.html"> <i class="icon-user"></i>seqyuan</a></h4>
+
+            <!--<h4>Published</h4>-->
+			<h4><time pubdate="pubdate" datetime="2018-11-09T00:00:00+08:00"><i class="icon-calendar"></i>2018-11-09</time></h4>
+
+            <h4><i class="icon-folder-open"></i>Category</h4>
             <a class="category-link" href="/categories.html#tools-ref">tools</a>
-            <h4>Tags</h4>
+            <h4><i class="icon-tag"></i>Tags</h4>
             <ul class="list-of-tags tags-in-article">
-                <li><a href="/tags.html#cotools-ref">cotools
+                <li><a href="/tags.html#shuo-ming-ref">说明
                     <span>1</span>
 </a></li>
-                <li><a href="/tags.html#medtools-ref">medtools
-                    <span>1</span>
-</a></li>
-                <li><a href="/tags.html#pagtools-ref">pagtools
-                    <span>1</span>
-</a></li>
-                <li><a href="/tags.html#plotools-ref">plotools
-                    <span>1</span>
-</a></li>
-                <li><a href="/tags.html#tetools-ref">tetools
+                <li><a href="/tags.html#tools-ref">tools
                     <span>1</span>
 </a></li>
             </ul>
@@ -320,7 +323,7 @@ nohup make_serve <span class="p">&amp;</span>
 <footer>
 <div id="footer">
     <ul class="footer-content">
-        <li class="elegant-power">Designed by <a href="https://github.com/seqyuan/" title="Seqyuan Home Page">Yuan Zan</a></li>
+        <li class="elegant-power">Designed by <a href="http://www.seqyuan.com/" title="Seqyuan Home Page">Yuan Zan</a></li>
     </ul>
 </div>
 </footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
