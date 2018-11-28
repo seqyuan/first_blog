@@ -23,7 +23,7 @@ AUTHOR_FEED_RSS = None
 
 #add self
 STATIC_PATHS = ['extra']
-THEME = './themes/pelican-elegant'
+THEME = './themes/elegant-seqyuan'
 
 EXTRA_PATH_METADATA = {
 	'extra/CNAME': {'path': 'CNAME'},   # 这是个路径映射，即会把 `content/extra/CNAME` 文件拷贝到 `output/CNAME`

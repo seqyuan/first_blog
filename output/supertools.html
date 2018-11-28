@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="seqyuan" />
+        <meta name="copyright" content="seqyuan" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="tools, 说明, tools, " />
+
+<meta property="og:title" content="supertools使用说明 "/>
+<meta property="og:url" content="/supertools.html" />
+<meta property="og:description" content="supertools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools" />
+<meta property="og:site_name" content="seqyuan" />
+<meta property="og:article:author" content="seqyuan" />
+<meta property="og:article:published_time" content="2018-11-09T00:00:00+08:00" />
+<meta name="twitter:title" content="supertools使用说明 ">
+<meta name="twitter:description" content="supertools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools">
+
+        <title>supertools使用说明  · seqyuan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/"><span class=site-name>seqyuan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="">Home</a></li>
+                            <li ><a href="/categories.html">Categories</a></li>
+                            <li ><a href="/tags.html">Tags</a></li>
+                            <li ><a href="/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="/supertools.html"> supertools使用说明  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <h1>supertools使用</h1>
+<h2>网页检索</h2>
+<p>我们设置了网页服务使开发者和用户更好的互动，访问以下ip中的任何一个都能看到相应工具集的汇总</p>
+<p><a href="http://192.168.2.202:1900">tetools</a></p>
+<p><a href="http://192.168.2.202:1901">pagtools</a></p>
+<p><a href="http://192.168.2.202:1902">medtools</a></p>
+<p><a href="http://192.168.2.202:1903">plotools</a></p>
+<h2>空运行，帮助文档</h2>
+<p>空运行supertools，会显示帮助文档，如下：</p>
+<div class="highlight"><pre><span></span><span class="nl">Program</span><span class="p">:</span> <span class="n">tetools</span> <span class="p">(</span><span class="n">Tools</span> <span class="n">set</span><span class="p">)</span>
+<span class="nl">Version</span><span class="p">:</span> <span class="mf">0.0.1</span>   <span class="n">seqyuan</span><span class="p">@</span><span class="n">gmail</span><span class="p">.</span><span class="n">com</span>  <span class="n">Nov</span> <span class="mi">08</span> <span class="mi">2018</span>
+
+<span class="nl">Usage</span><span class="p">:</span>  <span class="n">tetools</span>  <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">command</span><span class="o">&gt;</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+                 <span class="n">at</span><span class="o">|</span><span class="n">addtool</span>          <span class="p">[</span><span class="n">toolspath</span><span class="p">]</span>            <span class="n">Add</span> <span class="n">a</span> <span class="n">new</span> <span class="n">tool</span> <span class="n">or</span> <span class="n">a</span> <span class="n">new</span> <span class="n">version</span>
+                 <span class="n">ut</span><span class="o">|</span><span class="n">updatetool</span>       <span class="p">[</span><span class="n">toolspath</span><span class="p">]</span>            <span class="n">Update</span> <span class="n">a</span> <span class="n">tool</span> <span class="n">not</span> <span class="n">change</span> <span class="n">the</span> <span class="n">version</span>
+                 <span class="n">am</span><span class="o">|</span><span class="n">addmodule</span>        <span class="p">[</span><span class="n">module</span> <span class="n">description</span><span class="p">]</span>   <span class="n">Add</span> <span class="n">a</span> <span class="n">new</span> <span class="n">module</span>
+
+    <span class="n">TAD</span>             <span class="n">TAD类个性化分析工具</span>
+    <span class="n">compartment</span>     <span class="n">sfadf</span>
+</pre></div>
+
+
+<h2>查看某个module里所有的tool</h2>
+<p>运行 cotools modulename即可查看相应module里所有的tool，示例：
+<code>tetools TAD</code></p>
+<div class="highlight"><pre><span></span>$./tetools TAD
+
+    Usage TAD:
+        Jujube_pill     v0.0.1  吃枣药丸
+        argtest         v0.0.1  argtest
+</pre></div>
+
+
+<h2>查看某个tool的帮助文档</h2>
+<p>运行 <code>cotools modulename toolname</code>即可查看相应tool的帮助信息，示例：</p>
+<div class="highlight"><pre><span></span>$./tetools TAD Jujube_pill
+
+usage:
+    python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill arg1 val1 arg2 val2
+jujube pill
+
+/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill 
+</pre></div>
+
+
+<p>在运行命令的最后一行会提示实际要执行的程序</p>
+<h2>使用tool</h2>
+<h3>cotools的方式使用</h3>
+<p>首先执行<code>cotools modulename toolname</code>查看tool的参数说明，然后根据参数说明直接在命令行输入即可，例如：</p>
+<div class="highlight"><pre><span></span>$./tetools TAD Jujube_pill ag1 
+jujube pill
+
+/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill  ag1
+</pre></div>
+
+
+<p>根据示例我们能清楚的看到<code>tetools TAD Jujube_pill ag1</code> 等价于执行</p>
+<p><code>/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill  ag1</code></p>
+<p>所以可以用以上两种方式调用执行程序</p>
+<h1>cotools目录结构</h1>
+<div class="highlight"><pre><span></span>.
+├── bin                 
+│   ├── cotools.ini        #cotools配置文件
+│   └── tetools            #cotools主程序
+├── html                   #用于网页服务的目录
+│   ├── Makefile
+│   ├── __pycache__
+│   ├── content
+│   ├── develop_server.sh
+│   ├── fabfile.py
+│   ├── output
+│   ├── pelicanconf.py
+│   ├── publishconf.py
+│   └── themes
+└── module                 #存放开发人员提交的各类程序
+    ├── TAD                #模块名1
+    └── compartment        #模块名2
+</pre></div>
+
+
+<h1>程序开发规范</h1>
+<h2>目录及文件</h2>
+<p>开发目录示例如下：</p>
+<div class="highlight"><pre><span></span>.
+└── argtest                        #NOT NULL
+    └── bin                        #NOT NULL
+        ├── argtest -&gt; argtest.py  #NOT NULL
+        ├── argtest.ini            #NOT NULL
+        ├── argtest.md             #NOT NULL
+        ├── argtest.py             #NOT NULL
+        └── figure                 #NOT NULL
+            └── seqyuan.jpg
+</pre></div>
+
+
+<p><code>**提交给tools管理员此目录的绝对路径即可**</code></p>
+<h3>toolname</h3>
+<p>提交给tools管理员的路径basename即为程序的名称<code>toolname</code>，此后统称为<code>toolname</code>，示例中为<code>argtest</code></p>
+<h3>bin</h3>
+<p>bin目录是固定且必须的</p>
+<h3>主程序</h3>
+<p>bin目录下有主程序，示例中为<code>argtest.py</code>，此程序命名不做要求</p>
+<h3>主程序链接为<code>toolname</code></h3>
+<p>示例中bin/argtest为一个软链接文件，链接的是bin下的主程序，链接文件的命名与<code>toolname</code>的名称相同</p>
+<h3>toolname.ini文件</h3>
+<p>示例中的argtest.ini为必须文件，标准的ini书写格式，命名为<code>toolname</code> + <code>.ini</code>，其中内容如下：</p>
+<div class="highlight"><pre><span></span>[argtest]               
+# section name需命名为`toolname`
+
+interpreter = python3
+ # 主程序的解释器，固定的option name，value值可根据主程序作修改，例如主程序为test.r 需要Rscript3.5.1那么这个值请设置为Rscript3.5.1，如果是比较特殊的版本请联系tools管理员添加新的程序解释器路径到tools的配置文件
+
+description = argtest
+# 对程序功能的简短描述，用于显示在linux界面
+
+module = TAD
+# 主程序所属的分类，可通过空运行tools程序查看已有分类信息，如果没有新提交程序的分类，可以联系cotools管理员进行添加
+
+version = v0.0.1 
+# 程序的版本号，以三段式命名版本号。如果对已经提交的程序有任何basename目录内的文件更改，需要更改版本号并提交目录给cotools管理员
+</pre></div>
+
+
+<h3>tool说明文件toolname.md</h3>
+<p>示例中的argtest.md为markdown格式的文件，命名为<code>toolname</code>+ <code>.md</code>，与标准markdown不同的是文件中需要有头文件，示例如下：</p>
+<div class="highlight"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">argtest</span>
+<span class="err">#</span> <span class="err">值为`</span><span class="n">toolname</span><span class="err">`</span>
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">11</span><span class="o">-</span><span class="mi">06</span>
+<span class="err">#</span> <span class="err">日期格式</span>
+<span class="n">Category</span><span class="o">:</span> <span class="n">TAD</span>
+<span class="err">#</span> <span class="err">值为</span><span class="n">module</span> <span class="n">name</span>
+
+<span class="n">Tags</span><span class="o">:</span> <span class="n">args</span><span class="err">，</span><span class="n">python</span>
+<span class="err">#</span> <span class="err">本</span><span class="n">tools的关键词</span><span class="err">，如有多个以逗号隔开，不要多于</span><span class="mi">3</span><span class="err">个</span><span class="n">Tag</span>
+
+<span class="n">Slug</span><span class="o">:</span> 
+<span class="err">#</span> <span class="err">此项为空</span>
+<span class="err">#</span> <span class="err">此项为</span><span class="n">url的后缀</span><span class="err">，例如</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">2.202</span><span class="sr">/1900/</span><span class="n">argtest</span><span class="o">.</span><span class="na">html中的</span> <span class="n">argtest</span><span class="err">，如果此项为空默认为</span><span class="n">Title</span><span class="err">，所以</span><span class="n">tools里面的toolsname是不允许有重名的</span><span class="err">，即使相同的</span><span class="n">toolname在不同的module里</span><span class="err">，如果不同</span><span class="n">module里有重名的toolname会导致网页生成有问题</span>
+
+<span class="n">Author</span><span class="o">:</span> <span class="n">seqyuan</span>
+<span class="err">#</span> <span class="err">作者，不要写邮箱</span>
+
+<span class="n">Summary</span><span class="o">:</span> 
+<span class="err">#</span> <span class="err">摘要，不要多于</span><span class="mi">42</span><span class="err">个字符</span>
+</pre></div>
+
+
+<p>以下为<code>toolname.md</code>的正文部分，以标准的markdown格式书写</p>
+<div class="highlight"><pre><span></span>&gt; 我们经常以pip install package的形式安装python包，很多新同鞋有这样的疑问：怎样编写python包（自己造轮子）分享给别人，让别人也可以用pip的形式进行安装使用呢？
+
+要解决这个问题我们要从两方面入手：
+
+* 写一个python包
+* 规范包的内容上传到PYPI
+
+## 编写一个python包
+为了言之有物我们决定编写一个能解决实际应用的包
+![seqyuan](./module/TAD/argtest/bin/figure/seqyuan.jpg)
+</pre></div>
+
+
+<p>如果需要在<code>toolname.md</code>中插入图片，请按照示例中的样式<code>采用相对路径</code>插入图片，图片要放在<code>toolname/bin/figure</code>里，标准相对路径格式为：</p>
+<blockquote>
+<p>./module/模块名/toolname/bin/figure/图片名</p>
+</blockquote>
+<p><strong>说明文档必须包涵以下内容：</strong></p>
+<ol>
+<li>程序的主要功能描述</li>
+<li>程序的使用示例</li>
+<li>程序的参数简介</li>
+<li>程序的参数详解，如果参数是文件，要包含输入文件的具体格式要求</li>
+<li>程序结果的解读，如果是图需要解读，如果是表，需要做表头说明</li>
+</ol>
+<p><code>示例请参考：</code> tetools中的<a href="http://192.168.2.202:1900/gwas_ldheatmap.html" target="_blank">GWAS_LDheatmap</a></p>
+<h3>toolname/bin/figure</h3>
+<p>此目录必须存在，即使为空。用于存放<code>toolname.md</code>中插入的图片</p>
+<h2>tool审核</h2>
+<p>tool审核工作由cotools管理员进行分配审核</p>
+<h1>cotools管理员</h1>
+<h2>添加tool</h2>
+<p>cotools管理员采用 <code>at</code>参数+<code>开发人员提交的tool路径</code>
+以下命令用于添加tool到cotools
+tetools at /abspath/toolname</p>
+<h2>更新tool</h2>
+<p>如果提交的toolname在cotools中已经存在，更新tool的版本需要用到<code>ut</code>参数
+cotools管理员采用 <code>ut</code>参数+<code>开发人员提交的tool路径</code>
+以下命令用于添加tool到cotools
+cotools ut /abspath/toolname</p>
+<h2>添加模块到cotools</h2>
+<p>如果开发人员提供的tool所属模块在cotools中不存在（空运行cotools可查看已有的模块），需要用到<code>am</code>参数添加新模块到cotools才能使用<code>at</code>参数添加tool。
+示例：<code>cotools am newmodulename moduleDescription</code></p>
+<h3>添加新的解释器</h3>
+<p>请编辑<code>cotools.ini</code>文件手动添加
+<code>cotools.ini</code>内容如下：</p>
+<div class="highlight"><pre><span></span><span class="k">[software]</span>
+<span class="na">python3</span> <span class="o">=</span> <span class="s">/annoroad/share/software/install/Python-3.3.2/bin/python3</span>
+<span class="na">perl</span>    <span class="o">=</span> <span class="s">/annoroad/share/software/install/perl-5.16.2/bin/perl</span>
+<span class="na">make</span>    <span class="o">=</span> <span class="s">/usr/bin/make -f</span>
+<span class="na">Rscript</span> <span class="o">=</span> <span class="s">/annoroad/share/software/install/R-3.2.2/bin/Rscript</span>
+
+<span class="k">[module]</span>
+<span class="na">TAD</span> <span class="o">=</span> <span class="s">TAD类个性化分析工具</span>
+</pre></div>
+
+
+<h2>删除module</h2>
+<p>请编辑<code>cotools.ini</code>文件中的<code>module</code>section自行删除或修改
+如要删除整个模块，请手动删除<code>./module/modlueName</code></p>
+<h2>建立持久网页服务</h2>
+<p>由supertools总管理员进入makeService，然后<code>go build make_serve.go</code>，最后<code>nohup make_serve &amp;</code> 就启动了网页服务</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> supertools/makeService
+go build make_serve.go
+nohup make_serve <span class="p">&amp;</span>
+</pre></div>
+
+
+<h2>设置计划任务，定期生成网页</h2>
+<p>运用<code>crontab -e</code>命令在每周日的晚21点自动执行以下命令,注意<code>*tools</code>改成自己负责的工具</p>
+<div class="highlight"><pre><span></span>0 21 * * sun cd supertools/*tools/html &amp;&amp; make html
+</pre></div>
+            
+            
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4><a href="/author/seqyuan.html"> <i class="icon-user"></i>seqyuan</a></h4>
+
+            <!--<h4>Published</h4>-->
+			<h4><time pubdate="pubdate" datetime="2018-11-09T00:00:00+08:00"><i class="icon-calendar"></i>2018-11-09</time></h4>
+
+            <h4><i class="icon-folder-open"></i>Category</h4>
+            <a class="category-link" href="/categories.html#tools-ref">tools</a>
+            <h4><i class="icon-tag"></i>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags.html#shuo-ming-ref">说明
+                    <span>1</span>
+</a></li>
+                <li><a href="/tags.html#tools-ref">tools
+                    <span>1</span>
+</a></li>
+            </ul>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Designed by <a href="http://www.seqyuan.com/" title="Seqyuan Home Page">Yuan Zan</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>
