@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="seqyuan" />
+        <meta name="copyright" content="seqyuan" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="matplotlib, popular genes, " />
+
+<meta property="og:title" content="复现The most popular genes in the human genome "/>
+<meta property="og:url" content="/libcor.html" />
+<meta property="og:description" content="Hi-C分析需要的测序量比较高，1个样本往往需要测序很多的数据量，1个Hi-C文库可测序的数据量有限（一般情况下100-300G PE150，超出这个量，多测的数据可能含有较高的PCR dup），所以1个样本往往需要建几个文库来保证总的测序量足够。相同样本不同文库产生的数据需要有比较高的重复性，才能用于后续分析" />
+<meta property="og:site_name" content="seqyuan" />
+<meta property="og:article:author" content="seqyuan" />
+<meta property="og:article:published_time" content="2019-12-15T00:00:00+08:00" />
+<meta name="twitter:title" content="复现The most popular genes in the human genome ">
+<meta name="twitter:description" content="Hi-C分析需要的测序量比较高，1个样本往往需要测序很多的数据量，1个Hi-C文库可测序的数据量有限（一般情况下100-300G PE150，超出这个量，多测的数据可能含有较高的PCR dup），所以1个样本往往需要建几个文库来保证总的测序量足够。相同样本不同文库产生的数据需要有比较高的重复性，才能用于后续分析">
+
+        <title>复现The most popular genes in the human genome  · seqyuan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/"><span class=site-name>seqyuan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="">Home</a></li>
+                            <li ><a href="/categories.html">Categories</a></li>
+                            <li ><a href="/tags.html">Tags</a></li>
+                            <li ><a href="/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="/libcor.html"> 复现The most popular genes in the human genome  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <blockquote>
+<p>为了计算方便，开发了一个R脚本hicLibRepeatCor.R用于Hi-C文库相关性分析，计算两两Hi-C文库的cis矩阵相关性，对所有文库的相关性矩阵做聚类热图,用于衡量判断样本文库的重复性，和不同样本文库的差异</p>
+</blockquote>
+<h3>程序用法</h3>
+<p><code>Rscript hicLibRepeatCor.R &lt;lib_matrix.list&gt; &lt;binsize&gt; &lt;outdir&gt;</code></p>
+<h3>参数说明</h3>
+<h4>lib_matrix.list</h4>
+<p>此参数为每一个文库的matrix列表，示例如下：</p>
+<table>
+<thead>
+<tr>
+<th>wt1</th>
+<th>1000000</th>
+<th>/abspath/wt1_1000000_symmetric.matrix</th>
+<th>/abspath/wt1_1000000_abs.bed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wt2</td>
+<td>1000000</td>
+<td>/abspath/wt2_1000000_symmetric.matrix</td>
+<td>/abspath/wt2_1000000_abs.bed</td>
+</tr>
+<tr>
+<td>tr1</td>
+<td>1000000</td>
+<td>/abspath/tr1_1000000_symmetric.matrix</td>
+<td>/abspath/tr1_1000000_abs.bed</td>
+</tr>
+<tr>
+<td>tr2</td>
+<td>1000000</td>
+<td>/abspath/tr2_1000000_symmetric.matrix</td>
+<td>/abspath/tr2_1000000_abs.bed</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>第一列：文库的命名</li>
+<li>第二列：对应行矩阵的bin size</li>
+<li>第三列：文库矩阵，格式同<a href="http://nservant.github.io/HiC-Pro/RESULTS.html#intra-and-inter-chromosomal-contact-maps">HiC-Pro</a>软件buildMatrix产生的3列矩阵的格式</li>
+<li>第四列：染色体位置与bin number对应关系bed文件，格式<code>HiC-Pro</code>软件buildMatrix产生的bed文件</li>
+</ol>
+<h4>binsize</h4>
+<p>数字型，选择<code>lib_matrix.list</code>参数中第二列与<code>binsize</code>参数相同的matrix去做文库相关性分析</p>
+<h4>outdir</h4>
+<p>输出目录</p>
+<h3>输出结果示例</h3>
+<p>此程序会输出3个结果文件</p>
+<ul>
+<li>pair.pdf</li>
+<li>corr_heatmap.pdf</li>
+<li>cor_matr.matrix</li>
+</ul>
+<h4>pair.pdf</h4>
+<p><img alt="avatar" src="https://gitlab.com/seqyuan/ctools/raw/master/module/CQC/libCor/fig/pair.png">
+<img alt="avatar" src="https://gitlab.com/seqyuan/ctools/raw/master/module/CQC/libCor/fig/alllibpair.png"></p>
+<h4>corr_heatmap.pdf</h4>
+<p><img alt="avatar" src="https://gitlab.com/seqyuan/ctools/raw/master/module/CQC/libCor/fig/corr_heatmap.png">
+<img alt="avatar" src="https://gitlab.com/seqyuan/ctools/raw/master/module/CQC/libCor/fig/alllib_corr_heatmap.png"></p>
+<h4>cor_matr.matrix</h4>
+<p><code>corr_heatmap.pdf</code>的数据文件，对于有编程经验的用户可以自己再去根据自己的喜好去画热图</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>wt1</th>
+<th>wt2</th>
+<th>tr1</th>
+<th>tr2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>wt1</td>
+<td>1</td>
+<td>0.994581416401839</td>
+<td>0.946872471200991</td>
+<td>0.946223805271397</td>
+</tr>
+<tr>
+<td>wt2</td>
+<td>0.994581416401839</td>
+<td>1</td>
+<td>0.947224994844614</td>
+<td>0.946685529296875</td>
+</tr>
+<tr>
+<td>tr1</td>
+<td>0.946872471200991</td>
+<td>0.947224994844614</td>
+<td>1</td>
+<td>0.995740232735047</td>
+</tr>
+<tr>
+<td>tr2</td>
+<td>0.946223805271397</td>
+<td>0.946685529296875</td>
+<td>0.995740232735047</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>例如可以用以下python代码画图</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<span class="c1"># matplotlib.use(&#39;TkAgg&#39;) # for macbook</span>
+<span class="c1"># matplotlib.use(&#39;Agg&#39;) # linux or win</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="s2">&quot;cor_matr.matrix&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span> <span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">clustermap</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="mi">7000</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+
+<p>效果</p>
+<p><img alt="avatar" src="https://gitlab.com/seqyuan/ctools/raw/master/module/CQC/libCor/fig/sns_corr_heatmap.png">
+<img alt="avatar" src="https://gitlab.com/seqyuan/ctools/raw/master/module/CQC/libCor/fig/sns_6corr_heatmap.png"></p>
+<h3>程序依赖包</h3>
+<p>R环境需要安装以下两个R包才能使用此程序
+<em> <a href="http://www.bioconductor.org/packages/release/bioc/html/HiTC.html">HiTC</a>
+</em> <code>pheatmap</code></p>
+            
+            
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4><a href="/author/seqyuan.html"> <i class="icon-user"></i>seqyuan</a></h4>
+
+            <!--<h4>Published</h4>-->
+			<h4><time pubdate="pubdate" datetime="2019-12-15T00:00:00+08:00"><i class="icon-calendar"></i>2019-12-15</time></h4>
+
+            <h4><i class="icon-folder-open"></i>Category</h4>
+            <a class="category-link" href="/categories.html#popular-genes-ref">popular genes</a>
+            <h4><i class="icon-tag"></i>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags.html#matplotlib-ref">matplotlib
+                    <span>3</span>
+</a></li>
+            </ul>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Designed by <a href="http://www.seqyuan.com/" title="Seqyuan Home Page">Yuan Zan</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>
