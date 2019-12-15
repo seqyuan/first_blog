@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>seqyuan - tools</title><link href="jujuba.net/" rel="alternate"></link><link href="jujuba.net/feeds/tools.atom.xml" rel="self"></link><id>jujuba.net/</id><updated>2018-11-09T00:00:00+08:00</updated><entry><title>supertools使用说明</title><link href="jujuba.net/supertools.html" rel="alternate"></link><published>2018-11-09T00:00:00+08:00</published><updated>2018-11-09T00:00:00+08:00</updated><author><name>seqyuan</name></author><id>tag:None,2018-11-09:jujuba.net/supertools.html</id><summary type="html">&lt;p&gt;supertools使用开发说明，适用于 cotools, tetools, pagtools, medtools, plotools&lt;/p&gt;</summary><content type="html">&lt;h1&gt;supertools使用&lt;/h1&gt;
+&lt;h2&gt;网页检索&lt;/h2&gt;
+&lt;p&gt;我们设置了网页服务使开发者和用户更好的互动，访问以下ip中的任何一个都能看到相应工具集的汇总&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://192.168.2.202:1900"&gt;tetools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://192.168.2.202:1901"&gt;pagtools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://192.168.2.202:1902"&gt;medtools&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://192.168.2.202:1903"&gt;plotools&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;空运行，帮助文档&lt;/h2&gt;
+&lt;p&gt;空运行supertools，会显示帮助文档，如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nl"&gt;Program&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;tetools&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Tools&lt;/span&gt; &lt;span class="n"&gt;set&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nl"&gt;Version&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="mf"&gt;0.0.1&lt;/span&gt;   &lt;span class="n"&gt;seqyuan&lt;/span&gt;&lt;span class="p"&gt;@&lt;/span&gt;&lt;span class="n"&gt;gmail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;  &lt;span class="n"&gt;Nov&lt;/span&gt; &lt;span class="mi"&gt;08&lt;/span&gt; &lt;span class="mi"&gt;2018&lt;/span&gt;
+
+&lt;span class="nl"&gt;Usage&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;  &lt;span class="n"&gt;tetools&lt;/span&gt;  &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;options&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+                 &lt;span class="n"&gt;at&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;addtool&lt;/span&gt;          &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;toolspath&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;            &lt;span class="n"&gt;Add&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt; &lt;span class="n"&gt;or&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;
+                 &lt;span class="n"&gt;ut&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;updatetool&lt;/span&gt;       &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;toolspath&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;            &lt;span class="n"&gt;Update&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;tool&lt;/span&gt; &lt;span class="n"&gt;not&lt;/span&gt; &lt;span class="n"&gt;change&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;version&lt;/span&gt;
+                 &lt;span class="n"&gt;am&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="n"&gt;addmodule&lt;/span&gt;        &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;description&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;   &lt;span class="n"&gt;Add&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;new&lt;/span&gt; &lt;span class="n"&gt;module&lt;/span&gt;
+
+    &lt;span class="n"&gt;TAD&lt;/span&gt;             &lt;span class="n"&gt;TAD类个性化分析工具&lt;/span&gt;
+    &lt;span class="n"&gt;compartment&lt;/span&gt;     &lt;span class="n"&gt;sfadf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;查看某个module里所有的tool&lt;/h2&gt;
+&lt;p&gt;运行 cotools modulename即可查看相应module里所有的tool，示例：
+&lt;code&gt;tetools TAD&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$./tetools TAD
+
+    Usage TAD:
+        Jujube_pill     v0.0.1  吃枣药丸
+        argtest         v0.0.1  argtest
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;查看某个tool的帮助文档&lt;/h2&gt;
+&lt;p&gt;运行 &lt;code&gt;cotools modulename toolname&lt;/code&gt;即可查看相应tool的帮助信息，示例：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$./tetools TAD Jujube_pill
+
+usage:
+    python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill arg1 val1 arg2 val2
+jujube pill
+
+/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;在运行命令的最后一行会提示实际要执行的程序&lt;/p&gt;
+&lt;h2&gt;使用tool&lt;/h2&gt;
+&lt;h3&gt;cotools的方式使用&lt;/h3&gt;
+&lt;p&gt;首先执行&lt;code&gt;cotools modulename toolname&lt;/code&gt;查看tool的参数说明，然后根据参数说明直接在命令行输入即可，例如：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$./tetools TAD Jujube_pill ag1 
+jujube pill
+
+/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill  ag1
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;根据示例我们能清楚的看到&lt;code&gt;tetools TAD Jujube_pill ag1&lt;/code&gt; 等价于执行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;/Users/yuanzan/anaconda3/bin/python3 /Users/yuanzan/Documents/golang_programe/tetools/module/TAD/Jujube_pill/current/Jujube_pill/bin/Jujube_pill  ag1&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;所以可以用以上两种方式调用执行程序&lt;/p&gt;
+&lt;h1&gt;cotools目录结构&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.
+├── bin                 
+│   ├── cotools.ini        #cotools配置文件
+│   └── tetools            #cotools主程序
+├── html                   #用于网页服务的目录
+│   ├── Makefile
+│   ├── __pycache__
+│   ├── content
+│   ├── develop_server.sh
+│   ├── fabfile.py
+│   ├── output
+│   ├── pelicanconf.py
+│   ├── publishconf.py
+│   └── themes
+└── module                 #存放开发人员提交的各类程序
+    ├── TAD                #模块名1
+    └── compartment        #模块名2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1&gt;程序开发规范&lt;/h1&gt;
+&lt;h2&gt;目录及文件&lt;/h2&gt;
+&lt;p&gt;开发目录示例如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;.
+└── argtest                        #NOT NULL
+    └── bin                        #NOT NULL
+        ├── argtest -&amp;gt; argtest.py  #NOT NULL
+        ├── argtest.ini            #NOT NULL
+        ├── argtest.md             #NOT NULL
+        ├── argtest.py             #NOT NULL
+        └── figure                 #NOT NULL
+            └── seqyuan.jpg
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;**提交给tools管理员此目录的绝对路径即可**&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;toolname&lt;/h3&gt;
+&lt;p&gt;提交给tools管理员的路径basename即为程序的名称&lt;code&gt;toolname&lt;/code&gt;，此后统称为&lt;code&gt;toolname&lt;/code&gt;，示例中为&lt;code&gt;argtest&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;bin&lt;/h3&gt;
+&lt;p&gt;bin目录是固定且必须的&lt;/p&gt;
+&lt;h3&gt;主程序&lt;/h3&gt;
+&lt;p&gt;bin目录下有主程序，示例中为&lt;code&gt;argtest.py&lt;/code&gt;，此程序命名不做要求&lt;/p&gt;
+&lt;h3&gt;主程序链接为&lt;code&gt;toolname&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;示例中bin/argtest为一个软链接文件，链接的是bin下的主程序，链接文件的命名与&lt;code&gt;toolname&lt;/code&gt;的名称相同&lt;/p&gt;
+&lt;h3&gt;toolname.ini文件&lt;/h3&gt;
+&lt;p&gt;示例中的argtest.ini为必须文件，标准的ini书写格式，命名为&lt;code&gt;toolname&lt;/code&gt; + &lt;code&gt;.ini&lt;/code&gt;，其中内容如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;[argtest]               
+# section name需命名为`toolname`
+
+interpreter = python3
+ # 主程序的解释器，固定的option name，value值可根据主程序作修改，例如主程序为test.r 需要Rscript3.5.1那么这个值请设置为Rscript3.5.1，如果是比较特殊的版本请联系tools管理员添加新的程序解释器路径到tools的配置文件
+
+description = argtest
+# 对程序功能的简短描述，用于显示在linux界面
+
+module = TAD
+# 主程序所属的分类，可通过空运行tools程序查看已有分类信息，如果没有新提交程序的分类，可以联系cotools管理员进行添加
+
+version = v0.0.1 
+# 程序的版本号，以三段式命名版本号。如果对已经提交的程序有任何basename目录内的文件更改，需要更改版本号并提交目录给cotools管理员
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3&gt;tool说明文件toolname.md&lt;/h3&gt;
+&lt;p&gt;示例中的argtest.md为markdown格式的文件，命名为&lt;code&gt;toolname&lt;/code&gt;+ &lt;code&gt;.md&lt;/code&gt;，与标准markdown不同的是文件中需要有头文件，示例如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;argtest&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;值为`&lt;/span&gt;&lt;span class="n"&gt;toolname&lt;/span&gt;&lt;span class="err"&gt;`&lt;/span&gt;
+&lt;span class="n"&gt;Date&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="mi"&gt;2018&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;06&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;日期格式&lt;/span&gt;
+&lt;span class="n"&gt;Category&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;TAD&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;值为&lt;/span&gt;&lt;span class="n"&gt;module&lt;/span&gt; &lt;span class="n"&gt;name&lt;/span&gt;
+
+&lt;span class="n"&gt;Tags&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;args&lt;/span&gt;&lt;span class="err"&gt;，&lt;/span&gt;&lt;span class="n"&gt;python&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;本&lt;/span&gt;&lt;span class="n"&gt;tools的关键词&lt;/span&gt;&lt;span class="err"&gt;，如有多个以逗号隔开，不要多于&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="err"&gt;个&lt;/span&gt;&lt;span class="n"&gt;Tag&lt;/span&gt;
+
+&lt;span class="n"&gt;Slug&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;此项为空&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;此项为&lt;/span&gt;&lt;span class="n"&gt;url的后缀&lt;/span&gt;&lt;span class="err"&gt;，例如&lt;/span&gt; &lt;span class="mf"&gt;192.168&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;2.202&lt;/span&gt;&lt;span class="sr"&gt;/1900/&lt;/span&gt;&lt;span class="n"&gt;argtest&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="na"&gt;html中的&lt;/span&gt; &lt;span class="n"&gt;argtest&lt;/span&gt;&lt;span class="err"&gt;，如果此项为空默认为&lt;/span&gt;&lt;span class="n"&gt;Title&lt;/span&gt;&lt;span class="err"&gt;，所以&lt;/span&gt;&lt;span class="n"&gt;tools里面的toolsname是不允许有重名的&lt;/span&gt;&lt;span class="err"&gt;，即使相同的&lt;/span&gt;&lt;span class="n"&gt;toolname在不同的module里&lt;/span&gt;&lt;span class="err"&gt;，如果不同&lt;/span&gt;&lt;span class="n"&gt;module里有重名的toolname会导致网页生成有问题&lt;/span&gt;
+
+&lt;span class="n"&gt;Author&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; &lt;span class="n"&gt;seqyuan&lt;/span&gt;
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;作者，不要写邮箱&lt;/span&gt;
+
+&lt;span class="n"&gt;Summary&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt; 
+&lt;span class="err"&gt;#&lt;/span&gt; &lt;span class="err"&gt;摘要，不要多于&lt;/span&gt;&lt;span class="mi"&gt;42&lt;/span&gt;&lt;span class="err"&gt;个字符&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;以下为&lt;code&gt;toolname.md&lt;/code&gt;的正文部分，以标准的markdown格式书写&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; 我们经常以pip install package的形式安装python包，很多新同鞋有这样的疑问：怎样编写python包（自己造轮子）分享给别人，让别人也可以用pip的形式进行安装使用呢？
+
+要解决这个问题我们要从两方面入手：
+
+* 写一个python包
+* 规范包的内容上传到PYPI
+
+## 编写一个python包
+为了言之有物我们决定编写一个能解决实际应用的包
+![seqyuan](./module/TAD/argtest/bin/figure/seqyuan.jpg)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果需要在&lt;code&gt;toolname.md&lt;/code&gt;中插入图片，请按照示例中的样式&lt;code&gt;采用相对路径&lt;/code&gt;插入图片，图片要放在&lt;code&gt;toolname/bin/figure&lt;/code&gt;里，标准相对路径格式为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;./module/模块名/toolname/bin/figure/图片名&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;说明文档必须包涵以下内容：&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;程序的主要功能描述&lt;/li&gt;
+&lt;li&gt;程序的使用示例&lt;/li&gt;
+&lt;li&gt;程序的参数简介&lt;/li&gt;
+&lt;li&gt;程序的参数详解，如果参数是文件，要包含输入文件的具体格式要求&lt;/li&gt;
+&lt;li&gt;程序结果的解读，如果是图需要解读，如果是表，需要做表头说明&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;code&gt;示例请参考：&lt;/code&gt; tetools中的&lt;a href="http://192.168.2.202:1900/gwas_ldheatmap.html" target="_blank"&gt;GWAS_LDheatmap&lt;/a&gt;&lt;/p&gt;
+&lt;h3&gt;toolname/bin/figure&lt;/h3&gt;
+&lt;p&gt;此目录必须存在，即使为空。用于存放&lt;code&gt;toolname.md&lt;/code&gt;中插入的图片&lt;/p&gt;
+&lt;h2&gt;tool审核&lt;/h2&gt;
+&lt;p&gt;tool审核工作由cotools管理员进行分配审核&lt;/p&gt;
+&lt;h1&gt;cotools管理员&lt;/h1&gt;
+&lt;h2&gt;添加tool&lt;/h2&gt;
+&lt;p&gt;cotools管理员采用 &lt;code&gt;at&lt;/code&gt;参数+&lt;code&gt;开发人员提交的tool路径&lt;/code&gt;
+以下命令用于添加tool到cotools
+tetools at /abspath/toolname&lt;/p&gt;
+&lt;h2&gt;更新tool&lt;/h2&gt;
+&lt;p&gt;如果提交的toolname在cotools中已经存在，更新tool的版本需要用到&lt;code&gt;ut&lt;/code&gt;参数
+cotools管理员采用 &lt;code&gt;ut&lt;/code&gt;参数+&lt;code&gt;开发人员提交的tool路径&lt;/code&gt;
+以下命令用于添加tool到cotools
+cotools ut /abspath/toolname&lt;/p&gt;
+&lt;h2&gt;添加模块到cotools&lt;/h2&gt;
+&lt;p&gt;如果开发人员提供的tool所属模块在cotools中不存在（空运行cotools可查看已有的模块），需要用到&lt;code&gt;am&lt;/code&gt;参数添加新模块到cotools才能使用&lt;code&gt;at&lt;/code&gt;参数添加tool。
+示例：&lt;code&gt;cotools am newmodulename moduleDescription&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;添加新的解释器&lt;/h3&gt;
+&lt;p&gt;请编辑&lt;code&gt;cotools.ini&lt;/code&gt;文件手动添加
+&lt;code&gt;cotools.ini&lt;/code&gt;内容如下：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[software]&lt;/span&gt;
+&lt;span class="na"&gt;python3&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/annoroad/share/software/install/Python-3.3.2/bin/python3&lt;/span&gt;
+&lt;span class="na"&gt;perl&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/annoroad/share/software/install/perl-5.16.2/bin/perl&lt;/span&gt;
+&lt;span class="na"&gt;make&lt;/span&gt;    &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/usr/bin/make -f&lt;/span&gt;
+&lt;span class="na"&gt;Rscript&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;/annoroad/share/software/install/R-3.2.2/bin/Rscript&lt;/span&gt;
+
+&lt;span class="k"&gt;[module]&lt;/span&gt;
+&lt;span class="na"&gt;TAD&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;TAD类个性化分析工具&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;删除module&lt;/h2&gt;
+&lt;p&gt;请编辑&lt;code&gt;cotools.ini&lt;/code&gt;文件中的&lt;code&gt;module&lt;/code&gt;section自行删除或修改
+如要删除整个模块，请手动删除&lt;code&gt;./module/modlueName&lt;/code&gt;&lt;/p&gt;
+&lt;h2&gt;建立持久网页服务&lt;/h2&gt;
+&lt;p&gt;由supertools总管理员进入makeService，然后&lt;code&gt;go build make_serve.go&lt;/code&gt;，最后&lt;code&gt;nohup make_serve &amp;amp;&lt;/code&gt; 就启动了网页服务&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; supertools/makeService
+go build make_serve.go
+nohup make_serve &lt;span class="p"&gt;&amp;amp;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;设置计划任务，定期生成网页&lt;/h2&gt;
+&lt;p&gt;运用&lt;code&gt;crontab -e&lt;/code&gt;命令在每周日的晚21点自动执行以下命令,注意&lt;code&gt;*tools&lt;/code&gt;改成自己负责的工具&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;0 21 * * sun cd supertools/*tools/html &amp;amp;&amp;amp; make html
+&lt;/pre&gt;&lt;/div&gt;</content><category term="tools"></category><category term="说明"></category></entry></feed>

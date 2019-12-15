@@ -13,9 +13,9 @@ Summary: 编程复现The most popular genes in the human genome文章两幅图�
  第一幅图是一个条形图,展示了被研究次数最多10个的基因
  第二幅图展示了所有基因的研究次数及基因在染色体上的位置
 
- ![](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/N1.jpg)
+ ![avatar](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/N1.jpg)
 
- ![](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/N2.jpg)
+ ![avatar](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/N2.jpg)
 
 ### 下载的数据
 
@@ -33,8 +33,8 @@ Summary: 编程复现The most popular genes in the human genome文章两幅图�
 
 ### 第一幅效果如下
 
- ![](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/The_top10_citations.png)
- ![](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/The_top20_citations.png)
+ ![avatar](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/The_top10_citations.png)
+ ![avatar](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/The_top20_citations.png)
 
 ### 第二幅图照虎画猫
 
@@ -44,7 +44,7 @@ Summary: 编程复现The most popular genes in the human genome文章两幅图�
 
 ### 第二幅效果如下
 
- ![](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/gene_on_chrom.png)
+ ![avatar](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/gene_on_chrom.png)
 
  通过与原图的对比我发现和文章结果是一些出入的，在top10基因的排名上，有些不同，也许作者两组数据的产生时间稍有不同。如果想彻底问清楚可以一步步重现作者的搜集数据步骤，自己做数据搜集工作。
 
@@ -58,7 +58,7 @@ Summary: 编程复现The most popular genes in the human genome文章两幅图�
 
  在基因组上的位置
 
- ![](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/AR-gene.png)
+ ![avatar](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/AR-gene.png)
 
 ### 源代码
 
@@ -68,4 +68,4 @@ Summary: 编程复现The most popular genes in the human genome文章两幅图�
 
  下图是我的微信公众号，会写一些生物信息相关的文章，欢迎关注。
 
- ![](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/seqyuan.jpg)
+ ![avatar](https://raw.githubusercontent.com/seqyuan/programs/master/plot/The_Most_Studied_Genes/seqyuan.jpg)
