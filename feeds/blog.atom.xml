@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>seqyuan - blog</title><link href="jujuba.net/" rel="alternate"></link><link href="jujuba.net/feeds/blog.atom.xml" rel="self"></link><id>jujuba.net/</id><updated>2017-03-14T00:00:00+08:00</updated><entry><title>pelican blog</title><link href="jujuba.net/pelican%20for%20blog.html" rel="alternate"></link><published>2017-03-14T00:00:00+08:00</published><updated>2017-03-14T00:00:00+08:00</updated><author><name>seqyuan</name></author><id>tag:None,2017-03-14:jujuba.net/pelican for blog.html</id><summary type="html">&lt;p&gt;python pelican for blog&lt;/p&gt;</summary><content type="html">&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir seqyuan_blog
+cd blog
+pelican-quickstart
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;git clone --branch gh-pages git@github.com:seqyuan/blog.git output&lt;/code&gt;
+&lt;code&gt;make html&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;cd output
+git add -A
+git commit -m &amp;quot;change log&amp;quot;
+git push origin gh-pages
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Makefile:1: *** missing separator.  Stop.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;perl -pi -e 's/^  */\t/' Makefile&lt;/code&gt;&lt;/p&gt;</content><category term="pelican"></category></entry></feed>

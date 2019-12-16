@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>seqyuan - chromebook</title><link href="jujuba.net/" rel="alternate"></link><link href="jujuba.net/feeds/chromebook.atom.xml" rel="self"></link><id>jujuba.net/</id><updated>2017-03-13T00:00:00+08:00</updated><entry><title>Chromebook Install Crouton in china</title><link href="jujuba.net/Chromebook%20Install%20Crouton%20in%20china.html" rel="alternate"></link><published>2017-03-13T00:00:00+08:00</published><updated>2017-03-13T00:00:00+08:00</updated><author><name>seqyuan</name></author><id>tag:None,2017-03-13:jujuba.net/Chromebook Install Crouton in china.html</id><summary type="html">&lt;p&gt;ASUS Chromebook C202通过crouton安装linux&lt;/p&gt;</summary><content type="html">&lt;p&gt;在 Chromebook 上面安装 Linux 发行版有2种方法：&lt;/p&gt;
+&lt;p&gt;crouton：https://github.com/dnschneid/crouton&lt;/p&gt;
+&lt;p&gt;ChrUbuntu：https://github.com/iantrich/ChrUbuntu-Guides&lt;/p&gt;
+&lt;p&gt;crouton 是比较流行的安装方法，主要特点如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可保留数据，不需要格式化&lt;/li&gt;
+&lt;li&gt;方便切换（热切换）&lt;/li&gt;
+&lt;li&gt;卸载方便（直接删除目录即可）&lt;/li&gt;
+&lt;li&gt;需要科学上网&lt;/li&gt;
+&lt;li&gt;每次 Chrome OS 升级后需要更新一下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一般crouton的安装教程从网上都能找到，但是真正安装的时候总会出现各种问题导致安装不成功，也许你会遇到同样的问题。下面的教程是我失N多总结的经验。&lt;/p&gt;
+&lt;h1&gt;Install crouton&lt;/h1&gt;
+&lt;h2&gt;开启开发者模式&lt;/h2&gt;
+&lt;p&gt;如果你决定要通过 crouton 的方式安装Linux 发行版，你需要：&lt;/p&gt;
+&lt;p&gt;一个已经开启开发者模式的 ChromeBook（关于开启开发者模式网上有很多教程，这里不另外叙述）&lt;/p&gt;
+&lt;p&gt;有充足的电量&lt;/p&gt;
+&lt;p&gt;良好的网络环境&lt;/p&gt;
+&lt;h2&gt;下载 crouton&lt;/h2&gt;
+&lt;p&gt;从github打下载crouton，网址：https://github.com/dnschneid/crouton&lt;/p&gt;
+&lt;p&gt;下载后解压&lt;/p&gt;
+&lt;h2&gt;修改crouton&lt;/h2&gt;
+&lt;p&gt;更改解压后的crouton中targets/audio文件:&lt;/p&gt;
+&lt;p&gt;第47行：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;( wget -O &amp;quot;$archive&amp;quot; &amp;quot;$urlbase/$ADHD_HEAD.tar.gz&amp;quot; 2&amp;gt;&amp;amp;1 \
+                                    || echo &amp;quot;Error fetching CRAS&amp;quot; ) | tee &amp;quot;$log&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;改为：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;( wget -O &amp;quot;$archive&amp;quot; &amp;quot;http://t.cn/R46YOzM&amp;quot; 2&amp;gt;&amp;amp;1 \
+                                    || echo &amp;quot;Error fetching CRAS&amp;quot; ) | tee &amp;quot;$log&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;make crouton&lt;/h2&gt;
+&lt;p&gt;继上一步更targets/audio后，在crouton目录中执行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;make&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;（在linux环境下执行make）&lt;/p&gt;
+&lt;p&gt;会生成一个&lt;em&gt;crouton&lt;/em&gt;文件&lt;/p&gt;
+&lt;p&gt;把这个&lt;em&gt;crouton&lt;/em&gt;文件放到你的chromebook的 ~/Downloads目录下&lt;/p&gt;
+&lt;h2&gt;开始安装&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;在 Chrome OS 下按 Ctrl + Alt + T 打开命令行标签页，输入 shell 进入命令行。&lt;/li&gt;
+&lt;li&gt;执行 sudo sh -e ~/Downloads/crouton -r trusty -t xfce -e 进行安装&lt;/li&gt;
+&lt;li&gt;当出现下面的几行字符时，就表明安装成功：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Here&amp;#39;s some tips:
+
+Audio from the chroot will now be forwarded to CRAS (Chromium OS audio server),
+through an ALSA plugin.
+
+Future Chromium OS upgrades may break compatibility with the installed version
+of CRAS. Should this happen, simply update your chroot.
+
+You can flip through your running chroot desktops and Chromium OS by hitting
+Ctrl+Alt+Shift+Back and Ctrl+Alt+Shift+Forward.
+
+You already have the Chromium OS extension installed, so you&amp;#39;re good to go!
+
+You can open your running chroot desktops by clicking on the extension icon.
+Once in a crouton window, press fullscreen or the &amp;quot;switch window&amp;quot; key to switch
+back to Chromium OS.
+
+You can launch individual apps in crouton windows by using the &amp;quot;xiwi&amp;quot; command
+in the chroot shell. Use startxiwi to launch directly from the host shell.
+Use the startxiwi parameter -b to run in the background.
+Example: sudo startxiwi -b xterm
+
+You can start Xfce via the startxfce4 host command: sudo startxfce4
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;进入安装好的linux进行配置&lt;/h2&gt;
+&lt;p&gt;执行以下命令进入linux桌面环境
+&lt;code&gt;sudo startxfce4&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;安装中文语言包&lt;/h3&gt;
+&lt;p&gt;因为安装后是什么都不带的系统，因此是英文系统，要使用中文语言先安装语言包：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install language-pack-zh-hans
+sudo apt-get install language-pack-gnome-zh-hans
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;接下来安装语言选择器：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo apt-get install language-selector-gnome&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;安装好后应该就可以从 Settings-Language Support更改语言了&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo update-locale LANG="zh_CN.UTF-8" LANGUAGE="zh_cn:en"&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;之后重启即可变更为中文语言&lt;/p&gt;
+&lt;h2&gt;使用linux&lt;/h2&gt;
+&lt;p&gt;我一般情况下只用以下方式使用linux命令行，而不用桌面版环境&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ctrl + Alt + T 打开命令行标签页&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;输入 &lt;code&gt;shell&lt;/code&gt; 进入命令行&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;sudo enter-chroot&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;进入linux命令行&lt;/p&gt;
+&lt;p&gt;好处是一个网页标签就可以使用linux系统了，复制粘贴都方便&lt;/p&gt;
+&lt;h2&gt;删除发行版&lt;/h2&gt;
+&lt;p&gt;可以使用 &lt;code&gt;sudo delete-chroot chrootname&lt;/code&gt; 来删除发行版，其中 chrootname 一般是发行版代号&lt;/p&gt;
+&lt;p&gt;也可以直接删除 /usr/local/chroot 里面的文件夹&lt;/p&gt;</content><category term="crouton"></category></entry></feed>
