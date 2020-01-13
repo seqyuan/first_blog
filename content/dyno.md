@@ -346,9 +346,3 @@ sudo docker run -it --memory=20G --memory-swap=20G --oom-kill-disable -v /home/z
 # 后续
 后续会推出在linux集群无root权限的情况下调用singularity来执行dyno
 
-
-
-
-# 参考
-* Qiu X, Mao Q, Tang Y, et al. Reversed graph embedding resolves complex single-cell trajectories[J]. Nature methods, 2017, 14(10): 979.
-* Saelens W, Cannoodt R, Todorov H, et al. A comparison of single-cell trajectory inference methods[J]. Nature biotechnology, 2019, 37(5): 547.
