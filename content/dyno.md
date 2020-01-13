@@ -67,18 +67,18 @@ dyno的整个安装过程会非常漫长，如果是windows10或者MACOS用户�
 ## 主要步骤
 [主要步骤如下](https://dynverse.org "dynverse")
 
-* [ ] 准备数据
-* [ ] 为数据集选择最佳方法
-* [ ] 运行TI方法
-* [ ] 轨迹可视化
-* [ ] 从生物学角度解释轨迹
-    *   Rooting
-    *   Milestone labelling
+#### 准备数据
+#### 为数据集选择最佳方法
+#### 运行TI方法
+#### 轨迹可视化
+#### 从生物学角度解释轨迹
+* Rooting
+* Milestone labelling
 
-* [ ] 基因表达在轨迹上的展示
-    *   A global overview of the most predictive genes
-    *   Lineage/branch markers
-    *   Genes important at bifurcation points
+#### 基因表达在轨迹上的展示
+* A global overview of the most predictive genes
+* Lineage/branch markers
+* Genes important at bifurcation points
 
 ![46ad4bd28656eb7ac2b75bcc55c0d335.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_1.png)
 
