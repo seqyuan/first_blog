@@ -83,14 +83,14 @@
 <li>在1个项目的数据集上尝试多种TI分析算法，一是可以提供多种算法证据支持，二是如果多种算法的结果有冲突有利于我们深度思考可能的具体生物学原因</li>
 </ul>
 </blockquote>
-<p>所以<a href="https://www.nature.com/articles/s41587-019-0071-9" title="A comparison of single-cell trajectory inference methods">A comparison of single-cell trajectory inference methods</a>(Saelens et al., 2019)的作者做了一个R包--<code>dyno</code>为终端用户提供完整的TI分析流程，<code>dyno特点</code>如下：</p>
+<p><a href="https://www.nature.com/articles/s41587-019-0071-9" title="A comparison of single-cell trajectory inference methods">A comparison of single-cell trajectory inference methods</a>(Saelens et al., 2019)的作者做了一个R包--<code>dyno</code>为终端用户提供完整的TI分析流程，<code>dyno特点</code>如下：</p>
 <ol>
 <li>统一59种TI方法的输入输出接口</li>
 <li>提供交互式指南工具，可帮助用户选择最合适的TI方法</li>
 <li>简化了轨迹的解释和可视化，包括根据基因表达或者cluster着色</li>
 <li>还可以进行下游分析，例如潜在marker gene 的鉴定</li>
 </ol>
-<h1><code>dyno</code>安装</h1>
+<h2><code>dyno</code>安装</h2>
 <p>dyno是一个R包，需要R/Rstudio运行环境，目前的存放地址是在<code>github</code>- <code>https://github.com/dynverse/dyno</code>，所以我们用devtools进行安装，打开Rstudio，输入以下命令：</p>
 <div class="highlight"><pre><span></span>#install.packages(&quot;devtools&quot;)
 devtools::install_github(&quot;dynverse/dyno&quot;)
@@ -107,8 +107,8 @@ devtools::install_github(&quot;dynverse/dyno&quot;)
 </ul>
 <p>运行TI方法需要用到<code>Docker</code>或者<code>Singularity</code> (version ≥ 3.0)，如果电脑系统是Windows或者MacOS，推荐使用docker，如果是在集群，推荐使用 Singularity。</p>
 <p>如果是win10系统，可以运行<a href="https://hub.docker.com/editions/community/docker-ce-desktop-windows" title="Docker CE">Docker CE</a>。Singularity的安装请参考<code>https://www.sylabs.io/docs/</code>，如果已经安装了anaconda，可以执行<code>conda create -n singularity -c conda-forge singularity=3.0.1</code>安装</p>
-<h2>安装过程遇到的问题</h2>
-<h3>API rate limit exceeded</h3>
+<h3>安装过程遇到的问题</h3>
+<h4>API rate limit exceeded</h4>
 <p>因为dyno存放在了Github，在dyno的安装过程会使用<code>GitHub API</code>，默认的API限制是60次请求，所以会遇到<code>API rate limit exceeded</code>的问题，解决方式如下：</p>
 <ul>
 <li>在Rstudio命令行执行 <code>usethis::browse_github_pat()</code>建议一个GitHub token</li>
@@ -116,32 +116,32 @@ devtools::install_github(&quot;dynverse/dyno&quot;)
 <li>重启R/Rstudio (重新载入 GITHUB_PAT) </li>
 <li>再次重新安装:<code>devtools::install_github("dynverse/dyno")</code></li>
 </ul>
-<h3>其他安装问题</h3>
+<h4>其他安装问题</h4>
 <p>如果没有<code>devtools</code>是不能安装<code>dyno</code>的，所以有些时候<code>devtools</code>的安装也会出现一些问题，例如网络不稳定等，这时可以采用国内的源进行安装：<code>install.packages('devtools', repos='https://mirrors.tuna.tsinghua.edu.cn/CRAN/')</code></p>
 <p>在linux集群，如果没有<code>root</code>权限，安装使用<code>dyno</code>会非常困难，我准备了解决方案会在文章最后一节介绍。</p>
-<h3>windows10/MACOS用户快速体验方式</h3>
+<h4>windows10/MACOS用户快速体验方式</h4>
 <p>dyno的整个安装过程会非常漫长，如果是windows10或者MACOS用户可以在安装docker之后用我构建的R镜像：<code>seqyuan/seqyuan-r:v0.0.1</code>（R version 3.6.1）进行体验，这个R镜像安装了dyno、tidyverse及<code>Seurat</code>等包，可以免去安装过程快速体验dyno的强大，具体使用会在文章最后一节介绍。</p>
-<h1>dyno的使用</h1>
+<h2>dyno的使用</h2>
 <p><a href="https://github.com/dynverse/dyno" title="dyno">dyno</a>的官网<code>https://dynverse.org/</code>有详细的使用步骤介绍，在这里我们就不再重复官网测试数据的结果，重点介绍<code>Seurat</code>分析的10X单细胞转录组数据的结果怎么样和dyno对接。</p>
-<h2>主要步骤</h2>
+<h3>主要步骤</h3>
 <p><a href="https://dynverse.org" title="dynverse">主要步骤如下</a></p>
-<h4>准备数据</h4>
-<h4>为数据集选择最佳方法</h4>
-<h4>运行TI方法</h4>
-<h4>轨迹可视化</h4>
-<h4>从生物学角度解释轨迹</h4>
+<h5>准备数据</h5>
+<h5>为数据集选择最佳方法</h5>
+<h5>运行TI方法</h5>
+<h5>轨迹可视化</h5>
+<h5>从生物学角度解释轨迹</h5>
 <ul>
 <li>Rooting</li>
 <li>Milestone labelling</li>
 </ul>
-<h4>基因表达在轨迹上的展示</h4>
+<h5>基因表达在轨迹上的展示</h5>
 <ul>
 <li>A global overview of the most predictive genes</li>
 <li>Lineage/branch markers</li>
 <li>Genes important at bifurcation points</li>
 </ul>
 <p><img alt="46ad4bd28656eb7ac2b75bcc55c0d335.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_1.png"></p>
-<h2>准备数据</h2>
+<h3>准备数据</h3>
 <p>首先打开Rstudio（如果是linux，打开R命令行），载入以下R包</p>
 <div class="highlight"><pre><span></span><span class="kn">library</span><span class="p">(</span>dyno<span class="p">)</span>
 <span class="kn">library</span><span class="p">(</span>tidyverse<span class="p">)</span>
@@ -151,7 +151,7 @@ devtools::install_github(&quot;dynverse/dyno&quot;)
 
 
 <p>dyno对数据的包装主要通过<a href="https://dynverse.org/reference/dynwrap/">dynwrap</a>包来实现</p>
-<h3>Gene expression data</h3>
+<h4>Gene expression data</h4>
 <p>dynwrap要求raw counts和normalised(log2)表达数据，低表达的细胞、双细胞、坏细胞应该被提前过滤。使用Seurat处理后的数据一般都包含了这些步骤。</p>
 <p><code>wrap_expression</code>要求raw counts和normalised表达为 sparse matrix (dgCMatrix）(<code>列</code>为genes/features，<code>行</code>为细胞) </p>
 <div class="highlight"><pre><span></span><span class="c1">#读入seurat处理后的rds文件</span>
@@ -178,7 +178,7 @@ dataset <span class="o">&lt;-</span> add_grouping<span class="p">(</span>
 </pre></div>
 
 
-<h2>为数据集选择最佳方法</h2>
+<h3>为数据集选择最佳方法</h3>
 <p>如果是MACOS，可以执行以下命令以获取推荐的最佳TI方法</p>
 <div class="highlight"><pre><span></span>guidelines <span class="o">&lt;-</span> guidelines_shiny<span class="p">(</span>dataset<span class="p">)</span>
 methods_selected <span class="o">&lt;-</span> guidelines<span class="o">$</span>methods_selected
@@ -201,7 +201,7 @@ methods_selected <span class="o">&lt;-</span> guidelines<span class="o">$</span>
 <li>打对勾的TI方法就是推荐给我们的，如下图
 <img alt="ca6a6e1e4eb26018cf28f1f5d64430a3.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_6.png"></li>
 </ol>
-<h2>运行TI方法</h2>
+<h3>运行TI方法</h3>
 <div class="highlight"><pre><span></span>model_slingshot <span class="o">&lt;-</span> infer_trajectory<span class="p">(</span>dataset<span class="p">,</span> methods_selected<span class="p">[</span><span class="m">1</span><span class="p">])</span>
 model_paga_tree <span class="o">&lt;-</span> infer_trajectory<span class="p">(</span>dataset<span class="p">,</span> methods_selected<span class="p">[</span><span class="m">2</span><span class="p">])</span>
 model_paga <span class="o">&lt;-</span> infer_trajectory<span class="p">(</span>dataset<span class="p">,</span> methods_selected<span class="p">[</span><span class="m">3</span><span class="p">])</span>
@@ -214,7 +214,7 @@ model_mst <span class="o">&lt;-</span> infer_trajectory<span class="p">(</span>d
 </blockquote>
 <p>目前作者封装的59种TI方法列表见网址：https://github.com/dynverse/dynmethods#list-of-included-methods，用到代码中的调用一般是单词的所有字母都小写，单词之间加下划线。</p>
 <p>guidelines推荐给我的<code>methods_selected</code>包含4个TI方法，本文开头介绍了《<a href="https://mp.weixin.qq.com/s/6ZVTR3wpXrI2tdQpQEVwlQ" title="单细胞轨迹分析知多少--拟时间分析比较">单细胞轨迹分析知多少--拟时间分析比较</a>》得出了几项重要结论，理论指导实践，所以我打算把4中TI方法都试一下，看看结果怎么样。</p>
-<h3>简单可视化</h3>
+<h4>简单可视化</h4>
 <div class="highlight"><pre><span></span>model <span class="o">&lt;-</span> model_slingshot
 plot_dimred<span class="p">(</span>
   model<span class="p">,</span> 
@@ -232,8 +232,8 @@ mst
 <img alt="730af4534faea2ef6800f6cdc7f08328.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_9.png">
 paga_tree
 <img alt="a4212e00ffd8a6bdaa783bc6099da24f.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_10.png"></p>
-<h2>从生物学角度解释轨迹</h2>
-<h3>Rooting</h3>
+<h3>从生物学角度解释轨迹</h3>
+<h4>Rooting</h4>
 <p>大多数方法没有直接的方法来推断轨迹的方向性。在这种情况下，应该使用一些外部信息来“确定”轨迹，例如使用一组marker基因</p>
 <p>添加rooting gene列表，这里需要根据具体的生物学问题来定，为了更快速的演示，我不再深究，这里仅给一个示例作为演示用</p>
 <div class="highlight"><pre><span></span><span class="c1"># 初步来看我认为slingshot方法得到的结果和我的预期比较相近，后续将以此方法得到的model进行后续演示</span>
@@ -243,7 +243,7 @@ model <span class="o">&lt;-</span> model <span class="o">%&gt;%</span>
 </pre></div>
 
 
-<h3>Milestone labelling</h3>
+<h4>Milestone labelling</h4>
 <p>可以使用marker基因标记里程碑，这些标签随后可用于后续分析和可视化</p>
 <div class="highlight"><pre><span></span><span class="c1"># 通过model$milestone_ids我们知道了有4个里程碑</span>
 <span class="c1"># 这个示例我们标记3个里程碑，此处仅为示例，请忽略标签意义</span>
@@ -259,9 +259,9 @@ model <span class="o">&lt;-</span> label_milestones_markers<span class="p">(</sp
 </pre></div>
 
 
-<h2>轨迹可视化</h2>
+<h3>轨迹可视化</h3>
 <p>dyno提供了降维、轨迹模型和细胞聚类等可视化展示方法</p>
-<h3>细胞亚群在轨迹上的展示</h3>
+<h4>细胞亚群在轨迹上的展示</h4>
 <div class="highlight"><pre><span></span>model <span class="o">&lt;-</span> model <span class="o">%&gt;%</span> add_dimred<span class="p">(</span>dyndimred<span class="o">::</span>dimred_mds<span class="p">,</span> expression_source <span class="o">=</span> dataset<span class="o">$</span><span class="kp">expression</span><span class="p">)</span>
 plot_dimred<span class="p">(</span>
   model<span class="p">,</span> 
@@ -296,7 +296,7 @@ plot_dimred<span class="p">(</span>
 <img alt="cb0a43f5628a0e47bd86b0a7c1db5d2b.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_15.png"></p>
 <h2>预测和可视化感兴趣的基因</h2>
 <p>dyno整合了几种方法来从轨迹中提取候选标记基因/特征</p>
-<h3>最具预测性的基因的全球概述</h3>
+<h4>最具预测性的基因的全球概述</h4>
 <p>默认情况下，绘制热图时会计算总体上最重要的基因</p>
 <div class="highlight"><pre><span></span>plot_heatmap<span class="p">(</span>
   model<span class="p">,</span>
@@ -326,7 +326,7 @@ plot_heatmap<span class="p">(</span>
 
 
 <p><img alt="793e06efdff94d4fa90b0bd3132b39c5.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_17.png"></p>
-<h3>分叉点重要的基因</h3>
+<h4>分叉点重要的基因</h4>
 <p>提取在分支点发生变化的特征/基因</p>
 <div class="highlight"><pre><span></span>branching_milestone <span class="o">&lt;-</span> model<span class="o">$</span>milestone_network <span class="o">%&gt;%</span> group_by<span class="p">(</span>from<span class="p">)</span> <span class="o">%&gt;%</span> filter<span class="p">(</span>n<span class="p">()</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span> pull<span class="p">(</span>from<span class="p">)</span> <span class="o">%&gt;%</span> first<span class="p">()</span>
 
@@ -353,7 +353,7 @@ map<span class="p">(</span>branching_point_features<span class="p">[</span><span
 
 
 <p><img alt="d383855a6a239ea4944257d23db8f26d.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_19.png"></p>
-<h1>快速免安装体验方式</h1>
+<h2>快速免安装体验方式</h2>
 <p>对于MACOS或者有root权限的用户，如果想快速体验dyno，可以在安装并启动docker之后，执行以下命令行进入docker环境命令行，然后打开<code>R</code>终端。</p>
 <div class="highlight"><pre><span></span>sudo docker run -it --memory=20G --memory-swap=20G --oom-kill-disable -v /home/zanyuan:/zanyuan -v /tmp:/tmp -v /usr/bin/:/dockerbin -v /var/run/docker.sock:/var/run/docker.sock seqyuan/seqyuan-r:v0.0.1 /bin/bash
 </pre></div>
@@ -390,7 +390,7 @@ model <span class="o">&lt;-</span> infer_trajectory<span class="p">(</span>datas
 </pre></div>
 
 
-<h1>后续</h1>
+<h2>后续</h2>
 <p>后续会推出在linux集群无root权限的情况下调用singularity来执行dyno</p>
             
             
