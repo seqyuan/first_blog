@@ -1,10 +1,4 @@
-Title: 单细胞轨迹分析dyno使用教程
-Date: 2020-01-13
-Category: single-cell 
-Tags: pseudotime， trajectory inference
-Slug: step by step dyno
-Author: seqyuan
-Summary: dyno--1个R包实现几十种单细胞轨迹推断分析使用教程
+Summary: 一个R包解决59种单细胞轨迹推断分析/拟时间分析问题
 
 在上一期的《[单细胞轨迹分析知多少--拟时间分析比较](https://mp.weixin.qq.com/s/6ZVTR3wpXrI2tdQpQEVwlQ "单细胞轨迹分析知多少--拟时间分析比较")》中我们介绍了45种单细胞轨迹推断分析软件方法在以下4个方面的比较：
 
