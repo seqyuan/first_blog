@@ -64,7 +64,7 @@ sdata.loom <- as.loom(x = sdata, filename = "/Users/yuanzan/Desktop/tmp/sdata.lo
 sdata.loom$close_all()
 ```
 
-> 接着*`在jupyter中执行以下代码`* ，实现第二步：`Scanpy读取loom文件转换为能够操作的anndata对象`
+> 接着 *`在jupyter中执行以下代码`* ，实现第二步：`Scanpy读取loom文件转换为能够操作的anndata对象`
 ```python
 import scanpy as sc
 adata = sc.read_loom("/Users/yuanzan/Desktop/tmp/sdata.loom", sparse=True, cleanup=False, X_name='spliced', obs_names='CellID', var_names='Gene', dtype='float32')
