@@ -93,3 +93,6 @@ img.transpose(Image.ROTATE_270)
 
 多年以后，再次读起这些文字，我一定会回想起此时自己没等看到最后一行便已明白，自己不会再走出这故事。从一个围观的吃瓜群众到讲述这个故事再到成为故事一部分的我，应该很庆幸此时的参与。一切过往自永远至永远不会再重复，因为激发起相同兴趣的情形不会有第二次机会在大地上出现。
 
+欢迎扫码关注生信微信公众号
+
+![seqyuan](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/seqyuan.jpg)
