@@ -136,8 +136,8 @@ sdata.loom<span class="o">$</span>close_all<span class="p">()</span>
 </pre></div>
 
 
-<p><img alt="91c7fc5e195e3fb0b29ce0d891ca9dca.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_8.png">
-到这里和文章里的图只差把图的旋转270度了，于是查看了scnapy的源代码，发现是一个叫<code>stacked_violin</code>的函数调用的<code>seaborn.violinplot</code>实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让它默认出来就是XY转制的小提琴图不就行了。转念又一想还是不浪费时间了，“<code>用AI吧，简单操作一下就能搞定了</code>”，不知道从哪里冒出一个声音，真是可恶，那就简单实现一下吧：</p>
+<p><img alt="91c7fc5e195e3fb0b29ce0d891ca9dca.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_8.png"></p>
+<p>到这里和文章里的图只差顺时针旋转90度了，于是查看了scanpy的源代码，发现是一个叫<code>stacked_violin</code>的函数调用的<code>seaborn.violinplot</code>实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让其由纵向增加小提琴图变为横向增加小提琴图就可以了。转念又一想还是不浪费时间了，“<code>用AI吧，简单操作一下就能搞定了</code>”，不知道从哪里冒出一个声音，真是可恶，那就简单实现一下旋转吧：</p>
 <div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./figures/stacked_violin_tmp.png&#39;</span><span class="p">)</span>
