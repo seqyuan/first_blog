@@ -23,11 +23,11 @@ Summary: 许多年之后，面对同一个作图需求，僵小鱼准会回想�
 
 ![9d1239b17be9264db744ed0ae8a4404a.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_4.png)
 
-> `AI才是真的解决一切！`。
+> `AI才是真的解决一切！`
 
-僵小鱼的故事已经告一段落了，我的心里却久久未能平复，作为已经5年没向AI低头的人，我始终秉承的信念是：`python能解决一切`。所以在僵小鱼声明“`我目前只能接受seurat`”后，众人不再理睬的那句“`scanpy does it`”始终萦绕在我的脑海。
+僵小鱼的故事已经告一段落了，我的心里却久久未能平复，作为已经5年没向AI过低头的人，我始终秉承的信念是：`python能解决一切`。所以在僵小鱼声明“`我目前只能接受seurat`”后，众人不再理睬的那句“`scanpy does it`”始终萦绕在我的脑海。
 
-scanpy是python写的处理单细胞数据的python包，基本复现了seurat的主要功能，曾经我也测试过，在处理大数据量的单细胞项目时，scanpy的速度和内存真是比seurat友好太多。今天再一次翻看了[scanpy教程](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html)，scanpy堆叠小提琴图的风格和Nature文章里的那个图很像，下面是scanpy教程里的小提琴图，在风格上还真是很像：
+scanpy是处理单细胞数据的python包，基本复现了seurat的主要功能，我曾经测试过，在处理大数据量的单细胞项目时，scanpy的速度和内存真是比seurat友好太多。今天再一次翻看了[scanpy教程](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html)，scanpy堆叠小提琴图的风格和Nature文章里的那个图很像，下面是scanpy教程里的小提琴图，在风格上还真是很像：
 
 ![a402d4be69390fb1882ba97f979851a6.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_5.png)
 
@@ -65,6 +65,7 @@ sdata.loom$close_all()
 ```
 
 > 接着 *`在jupyter中执行以下代码`* ，实现第二步：`Scanpy读取loom文件转换为能够操作的anndata对象`
+
 ```python
 import scanpy as sc
 adata = sc.read_loom("/Users/yuanzan/Desktop/tmp/sdata.loom", sparse=True, cleanup=False, X_name='spliced', obs_names='CellID', var_names='Gene', dtype='float32')
@@ -76,10 +77,12 @@ ax = sc.pl.stacked_violin(adata, marker_genes, groupby='ClusterName', rotation=9
 
 ![4d2b58a4c8f94ba6f2acf69477bfc4b2.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_7.png)
 
-再调一下参数转换X轴和Y轴标签：
+再调一下参数，转换X轴和Y轴标签：
+
 ```python
 ax = sc.pl.stacked_violin(sdata, marker_genes, groupby='ClusterName', rotation=90,swap_axes=True, save="_tmp.png")
 ```
+
 ![91c7fc5e195e3fb0b29ce0d891ca9dca.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_8.png)
 到这里和文章里的图只差把图的旋转270度了，于是查看了scnapy的源代码，发现是一个叫`stacked_violin`的函数调用的`seaborn.violinplot`实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让它默认出来就是XY转制的小提琴图不就行了。转念又一想还是不浪费时间了，“`用AI吧，简单操作一下就能搞定了`”，不知道从哪里冒出一个声音，真是可恶，那就简单实现一下吧：
 
