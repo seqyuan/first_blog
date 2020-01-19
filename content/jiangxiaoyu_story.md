@@ -84,7 +84,8 @@ ax = sc.pl.stacked_violin(sdata, marker_genes, groupby='ClusterName', rotation=9
 ```
 
 ![91c7fc5e195e3fb0b29ce0d891ca9dca.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_8.png)
-到这里和文章里的图只差把图的旋转270度了，于是查看了scnapy的源代码，发现是一个叫`stacked_violin`的函数调用的`seaborn.violinplot`实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让它默认出来就是XY转制的小提琴图不就行了。转念又一想还是不浪费时间了，“`用AI吧，简单操作一下就能搞定了`”，不知道从哪里冒出一个声音，真是可恶，那就简单实现一下吧：
+
+到这里和文章里的图只差顺时针旋转90度了，于是查看了scanpy的源代码，发现是一个叫`stacked_violin`的函数调用的`seaborn.violinplot`实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让其由纵向增加小提琴图变为横向增加小提琴图就可以了。转念又一想还是不浪费时间了，“`用AI吧，简单操作一下就能搞定了`”，不知道从哪里冒出一个声音，真是可恶，那就简单实现一下旋转吧：
 
 ```python
 from PIL import Image
@@ -92,6 +93,7 @@ import matplotlib.pyplot as plt
 img = Image.open('./figures/stacked_violin_tmp.png')
 img.transpose(Image.ROTATE_270)
 ```
+
 ![9ad9428dec37767f78607bbc743fc123.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_9.png)
 
 多年以后，再次读起这些文字，我一定会回想起此时自己没等看到最后一行便已明白，自己不会再走出这故事。从一个围观的吃瓜群众到讲述这个故事再到成为故事一部分的我，应该很庆幸此时的参与。一切过往自永远至永远不会再重复，因为激发起相同兴趣的情形不会有第二次机会在大地上出现。
