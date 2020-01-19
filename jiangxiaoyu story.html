@@ -81,10 +81,10 @@
 <p>群里继续有人在出主意：“Seurat+ppt就能搞定”，“ggplot is able to do everything”，“PPT+1”，“PS食用更佳”，“要么AI，要么AI”，“AI”，“AI ...”。最终僵小鱼选择了<code>AI</code>，以下是成图：</p>
 <p><img alt="9d1239b17be9264db744ed0ae8a4404a.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_4.png"></p>
 <blockquote>
-<p><code>AI才是真的解决一切！</code>。</p>
+<p><code>AI才是真的解决一切！</code></p>
 </blockquote>
-<p>僵小鱼的故事已经告一段落了，我的心里却久久未能平复，作为已经5年没向AI低头的人，我始终秉承的信念是：<code>python能解决一切</code>。所以在僵小鱼声明“<code>我目前只能接受seurat</code>”后，众人不再理睬的那句“<code>scanpy does it</code>”始终萦绕在我的脑海。</p>
-<p>scanpy是python写的处理单细胞数据的python包，基本复现了seurat的主要功能，曾经我也测试过，在处理大数据量的单细胞项目时，scanpy的速度和内存真是比seurat友好太多。今天再一次翻看了<a href="https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html">scanpy教程</a>，scanpy堆叠小提琴图的风格和Nature文章里的那个图很像，下面是scanpy教程里的小提琴图，在风格上还真是很像：</p>
+<p>僵小鱼的故事已经告一段落了，我的心里却久久未能平复，作为已经5年没向AI过低头的人，我始终秉承的信念是：<code>python能解决一切</code>。所以在僵小鱼声明“<code>我目前只能接受seurat</code>”后，众人不再理睬的那句“<code>scanpy does it</code>”始终萦绕在我的脑海。</p>
+<p>scanpy是处理单细胞数据的python包，基本复现了seurat的主要功能，我曾经测试过，在处理大数据量的单细胞项目时，scanpy的速度和内存真是比seurat友好太多。今天再一次翻看了<a href="https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html">scanpy教程</a>，scanpy堆叠小提琴图的风格和Nature文章里的那个图很像，下面是scanpy教程里的小提琴图，在风格上还真是很像：</p>
 <p><img alt="a402d4be69390fb1882ba97f979851a6.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_5.png"></p>
 <p>但是怎样把seurat的对象转换成scanpy能够识别的数据格式呢，这一个是R S3对象，另一个是python的<a href="https://anndata.readthedocs.io/en/stable/api.html#module-anndata">anndata</a>对象。最初的想法是能不能把seurat对象的矩阵和分群信息导出到文件，再手动构建一个anndata对象，真要做的时候发现面临很多困难。</p>
 <p>最终经过在google搜索，毫无意外的发现了同道中人，有相同需求的人在<code>bioinformatics</code>上提问<a href="https://bioinformatics.stackexchange.com/questions/3943/convert-r-rna-seq-data-object-to-a-python-object">Convert R RNA-seq data object to a Python object</a>，通过查看这个页面提供的方案，我发现<a href="https://satijalab.org/seurat/v3.1/conversion_vignette.html">seurat官网</a>提供了不同单细胞处理软件结果互通的转换方法。</p>
@@ -131,7 +131,7 @@ sdata.loom<span class="o">$</span>close_all<span class="p">()</span>
 
 <p>初步产生的图和scanpy教程里一样，挑选的marker基因在各个亚群中的表达小提琴图，规则的排布在了一起，基本实现了当初的想法。</p>
 <p><img alt="4d2b58a4c8f94ba6f2acf69477bfc4b2.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_7.png"></p>
-<p>再调一下参数转换X轴和Y轴标签：</p>
+<p>再调一下参数，转换X轴和Y轴标签：</p>
 <div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">stacked_violin</span><span class="p">(</span><span class="n">sdata</span><span class="p">,</span> <span class="n">marker_genes</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;ClusterName&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="n">swap_axes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="s2">&quot;_tmp.png&quot;</span><span class="p">)</span>
 </pre></div>
 
