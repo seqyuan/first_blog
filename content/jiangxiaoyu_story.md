@@ -89,7 +89,7 @@ ax = sc.pl.stacked_violin(sdata, marker_genes, groupby='ClusterName', rotation=9
 
 ![91c7fc5e195e3fb0b29ce0d891ca9dca.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_8.png)
 
-到这里和文章里的图只差顺时针旋转90度了，于是查看了scanpy的源代码，发现是一个叫`stacked_violin`的函数调用的`seaborn.violinplot`实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让其由纵向增加小提琴图变为横向增加小提琴图就可以了。转念又一想还是不浪费时间了，“`用AI吧，简单操作一下就能搞定了`”，不知道从哪里冒出一个声音，真是可恶，那就简单实现一下旋转吧：
+到这里和文章里的图只差顺时针旋转90度了，于是查看了scanpy的源代码，发现是一个叫`stacked_violin`的函数调用的`seaborn.violinplot`实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让其由纵向增加小提琴图变为横向增加小提琴图就可以了。转念又一想还是不浪费时间了，“`用AI吧，简单操作一下就能搞定了`”，不知道从哪里冒出一个声音，真是可恶，那就用代码简单实现一下旋转吧：
 
 ```python
 from PIL import Image
