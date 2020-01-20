@@ -69,15 +69,15 @@
 
             
             <blockquote>
-<p>许多年之后，面对同一个作图需求，<code>僵小鱼</code>将会回想起，在微信群里提出相同问题的那个遥远的上午</p>
+<p>许多年之后，面对同一个作图需求，僵小鱼将会回想起，在微信群里提出相同问题的那个遥远的上午</p>
 </blockquote>
-<p>在那个遥远的上午，百无聊赖的做着项目，用<a href="https://satijalab.org/seurat/pancreas_integration_label_transfer.html">Seurat</a>画着一个又一个单细胞marker基因小提琴图，“这种图真是够了！”，她在心里想着，“是时候该换一种风格了，最好能够把多个基因的小提琴图规则美观的合并在一起，这样就能直接用在文章里了”。
-<img alt="9296d89bf90fcffb1feb208444aeaba5.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_1.png">
-果然在看过的顶级期刊文章里她找到了一个对胃口的图，“嗯，就是这个了”，想归想，真正要实现的时候发现：非常熟悉的Seurat不能直接产生这种图，“怎么办呢？”</p>
+<p>在那个遥远的上午，百无聊赖的做着项目，用<a href="https://satijalab.org/seurat/pancreas_integration_label_transfer.html">Seurat</a>画着一个又一个单细胞marker基因小提琴图，“这种图真是够了！”，她在心里想着，“是时候该换一种风格了，最好能够把多个基因的小提琴图规则美观的合并在一起，这样就能直接用在文章里了”。</p>
+<p><img alt="9296d89bf90fcffb1feb208444aeaba5.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_1.png"></p>
+<p>果然在看过的顶级期刊文章里她找到了一个对胃口的图，“嗯，就是这个了”，想归想，真正要实现的时候发现：非常熟悉的Seurat不能直接产生这种图，“怎么办呢？”</p>
 <p>“求助吧”，最近刚加了专业领域的微信群，群里大牛云集，“也许他们能给我点启发”，说着就试着发了自己的想法到群里。</p>
 <p><img alt="b1c81aa36ab2e0e924d36897edf1fcbd.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_2.png"></p>
-<p>对于群里的新成员，大家都还是比较热心的，有大佬直接指出“<code>scanpy does it</code>”，有的大佬指出“<code>这张图来自Nature肝硬化的文章吧</code>”，“都这么熟悉的么”，僵小鱼在群里回应道。“真的假的？”，吃瓜的我心里想着，然后默默打开搜索引擎，搜索“单细胞肝硬化”的新闻，找到原文“<a href="https://www.nature.com/articles/s41586-019-1631-3">Resolving the fibrotic niche of human liver cirrhosis at single-cell level</a>”，复制粘贴到sci-hub.tw，下载文章，这些都动作一气呵成，仿佛经历过多年的练习。果然，大佬诚不我欺，我从文章里找到了原图。
-<img alt="89e2163f81c51a19fb56c14fa1ab44cd.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_3.png"></p>
+<p>对于群里的新成员，大家都还是比较热心的，有大佬直接指出“<code>scanpy does it</code>”，有的大佬指出“<code>这张图来自Nature肝硬化的文章吧</code>”，“都这么熟悉的么”，僵小鱼在群里回应道。“真的假的？”，吃瓜的我心里想着，然后默默打开搜索引擎，搜索“单细胞肝硬化”的新闻，找到原文“<a href="https://www.nature.com/articles/s41586-019-1631-3">Resolving the fibrotic niche of human liver cirrhosis at single-cell level</a>”，复制粘贴到sci-hub.tw，下载文章，这些都动作一气呵成，仿佛经历过多年的练习。果然，大佬诚不我欺，我从文章里找到了原图。</p>
+<p><img alt="89e2163f81c51a19fb56c14fa1ab44cd.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_3.png"></p>
 <p>群里继续有人在出主意：“Seurat+ppt就能搞定”，“ggplot is able to do everything”，“PPT+1”，“PS食用更佳”，“要么AI，要么AI”，“AI”，“AI ...”。最终僵小鱼选择了<code>AI</code>，以下是成图：</p>
 <p><img alt="9d1239b17be9264db744ed0ae8a4404a.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_4.png"></p>
 <blockquote>
@@ -88,8 +88,8 @@
 <p><img alt="a402d4be69390fb1882ba97f979851a6.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_5.png"></p>
 <p>但是怎样把seurat的对象转换成scanpy能够识别的数据格式呢，这一个是R S3对象，另一个是python的<a href="https://anndata.readthedocs.io/en/stable/api.html#module-anndata">anndata</a>对象。最初的想法是能不能把seurat对象的矩阵和分群信息导出到文件，再手动构建一个anndata对象，真要做的时候发现面临很多困难。</p>
 <p>最终经过在google搜索，毫无意外的发现了同道中人，有相同需求的人在<code>bioinformatics</code>上提问<a href="https://bioinformatics.stackexchange.com/questions/3943/convert-r-rna-seq-data-object-to-a-python-object">Convert R RNA-seq data object to a Python object</a>，通过查看这个页面提供的方案，我发现<a href="https://satijalab.org/seurat/v3.1/conversion_vignette.html">seurat官网</a>提供了不同单细胞处理软件结果互通的转换方法。</p>
-<p><img alt="98691e781a906e3bf1774ce4a55e9f63.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_6.png">
-seurat官网提供了<code>seurat对象</code>与<code>SingleCellExperiment</code>、<code>loom</code>、<code>AnnData</code>三种单细胞数据格式相互转换的方法。目前seurat（version 3.1）不支持写入scanpy要求的H5AD文件，所以目前的解决方案是：</p>
+<p><img alt="98691e781a906e3bf1774ce4a55e9f63.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_6.png"></p>
+<p>seurat官网提供了<code>seurat对象</code>与<code>SingleCellExperiment</code>、<code>loom</code>、<code>AnnData</code>三种单细胞数据格式相互转换的方法。目前seurat（version 3.1）不支持写入scanpy要求的H5AD文件，所以目前的解决方案是：</p>
 <ol>
 <li>Seurat对象转换为loom文件</li>
 <li>Scanpy读取loom文件转换为能够操作的anndata对象</li>
