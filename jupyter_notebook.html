@@ -122,8 +122,13 @@
 </pre></div>
 
 
-<p>我公司Linux集群的IP地址是192.168.2.209，所以在公司电脑<code>浏览器地址栏</code>输入<code>192.168.2.209:7890</code>就能访问jupyter notebook服务了</p>
+<p>我公司Linux集群的IP地址是192.168.2.209，所以在公司电脑<code>浏览器地址栏</code>输入<code>192.168.2.209:7890</code>就能访问jupyter notebook服务了，如果是第一次打开会先提示我们输入密码，这个密码就是就是<code>步骤3）</code>我们设置的<code>123456a</code>。</p>
 <p><img alt="jupyter_2.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jupyter/jupyter_2.png"></p>
+<p>启动jupyter服务的时候可以指定工作目录</p>
+<div class="highlight"><pre><span></span>jupyter notebook --notebook-dir=&quot;/seqyuan/PMO/ahworld&quot;
+</pre></div>
+
+
 <h2>后续更新</h2>
 <blockquote>
 <p><code>用家里电脑的浏览器访问在公司集群建立的服务</code>，例如：<code>python3 -m http.server</code>或者<code>jupyter notebook</code></p>
