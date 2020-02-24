@@ -57,9 +57,14 @@ c.NotebookApp.notebook_dir = '/seqyuan/PMO/yuanzan'
 ```
 jupyter notebook
 ```
-我公司Linux集群的IP地址是192.168.2.209，所以在公司电脑`浏览器地址栏`输入`192.168.2.209:7890`就能访问jupyter notebook服务了
+我公司Linux集群的IP地址是192.168.2.209，所以在公司电脑`浏览器地址栏`输入`192.168.2.209:7890`就能访问jupyter notebook服务了，如果是第一次打开会先提示我们输入密码，这个密码就是就是`步骤3）`我们设置的`123456a`。
 
 ![jupyter_2.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/jupyter/jupyter_2.png)
+
+启动jupyter服务的时候可以指定工作目录
+```
+jupyter notebook --notebook-dir="/seqyuan/PMO/ahworld"
+```
 
 ## 后续更新
 
