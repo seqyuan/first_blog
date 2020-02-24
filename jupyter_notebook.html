@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="ahworld" />
+        <meta name="copyright" content="ahworld" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="jupyter, linux, " />
+
+<meta property="og:title" content="本地电脑浏览器访问Linux集群上配置Jupyter Notebook服务 "/>
+<meta property="og:url" content="/jupyter_notebook.html" />
+<meta property="og:description" content="Linux集群上配置Jupyter Notebook服务，本地电脑进行访问的方法" />
+<meta property="og:site_name" content="seqyuan" />
+<meta property="og:article:author" content="ahworld" />
+<meta property="og:article:published_time" content="2020-02-24T00:00:00+08:00" />
+<meta name="twitter:title" content="本地电脑浏览器访问Linux集群上配置Jupyter Notebook服务 ">
+<meta name="twitter:description" content="Linux集群上配置Jupyter Notebook服务，本地电脑进行访问的方法">
+
+        <title>本地电脑浏览器访问Linux集群上配置Jupyter Notebook服务  · seqyuan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/"><span class=site-name>seqyuan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="">Home</a></li>
+                            <li ><a href="/categories.html">Categories</a></li>
+                            <li ><a href="/tags.html">Tags</a></li>
+                            <li ><a href="/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="/jupyter_notebook.html"> 本地电脑浏览器访问Linux集群上配置Jupyter Notebook服务  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <p>以往我们用Jupyter Notebook都是在自己电脑安装Anaconda，然后打开Jupyter服务，但是有时候我们运行的命令需要的计算量和内存比较大，所以如果能在Linux集群上配置Jupyter Notebook服务，再以自己的电脑浏览器访问这个服务就能体验Linux集群计算资源带来的便利。</p>
+<p>具体实现有以下5个步骤：</p>
+<blockquote>
+<ol>
+<li>Linux集群上安装Anaconda</li>
+<li>生成jupyter配置文件</li>
+<li>生成密钥</li>
+<li>修改jupyter配置文件</li>
+<li>启动jupyter notebook服务</li>
+</ol>
+</blockquote>
+<h4>1）Linux集群上安装Anaconda</h4>
+<p>登陆<a href="https://www.anaconda.com/distribution/">Anaconda官网</a>下载、安装到你的Linux集群。Anaconda集成了Jupyter，安装Anaconda的过程会自动把Jupyter加入到你的环境变量。</p>
+<h4>2）生成jupyter配置文件</h4>
+<p>在Linux集群命令行输入以下命令。</p>
+<div class="highlight"><pre><span></span>jupyter notebook --generate-config
+</pre></div>
+
+
+<p>以上命令执行成功后会在home目录生成jupyter notebook的配置文件<code>.jupyter/jupyter_notebook_config.py</code>。</p>
+<h4>3）生成密钥</h4>
+<p>在集群Linux命令行打开python3环境，执行以下两行命令生成密钥。</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">notebook.auth</span> <span class="kn">import</span> <span class="n">passwd</span>  
+<span class="n">passwd</span><span class="p">()</span>
+</pre></div>
+
+
+<p>在执行<code>passwd()</code>命令的时候会提示输入密码，这是jupyter服务的密码，可以设置简单点便于自己记住，例如<code>123456a</code></p>
+<h4>4）修改jupyter配置文件</h4>
+<div class="highlight"><pre><span></span>vim ~/.jupyter/jupyter_notebook_config.py
+</pre></div>
+
+
+<p>修改<code>~/.jupyter/jupyter_notebook_config.py</code>里的以下内容：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 就是设置ip为 0.0.0.0</span>
+<span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span>
+<span class="c1"># 刚才复制粘贴的那个密钥 </span>
+<span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;shal:dd...&#39;</span>
+<span class="c1"># 禁止自动打开浏览器 </span>
+<span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">open_browser</span> <span class="o">=</span> <span class="bp">False</span> 
+<span class="c1"># 设置端口号</span>
+<span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">7890</span>
+<span class="c1"># 设置默认的work dir</span>
+<span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">notebook_dir</span> <span class="o">=</span> <span class="s1">&#39;/seqyuan/PMO/yuanzan&#39;</span>
+</pre></div>
+
+
+<p><img alt="jupyter_1.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jupyter/jupyter_1.png"></p>
+<h4>5）启动jupyter notebook服务</h4>
+<p>在Linux命令行输入以下命令启动jupyter notebook服务</p>
+<div class="highlight"><pre><span></span>jupyter notebook
+</pre></div>
+
+
+<p>我公司Linux集群的IP地址是192.168.2.209，所以在公司电脑<code>浏览器地址栏</code>输入<code>192.168.2.209:7890</code>就能访问jupyter notebook服务了</p>
+<p><img alt="jupyter_2.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jupyter/jupyter_2.png"></p>
+<h2>后续更新</h2>
+<blockquote>
+<p><code>用家里电脑的浏览器访问在公司集群建立的服务</code>，例如：<code>python3 -m http.server</code>或者<code>jupyter notebook</code></p>
+</blockquote>
+<p>欢迎扫码关注生信微信公众号</p>
+<p><img alt="seqyuan" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/seqyuan.jpg"></p>
+            
+            
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4><a href="/author/ahworld.html"> <i class="icon-user"></i>ahworld</a></h4>
+
+            <!--<h4>Published</h4>-->
+			<h4><time pubdate="pubdate" datetime="2020-02-24T00:00:00+08:00"><i class="icon-calendar"></i>2020-02-24</time></h4>
+
+            <h4><i class="icon-folder-open"></i>Category</h4>
+            <a class="category-link" href="/categories.html#linux-ref">linux</a>
+            <h4><i class="icon-tag"></i>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags.html#jupyter-ref">jupyter
+                    <span>1</span>
+</a></li>
+            </ul>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Designed by <a href="http://www.seqyuan.com/" title="Seqyuan Home Page">Yuan Zan</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>
