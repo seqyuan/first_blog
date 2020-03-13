@@ -73,7 +73,7 @@
 <em> 有些癌症多样本的聚类结果大多每个样本单独分成一群
 </em> 对于发育样本，发育前期和后期细胞类型可能存在较大差异，某些样本特异的细胞群，难以判断是批次效应产生的还是真正的生物学效应。</p>
 </blockquote>
-<p>2017年发表在Nature Methods杂志上的<a href="https://www.nature.com/articles/nmeth.4463">SCENIC</a>算法，利用单细胞RNA-seq数据，同时进行基因调控网络重建和细胞状态鉴定，应用于肿瘤和小鼠大脑单细胞图谱数据，提出并证明了<strong>顺式调控网络分析能够用于指导转录因子和细胞状态的鉴定</strong>。SCENIC通过使用生物学驱动的features自动清除肿瘤样本特异行等批次效应。</p>
+<p>2017年发表在Nature Methods杂志上的<a href="https://www.nature.com/articles/nmeth.4463">SCENIC</a>算法，利用单细胞RNA-seq数据，同时进行基因调控网络重建和细胞状态鉴定，应用于肿瘤和小鼠大脑单细胞图谱数据，提出并证明了<strong>顺式调控网络分析能够用于指导转录因子和细胞状态的鉴定</strong>。SCENIC通过使用生物学驱动的features自动清除肿瘤样本特异性等批次效应。</p>
 <h2>基因调控网络</h2>
 <p>我们要深刻了解SCENIC并应用在我们的项目上就要对<code>基因调控网络(GRN, gene regulatory network)</code>的背景有一些认识。细胞的转录状态来自潜在的基因调控网络，GRN由数量有限的转录因子（TFs）和辅因子相互调节及调节下游靶基因构成。</p>
 <p>单细胞转录组分析的最新进展为高分辨率识别转录状态和状态之间的过渡提供了令人兴奋的机会。例如，在分化过程中针对单细胞RNA-seq进行优化的统计和生物信息学方法带来了新的生物学见解。但是，<code>稳定细胞状态下的特异性和强健的（robust）GRN是否能够被确定还尚不清楚</code>。</p>
@@ -147,6 +147,9 @@
 1. 取采样数据集的子集来推断出GRN，并在AUCell评分步骤中包括所有细胞
 2. 使用更高效的机器学习和大数据处理解决方案，作者应用GRNBoost 梯度增强来代替random-forest regression，这种实现方式大大减少了推断GRN所需的时间，并将为在非常大的数据集上进行网络推断铺平道路。</p>
 <p>SCENIC是一种普遍适用的分析scRNA-seq数据的方法，利用TF和顺式调控序列来指导细胞状态的发现。文章的结果表明，GRNs是确定细胞状态的可靠方法，并且scRNA-seq数据非常适合跟踪基因调控过程，在基因调控过程中特定组合的TFs驱动细胞特异性的转录组。</p>
+<p>作者开发的pyscenic使用教程请参考：https://pyscenic.readthedocs.io/en/latest/或者查看 <a href="https://github.com/aertslab/pySCENIC">pyscenic github</a></p>
+<h2>最新SCENIC文章应用</h2>
+<p>最近发表的<a href="https://www.ncbi.nlm.nih.gov/pubmed/32059779">单细胞转录组测序绘制小鼠内皮细胞精细图谱</a>分析研究转录因子在不同ECs中的调控作用，发现了转录因子调控网络呈现了组织特异性。</p>
 <h2>参考</h2>
 <ul>
 <li>http://scenic.aertslab.org</li>
@@ -170,7 +173,7 @@
             <h4><i class="icon-tag"></i>Tags</h4>
             <ul class="list-of-tags tags-in-article">
                 <li><a href="/tags.html#grn-ref">GRN
-                    <span>1</span>
+                    <span>2</span>
 </a></li>
                 <li><a href="/tags.html#scenic-ref">scenic
                     <span>1</span>

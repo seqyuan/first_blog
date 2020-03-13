@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8"> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="ahworld" />
+        <meta name="copyright" content="ahworld" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="GRN, GRN, " />
+
+<meta property="og:title" content="单细胞多组学数据推断基因调控网络GRN "/>
+<meta property="og:url" content="/GRN.html" />
+<meta property="og:description" content="活跃表达的TF与其靶基因组成的基因调控网络（GRN）对于细胞类型的决定与维持至关重要，本文详细介绍了这方面的综述" />
+<meta property="og:site_name" content="seqyuan" />
+<meta property="og:article:author" content="ahworld" />
+<meta property="og:article:published_time" content="2020-03-13T00:00:00+08:00" />
+<meta name="twitter:title" content="单细胞多组学数据推断基因调控网络GRN ">
+<meta name="twitter:description" content="活跃表达的TF与其靶基因组成的基因调控网络（GRN）对于细胞类型的决定与维持至关重要，本文详细介绍了这方面的综述">
+
+        <title>单细胞多组学数据推断基因调控网络GRN  · seqyuan
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/theme/css/pygments.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/tipuesearch/tipuesearch.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/elegant.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="/theme/css/custom.css" media="screen">
+    </head>
+    <body>
+        <div id="content-sans-footer">
+        <div class="navbar navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="/"><span class=site-name>seqyuan</span></a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav pull-right top-menu">
+                            <li ><a href="">Home</a></li>
+                            <li ><a href="/categories.html">Categories</a></li>
+                            <li ><a href="/tags.html">Tags</a></li>
+                            <li ><a href="/archives.html">Archives</a></li>
+                            <li><form class="navbar-search" action="/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span1"></div>
+                <div class="span10">
+<article>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+    <h1><a href="/GRN.html"> 单细胞多组学数据推断基因调控网络GRN  </a></h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+
+            
+            <blockquote>
+<p>基因调控网络（GRN）决定并维持cell-type-specific的转录状态，这反过来又构成了细胞形态和功能的基础。每种细胞类型或稳定状态均由一组特异的转录因子与其靶标基因组合构成，在这个组合中活跃的转录因子（TFs）与基因组中的一组顺式调节区域相互作用并与染色质结构相互作用，从而产生特定的基因表达谱。</p>
+</blockquote>
+<p><img alt="GRN_1.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/GRN/GRN_1.png"></p>
+<p><strong><code>活性TFs及其靶基因的组合通常表示为GRNs</code></strong>。探索GRNs是基因组研究领域的主要挑战之一。一旦确定了驱动并维持细胞状态行为的关键regulators，它们最终就可以用来做干扰这些调控过程的切入点。比如，结合一组特异的TFs组合，将成纤维细胞重编程为诱导性多能干细胞（iPS）；许多其他的重编程途径也是通过特定的TFs组合驱动一个GRN来促使细胞状态的改变；最近在<a href="https://www.sciencedirect.com/science/article/pii/S0959437X17300096">癌症治疗</a>中进行了尝试，使癌细胞转成一种易于受特定药物侵害的状态。</p>
+<p>基于大规模转录组和表观基因组数据来计算预测GRNs是一个广泛研究的领域。但是诸如microarrays, RNA sequencing (RNA-seq), DHS-seq, ATAC-seq或者different methylation-seq methods等等，这些bulk技术衡量的是组织或样本中所有细胞的平均信号，在许多情况下，这种信号是由多种细胞类型组成的。虽然在某些情况下可以从组织中提取特定的细胞类型，例如通过FACS分选，但这需要特定标记的先验知识，并且无法识别新的细胞状态。利用单细胞技术，我们现在可以从单个细胞中收集组学数据，从而有了前所未有的机会来研究GRNs的异质性，并且揭示基因表达的随机（概率）性质和潜在的调控程序。由于这些原因，<strong>调节基因组学</strong>领域的研究正在大规模转向采用单细胞方法。</p>
+<blockquote>
+<p>2018年发表的一篇综述<code>Fiers M W E J, Minnoye L, Aibar S, et al. Mapping gene regulatory networks from single-cell omics data[J]. Briefings in functional genomics, 2018, 17(4): 246-254.</code>比较全面的介绍了目前GRN的发展。</p>
+</blockquote>
+<p>在这篇文章，作者讨论了最近发表的从单细胞转录组学数据推断GRNs的方法。与bulk data相比应该如何应对噪音水平、数据稀疏性以及数据量的增加的挑战。作者还讨论了如何使用单细胞表观基因组学的新技术（例如单细胞ATAC-seq和单细胞DNA甲基化谱图）来破译基因调控过程。作者期待着单细胞多组学和微扰技术的应用，这些技术将来可能在GRNs推断中发挥重要作用。</p>
+<h2>Introduction</h2>
+<p>在背景介绍部分，作者介绍了如何利用单细胞多组学技术以结合算法，从不同层面阐释调控程序：从调控区的染色质状态到GRNs。</p>
+<ul>
+<li>以目前应用最广的scRNA-seq开始，介绍如何将其用于检测一组共同被调控的基因集，并推断出潜在的主要的regulators。</li>
+<li>此外，作者描述了最近发表的研究是如何利用GRNs来进行细胞聚类并细胞状态的转换。</li>
+<li>接下来，作者讨论了单细胞表观基因组分析的进展，这些进展提供了研究基因调控的不同方法。详细介绍了单细胞染色质可及性、单细胞甲基化以及怎样整合多组学数据到每个细胞。每个细胞多组学数据的整合对单个细胞中GRNs的整合预测十分诱人，甚至可能使基因表达预测模型的最终目标触手可及。</li>
+<li>最后，作者介绍了单细胞扰动分析，可能用于研究扰动GRNs（TF或增强子水平）对转录组的影响。这些微扰方法可用于验证预测，并且在不久的将来，它们将成为用于推断高精度GRNs的强大工具。</li>
+</ul>
+<h2>GRN inference from scRNA-seq data</h2>
+<p>scRNA-seq是当今最常用的单细胞测序技术。汤富酬最早在2009年第一个发表之后，许多其他的scRNA-seq技术相继被开发出来。大多数方法遵循类似的方法，将改进的RNA-seq方案应用于以液滴或微孔分离的单个细胞。</p>
+<p>但是，从单个细胞获得的转录组目前不如其对应的bulk样本那样灵敏或提供更多信息：由于生物学差异（例如，随机性，爆发）和技术局限性的结合，只对一个细胞中的总mRNA进行捕获，扩增和测序。</p>
+<p>由于技术的局限性而未被检测到表达的基因称为缺失（dropouts），缺失的水平由每个细胞检测到的基因数的中位数来反映（尽管不同细胞类型可能导致差异），并且通常与实验规模（即测序的细胞数）进行权衡。</p>
+<p>大量单细胞的测序，对于统计区分不同的细胞状态有很大帮助，并可能补偿某些噪音，但是很难获得低表达基因的结论。在评估TF时，这可能是一个特殊的问题，这些TF通常是低表达的。</p>
+<blockquote>
+<p>数据处理过后，scRNA-seq数据会做成行列为基因和细胞的表达矩阵，矩阵中的数值为表达值。大多数scRNA-seq分析的重点是确定组织或癌症中细胞亚群的类型或状态，或研究动态变化过程，例如细胞分化、细胞周期或刺激反应。</p>
+</blockquote>
+<p><strong>用于解决这些问题的计算方法包括</strong>：
+<em> <a href="https://www.sciencedirect.com/science/article/pii/S0098299717300493">使用聚类算法将细胞分为不同的细胞类型或状态</a>
+</em> <a href="https://onlinelibrary.wiley.com/doi/full/10.1002/eji.201646347">通过轨迹推断方法沿伪时间轴对细胞进行排序</a></p>
+<blockquote>
+<p>从转录组学数据推断GRNs通常依赖于可以从表达模式中提取调控信息的假设。例如，具有相似行为的那些基因受共同机制（例如特异性的TF）的调节。依据这样的假设，调控网络（GRN）推断的目的可以是：</p>
+</blockquote>
+<ul>
+<li>对导致细胞从一种状态转变成另一种状态的TF激活事件顺序进行建模</li>
+<li>确定TFs潜在的靶标基因</li>
+<li>鉴定一个细胞状态能够维持所依赖的特定主要regulators（或regulators组合）。</li>
+</ul>
+<p>大多单细胞GRNs推断方法（下图）基于此，且与bulk数据开发的工具[<a href="https://www.sciencedirect.com/science/article/abs/pii/S0010482514000420">1</a><a href="https://www.embopress.org/doi/full/10.1038/msb4100120">2</a><a href="https://www.nature.com/nmeth/journal/v9/n8/abs/nmeth.2016.html">3</a>]原理相同。</p>
+<p><img alt="GRN_2.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/GRN/GRN_2.png"></p>
+<h5><strong>一类GRN推断方法</strong>着重于解密在动态过程中，细胞从一种状态转换到另一种状态所需的TF逻辑组合</h5>
+<p>这通常是通过布尔网络模型实现的。例如Single-Cell Network Synthesis (<a href="https://link.springer.com/chapter/10.1007/978-3-319-21690-4_38">SCNS</a>) toolkit和<a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-016-1235-y">BoolTraineR</a>，通过将每个细胞进行状态分类（基于TF表达）并连接有限数量差异的细胞来构建布尔网络。生成的状态图能够让我们找到参与细胞状态改变的关键TFs，并可用于预测TF的过表达或敲除后的效果。但是，<strong>这不涉及有关靶基因的信息</strong>。</p>
+<p>另外，网络规模的增加会导致计算量的迅速增加。因此，这些工具只能模拟少数基因（&lt;100）。所以通常选择相关TFs子集，再结合这些方法应用于动态过程的轨迹推断步骤。</p>
+<p>布尔网络的另一个缺点是将表达水平转换为二进制状态(基于阈值分为active/not active)，这使其无法可靠地建立剂量反应关系模型，并且对dropouts很敏感。</p>
+<p>这些方法的应用实例包括<a href="https://www.sciencedirect.com/science/article/pii/S0092867412010215">对iPS的重编程建模</a>以及<a href="https://www.nature.com/articles/nbt.3154">Moignard等人的工作</a>，作者对血液发育的调控网络进行了建模，使用的是扩散图和SCNS toolkit分支轨迹。</p>
+<h5>调控网络推断的另一种方法是：将TF与候选靶基因连接，最终目的是确定驱动特定细胞状态的“主要regulators”</h5>
+<p>此类别中的一种主要方法是基于共表达分析并已广泛用于bulk基因表达数据，例如<a href="https://orbi.uliege.be/handle/2268/107580">GENIE3</a>和<a href="https://link.springer.com/article/10.1186/1471-2105-9-559">WGCNA</a>。最近的研究已经成功地将相似的方法应用于单细胞数据。使用这些方法时需要考虑的要素包括以下假设：</p>
+<ul>
+<li>regulator表达水平的变化直接影响下游靶标的表达</li>
+<li>忽略了转录后调控</li>
+<li>忽略了并非所有co-varying基因都一定是直接作用的靶标</li>
+<li>这些方法对normalization和batch-effects敏感，可能会引入人工协变量</li>
+</ul>
+<p>基于共表达算法的其中一部分算法专门针对动态过程中的单细胞转录组数据构建GRN模型。这些方法结合细胞沿时间轴的初始顺序（或预测的轨迹），同时对基因和调节子之间的表达动态进行建模，使用的技术包括：(non-linear) correlation、regression、covariance analysis 、multivariant information 、ordinary differential equation (ODE)模型以及其他的模型。</p>
+<p><strong>ODE</strong>模型是这些模型中的一个特殊类别，它在时间序列上重构表达模式以检测和合并相似的模式。ODE系统允许推断某些因果关系，并且比其他方法更现实更详细。但是，它需要大量输入数据才能可靠地估计其参数，并且计算量很大，因此只能将它们应用于有限数量的TFs和靶标基因。</p>
+<p>在研究一个没有轨迹信息的系统时，需要采取不同的方法。例如由多种不同（静态）细胞类型组成的组织。复杂组织异质性的研究通常专注于识别细胞类型以及表征它们的基因markers，但是进一步的调控分析并不常见。最新工具试图弥补这种gap，例如<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4658017/">SINCERA</a>和<a href="https://www.nature.com/articles/s41467-018-03933-2">ACTION</a>这两个scRNA-seq 分析流程可以帮助寻找cell-type-specific的关键调控因子。</p>
+<blockquote>
+<p>作者的实验室开发的<a href="https://www.nature.com/articles/nmeth.4463">SCENIC</a>直接从数据中推断出GRN，通过将共表达与基序富集分析相结合，鉴定TFs与靶标基因之间调控关系。每一个细胞中的GRN活性用于鉴定细胞状态，关键TFs能够更精确地表征每个状态的特征。</p>
+</blockquote>
+<p><em>总之，早期结果表明，可以利用单细胞转录组学数据重建GRNs。进一步，使用（预测的）调控关系对单细胞数据集进行聚类是有利的，这对于理解细胞异质性至关重要</em></p>
+<h2>Single-cell epigenomics</h2>
+<p>单细胞表观基因组学提供了转录状态的补充描述，现在被表示为表观基因组图谱（epigenomic landscapes）。转录组是转录、转录后调控和RNA降解的结果。<strong>表观基因组提供了一个更接近转录过程的视角</strong>。一个表观基因组揭示了在每个状态下哪些调节区（例如增强子和启动子）起作用。单细胞表观基因组势必会增加对细胞（转录）异质性的了解，并在绘制GRNs时为scRNA-seq提供有价值的补充。</p>
+<p>尽管做单细胞表观基因组学的方法很多，这里主要讨论是ATAC-seq和DNA甲基化，因为这些方法已应用于多种生物系统。</p>
+<p>有两种实验方法可以执行scATAC-seq，一种是基于微流控平台（Fluidigm C1）进行物理分离的单细胞，另一种是基于组合索引（combinatorial indexing）的（sciATAC-seq），两种方法均源自原始的ATAC-seq协议，使用多能性Tn5转座酶同时切割和标记可及的染色质。<strong>目前10X Genomics 公司已经推出商业化的10X单细胞ATAC-seq解决方案</strong>。</p>
+<p>关于从单细胞表观基因组及多组学联合揭示GRNs的方法及应用，总体滞后于scRNA-seq-based方法，这和各组学数据的获得难易程度及组学特点有很大关系，具体内容我在这里不再详述，大家有兴趣可以阅读原文献。</p>
+<h2>文章要点</h2>
+<ul>
+<li>调控基因组学领域正在朝着单细胞分辨率发展</li>
+<li>GRNs可以根据scRNA-seq数据进行逆向推断</li>
+<li>Single-cell GRNs可用于识别稳定的细胞状态和细胞状态转变</li>
+<li>单细胞表观基因组学，单细胞扰动
+分析和单细胞多组学提供令人兴奋的
+揭开转录程序的机会</li>
+<li>从scRNA-seq数据推断GRNs的方法发展迅速；从单细胞表观基因组学数据中揭示调控过程的方法比较滞后</li>
+</ul>
+<h2>相关阅读</h2>
+<p><a href="https://mp.weixin.qq.com/s/BggAc9zdwsz0yOtPOWzjmA">SCENIC | 以single-cell RNA-seq数据推断基因调控网络和细胞功能聚类</a></p>
+            
+            
+            <hr/>
+        </div>
+        <section>
+        <div class="span2" style="float:right;font-size:0.9em;">
+            <h4><a href="/author/ahworld.html"> <i class="icon-user"></i>ahworld</a></h4>
+
+            <!--<h4>Published</h4>-->
+			<h4><time pubdate="pubdate" datetime="2020-03-13T00:00:00+08:00"><i class="icon-calendar"></i>2020-03-13</time></h4>
+
+            <h4><i class="icon-folder-open"></i>Category</h4>
+            <a class="category-link" href="/categories.html#grn-ref">GRN</a>
+            <h4><i class="icon-tag"></i>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="/tags.html#grn-ref">GRN
+                    <span>2</span>
+</a></li>
+            </ul>
+        </div>
+        </section>
+</div>
+</article>
+                </div>
+                <div class="span1"></div>
+            </div>
+        </div>
+        <div id="push"></div>
+    </div>
+<footer>
+<div id="footer">
+    <ul class="footer-content">
+        <li class="elegant-power">Designed by <a href="http://www.seqyuan.com/" title="Seqyuan Home Page">Yuan Zan</a></li>
+    </ul>
+</div>
+</footer>            <script src="http://code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    
+    </body>
+    <!-- Theme: Elegant built for Pelican
+    License : http://oncrashreboot.com/pelican-elegant -->
+</html>
