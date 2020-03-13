@@ -10,7 +10,7 @@ Summary: SCENIC算法，以single-cell RNA-seq数据推断基因调控网络和�
 > * 有些癌症多样本的聚类结果大多每个样本单独分成一群
 > * 对于发育样本，发育前期和后期细胞类型可能存在较大差异，某些样本特异的细胞群，难以判断是批次效应产生的还是真正的生物学效应。
 
-2017年发表在Nature Methods杂志上的[SCENIC](https://www.nature.com/articles/nmeth.4463)算法，利用单细胞RNA-seq数据，同时进行基因调控网络重建和细胞状态鉴定，应用于肿瘤和小鼠大脑单细胞图谱数据，提出并证明了**顺式调控网络分析能够用于指导转录因子和细胞状态的鉴定**。SCENIC通过使用生物学驱动的features自动清除肿瘤样本特异行等批次效应。
+2017年发表在Nature Methods杂志上的[SCENIC](https://www.nature.com/articles/nmeth.4463)算法，利用单细胞RNA-seq数据，同时进行基因调控网络重建和细胞状态鉴定，应用于肿瘤和小鼠大脑单细胞图谱数据，提出并证明了**顺式调控网络分析能够用于指导转录因子和细胞状态的鉴定**。SCENIC通过使用生物学驱动的features自动清除肿瘤样本特异性等批次效应。
 
 ## 基因调控网络
 我们要深刻了解SCENIC并应用在我们的项目上就要对`基因调控网络(GRN, gene regulatory network)`的背景有一些认识。细胞的转录状态来自潜在的基因调控网络，GRN由数量有限的转录因子（TFs）和辅因子相互调节及调节下游靶基因构成。
@@ -129,6 +129,11 @@ NFIB与毛囊和黑素细胞干细胞的干细胞行为有关，它在小细胞�
 2. 使用更高效的机器学习和大数据处理解决方案，作者应用GRNBoost 梯度增强来代替random-forest regression，这种实现方式大大减少了推断GRN所需的时间，并将为在非常大的数据集上进行网络推断铺平道路。
 
 SCENIC是一种普遍适用的分析scRNA-seq数据的方法，利用TF和顺式调控序列来指导细胞状态的发现。文章的结果表明，GRNs是确定细胞状态的可靠方法，并且scRNA-seq数据非常适合跟踪基因调控过程，在基因调控过程中特定组合的TFs驱动细胞特异性的转录组。
+
+作者开发的pyscenic使用教程请参考：https://pyscenic.readthedocs.io/en/latest/或者查看 [pyscenic github](https://github.com/aertslab/pySCENIC)
+
+## 最新SCENIC文章应用
+最近发表的[单细胞转录组测序绘制小鼠内皮细胞精细图谱](https://www.ncbi.nlm.nih.gov/pubmed/32059779)分析研究转录因子在不同ECs中的调控作用，发现了转录因子调控网络呈现了组织特异性。
 
 ## 参考
 
