@@ -127,12 +127,12 @@
 </ul>
 <h3>dataset source</h3>
 <p>测试数据由以下两部分构成：
-<em> 229个合成数据集：提供最精确参考轨迹
-</em> 110个真实数据集：提供最高生物学相关性</p>
+* 229个合成数据集：提供最精确参考轨迹
+* 110个真实数据集：提供最高生物学相关性</p>
 <p><a href="https://static-content.springer.com/esm/art%3A10.1038%2Fs41587-019-0071-9/MediaObjects/41587_2019_71_MOESM4_ESM.xlsx" title="110个真实的数据集">110个真实的数据集</a>来自各种单细胞技术，各种生物体和动态过程，并包含几种类型的拓扑轨迹。
 作者把做测试用的<code>真实数据集</code>做了两个分类：
-<em> Gold standard：参考轨迹是通过细胞分选或细胞混合而来，不是从表达数据本身中提取
-</em> Silver standard：gold standard之外的数据集</p>
+* Gold standard：参考轨迹是通过细胞分选或细胞混合而来，不是从表达数据本身中提取
+* Silver standard：gold standard之外的数据集</p>
 <p>作者使用4个不同的合成数据模拟器合成了<code>229个合成数据集</code>，对于每种模拟，作者都使用一个真实的数据集作为参考，以匹配其尺寸，差异表达基因的数量，丢弃率和其他统计特性：
 • dyngen：用来模拟细胞调控网络github.com/dynverse/dyngen
 • dyntoy：缩减空间中表达的随机梯度github.com/dynverse/dyntoy
@@ -186,12 +186,12 @@ TI方法的性能在很大程度上取决于数据中存在的轨迹类型，<co
 尽管与推断的轨迹的准确性没有直接关系，但一个TI方法能不能被评估实施以及对生物学用户的友好程度也很重要。
 作者对每种方法的软件包装、文档、自动代码测试以及发布的期刊做了评估。作者发现大多数方法都满足基本标准，例如教程的可用性和基本代码质量标准，新方法的质量得分比旧方法好一些，</p>
 <p>以下几个方面几乎所有的TI方法在某些方面多少有些不足
-<em> Availability 
-</em> Behaviour
-<em> Code assurance 
-</em> Code quality
-<em> Documentation 
-</em> Paper</p>
+* Availability 
+* Behaviour
+* Code assurance 
+* Code quality
+* Documentation 
+* Paper</p>
 <p>只有两种方法具有近乎完美的可用性评分（Slingshot和Celltrails）它们可以用作未来新方法开发的参考。</p>
 <h1>TI方法选择指导原则</h1>
 <p>根据基准测试的结果，作者为用户提供了一套TI方法选择实用的指导原则<a href="http://guidelines.dynverse.org/" title="Guidelines.dynverse.org">Guidelines.dynverse.org</a>
@@ -225,8 +225,8 @@ TI方法的性能在很大程度上取决于数据中存在的轨迹类型，<co
 <p>为了支持这些新工具的开发，作者在https://benchmark.dynverse.org上提供了一系列有关如何包装和评估一种针对本研究中提出的不同措施的方法的方法。</p>
 <h3>作者的总结</h3>
 <p>作者通过测试发现一种TI方法的性能在数据集之间可能非常不同，因此在评估中包含了大量的真实和合成数据，从而对不同方法进行了全面的排名。但是目前<code>万金油的方法</code>，TI领域仍然值得继续探索并做出非常有价值的贡献，特别是如果研究者利用新颖的算法，返回更具可扩展性的解决方案或在特定用例中提供独特的见解。作者对不同TI方法互补性的分析也支持了这一点，例如
-<em> <code>PhenoPath</code>：可以在其模型中包含其他协变量
-</em> <code>ouija</code>：可以返回轨迹中每个细胞位置的不确定性度量
+* <code>PhenoPath</code>：可以在其模型中包含其他协变量
+* <code>ouija</code>：可以返回轨迹中每个细胞位置的不确定性度量
 * <code>StemID</code>：可以推断出轨迹内分支的方向性</p>
 <h1>后记</h1>
 <p>作者对几十种TI方法的输入输出接口进行了标准化，并提供的统一的工具包<code>dyno</code>，下期我们将带来<code>dyno</code>代码实操教学，让你实现<code>安装一个软件方便的体验多种轨迹分析方法</code>。
