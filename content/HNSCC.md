@@ -49,7 +49,7 @@ Diffusion map算法做轨迹推断分析在2016年发表的[destiny](https://aca
 文章1点细节需要改正：
 
 * Figure S2B，中间图的ylabel应该为FItSNE_2
-![HNSCC_02.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_02.png)
+![HNSCC_03.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_03.png)
 
 
 # 文章详细解读
@@ -62,7 +62,7 @@ Diffusion map算法做轨迹推断分析在2016年发表的[destiny](https://aca
 
 ## SUMMARY
 HNSCC通常是由于暴露于致癌环境或者HPV恶性转移引起的。这篇文章评估了来自HPV-和HPV+ HNSCC患者以及健康供体的外周和肿瘤内免疫群体中131,224个单细胞的转录谱。HPV和HPV HNSCC肿瘤内的免疫细胞展示了一系列的转录特征，其中辅助CD4 + T细胞和B细胞相对发散，而CD8+ T细胞和CD4+ 调节性T细胞相对相似。转录组的结果结合多光谱免疫荧光分析，基于空间邻近性分析推断细胞与细胞之间的通讯。这些分析定义了与CD4+ T卵泡辅助细胞相关的基因表达特征，该基因表达特征与HNSCC患者中更长的无进展生存期有关。这篇文章的数据集和分析方法为进一步研究免疫细胞对病毒和致癌物诱导的癌症的影响提供了资源。
-![d937fd64260c507b647e42fcedbdd6e3.jpeg](evernotecid://E11E235D-3BB5-4824-9E8B-DA78E1BF1D37/appyinxiangcom/19103585/ENResource/p817)
+![HNSCC_04.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_04.png)
 
 ## INTRODUCTION
 头颈部鳞状细胞癌（HNSCC）在全球每年发生近60万例，大多数患者出现局部晚期疾病。HNSCC可能是由于暴露于致癌物（酒精或烟草）引起的遗传改变，也可能是由于HPV感染后发生的恶性转化而引起的。虽然大多数HNSCC与烟草使用相关，在西部，HPV+ HNSCC的发生率已大幅上升，并且呈上升趋势。现在，美国有一半的HNSCC病例是由高危HPV感染引起的。
@@ -75,32 +75,32 @@ HNSCC通常是由于暴露于致癌环境或者HPV恶性转移引起的。这篇
 
 ## RESULTS
 ### Single-Cell Survey of Immune Lineages in HNSCC
-![HNSCC_04.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_04.png)
+![HNSCC_05.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_05.png)
 血液学来源的活细胞的单细胞转录组来源是：术后立即从18例HPV- HNSCC患者和8例HPV+ HNSCC患者的原发肿瘤获得的配对血液和组织中分离出CD45+细胞，所有患者均未接受免疫治疗。作为对照，以下样本也做了单细胞转录组测序：1）5个独立的睡眠呼吸暂停患者（无癌症）的扁桃体组织中分离的CD45+细胞；2）6位健康捐赠者的外周血单核细胞(PBMCs)。总共131224个通过质控的个体免疫细胞，平均表达1262个基因。
 
-![HNSCC_05.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_05.png)
+![HNSCC_06.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_06.png)
 根据scRNA-seq数据构建的Pseudobulk表达矩阵做样品表达相关性，结果显示：**样品会根据PBMC和组织来源分离**，肿瘤浸润性白细胞（TILs）和扁桃体样品分离成簇。
 
-![HNSCC_06.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_06.png)
-
+![HNSCC_07.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_07.png)
+png
 作者对**PBMC和TIL Pseudobulk表达做了对比**，最大的不同在于：PBMC中表达的大多是外周血骨髓细胞相关的基因（例如LYZ和FCGR3A）；TIL中大多高表达免疫调节基因（例如CTLA4和IDO1）和炎性细胞因子（例如IFNG和IL1B）。
 
-![HNSCC_07.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_07.png)
+![HNSCC_08.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_08.png)
 在TIL clusters的分析中，作者发现clusters 3、4与来自扁桃体组织的clusters 1的样品共享了部分表达模式，包括B细胞（MS4A1和CD19）和活化的T细胞基因（CD3D和HLA-DRB5），但也表达了与TIL不同的一小簇细胞毒性基因（例如GZMB）。
 
 总体而言，Pseudobulk RNA-seq分析显示PBMC和TIL样品之间的基因表达有很大不同。提示了与HPV–和HPV+ TIL之间的差异性浸润和转录状态相关的亚结构。
 
-![HNSCC_08.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_08.png)
+![HNSCC_09.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_09.png)
 
 作者开发了[DRAGON](https://github.com/arc85/dragonsc)算法对细胞进行分群，DRAGON和Louvian聚类的表现相似，但基于不同的框架。DRAGON确定的26个cluster通过基于快速傅里叶变换加速插值的t分布随机邻居嵌入（[FItSNE](https://github.com/KlugerLab/FIt-SNE)）进行了可视化。
 
-![HNSCC_09.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_09.png)
+![HNSCC_10.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_10.png)
 
 为了鉴定主要的免疫谱系，作者在用DRAGON聚类的时候设置了相对较高的温度参数(Temperature = 45)，所有细胞总共分为4个cluster：
 
-![HNSCC_10.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_10.png)
-
 ![HNSCC_11.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_11.png)
+
+![HNSCC_12.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_12.png)
 发现这4个cluster之间的差异表达基因与以下4类细胞密切相关：
 
 * CD4+ T细胞
@@ -110,27 +110,27 @@ HNSCC通常是由于暴露于致癌环境或者HPV恶性转移引起的。这篇
 
 接着，作者对这4个cluster分别进行亚群细分，以根据规范的基因表达模式识别细胞类型。
 
-![HNSCC_12.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_12.png)
-推断的细胞类型与通过流式细胞仪在部分患者的配对样品上鉴定的细胞类型密切相关。
 ![HNSCC_13.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_13.png)
-以下是4个亚群细分后映射到完整数据集FItSNE上的结果：
+推断的细胞类型与通过流式细胞仪在部分患者的配对样品上鉴定的细胞类型密切相关。
 ![HNSCC_14.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_14.png)
-下图为不同样本细胞的FItSNE分布
+以下是4个亚群细分后映射到完整数据集FItSNE上的结果：
 ![HNSCC_15.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_15.png)
+下图为不同样本细胞的FItSNE分布
+![HNSCC_16.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_16.png)
 
 为了量化HPV-和HPV+ TILs主要免疫谱系之间的改变，作者使用Bhattacharyya距离测量了每种肿瘤类型的免疫谱系之间的距离。
-![HNSCC_16.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_16.png)
+![HNSCC_17.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_17.png)
 
 * 该分析揭示了HPV-和HPV+ TIL之间的B细胞，髓样细胞和常规CD4+（Tconv）细胞之间存在很大差异
 * CD8+ T细胞和CD4+调节（Treg）细胞更为相似
 
 ## CD8+ T Cells Have a Continuous Differentiation Trajectory
 作者挑选CD8+ T细胞，并重新聚类为8个亚群，TILs的CD8+ T细胞最常见于第1–4群，而PBMC和扁桃体的CD8+ T细胞更常见于第5–8群。
-![HNSCC_17.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_17.png)
+![HNSCC_18.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_18.png)
 
 差异表达基因分析发现：控制每个亚群的基因迥异
 
-![HNSCC_18.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_18.png)
+![HNSCC_19.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_19.png)
 
 
 1.  `cluster 1`与周期细胞相关(e.g., MKI67)
@@ -146,17 +146,17 @@ HNSCC通常是由于暴露于致癌环境或者HPV恶性转移引起的。这篇
 CD8+ T细胞相关的`cluster 3`中co-simulation上调，`cluster 4`中缺氧信号和INF响应。
 
 作者使用一种非线性降维技术`Diffusion Map`来推导分化轨迹。2维Diffusion map揭示了一条平滑的轨迹，该轨迹将PBMC连接到TIL，而对于HPV+和HPV- TIL则重叠：
-![HNSCC_19.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_19.png)
-下图是各cluster细胞在2维Diffusion map中的展示：
 ![HNSCC_20.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_20.png)
-作者鉴定了与每个扩散成分相关的基因来表征两个扩散成分（DC1和DC2），DC1与终末分化表型密切相关，沿着DC1的进展与抑制性受体的共表达增加相关；DC2与由CD27，CCR7，EOMES和与记忆形成相关的其他基因的共表达控制的记忆表型相关
+下图是各cluster细胞在2维Diffusion map中的展示：
 ![HNSCC_21.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_21.png)
+作者鉴定了与每个扩散成分相关的基因来表征两个扩散成分（DC1和DC2），DC1与终末分化表型密切相关，沿着DC1的进展与抑制性受体的共表达增加相关；DC2与由CD27，CCR7，EOMES和与记忆形成相关的其他基因的共表达控制的记忆表型相关
+![HNSCC_22.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_22.png)
 
 > 总之，确定了CD8+ T细胞群，并推断出肿瘤类型之间共有的分化轨迹。这表明针对CD8+ T细胞的免疫治疗策略可能适用于病毒和致癌物诱导的HNSCC。
 
 ## Extensive CD4+ Tconv Heterogeneity and Differentiation Trajectories
 在这一部分，作者比较了HPV-和HPV+ HNSCC之间CD4+ T细胞的转录情况，`分别对CD4+ Tconv细胞和CD4+ Treg细胞进行了分析`。
-![HNSCC_22.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_22.png)
+![HNSCC_23.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_23.png)
 #### CD4 Tconv细胞聚为7类
 基因集富集分析显示：
 **PBMC衍生的CD4 Tconv细胞中**：
@@ -164,7 +164,7 @@ CD8+ T细胞相关的`cluster 3`中co-simulation上调，`cluster 4`中缺氧信
 * `cluster 3`富集了effector memory相关基因
 * `cluster 5`富集了effector和central memory相关基因
 
-![HNSCC_23.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_23.png)
+![HNSCC_24.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_24.png)
 
 **来自TIL的CD4 Tconv细胞中**：
 * `cluster 1、6`大部分由HPV TIL和扁桃体（Tonsil）CD4 Tconv细胞组成
@@ -173,23 +173,23 @@ CD8+ T细胞相关的`cluster 3`中co-simulation上调，`cluster 4`中缺氧信
 **Tonsil和TIL CD4 Tconv细胞显示出一系列相互关联的T滤泡辅助物（TFH）和1型辅助物（TH1）特征，并带有效应记忆特征。**
 
 作者对CD4 Tconv细胞的样本类型与聚类之间的关系进行了统计学评估，发现HPV+ TIL与HPV- TIL相比，在该聚类中具有显着的细胞富集（p = 0.0044，秩和检验）
-![HNSCC_24.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_24.png)
 ![HNSCC_25.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_25.png)
-##### 接下来作者用Diffusion map重建CD4 + Tconv细胞的分化轨迹
 ![HNSCC_26.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_26.png)
+##### 接下来作者用Diffusion map重建CD4 + Tconv细胞的分化轨迹
+![HNSCC_27.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_27.png)
 三维Diffusion map显示CD4+ Tconv的分化轨迹 产生了分支，这点与CD8+ T细胞不同。
 
 接下来，作者对源自HPV–和HPV+ TIL的CD4+ Tconv细胞的DC1，DC2和DC3之间的回归平面进行拟合，发现肿瘤类型之间的分化平面显着不同：
-![HNSCC_27.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_27.png)
-将Diffusion map的前两维与推断的Diffusion pseudotime(DPT)放到一起查看，结果很明显，DC1和DC2都与DPT正相关，彼此基本呈正交。
 ![HNSCC_28.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_28.png)
+将Diffusion map的前两维与推断的Diffusion pseudotime(DPT)放到一起查看，结果很明显，DC1和DC2都与DPT正相关，彼此基本呈正交。
+![HNSCC_29.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_29.png)
 
 与基因集富集分析一致，cluster 2是最初的cluster，然后细胞通过连续的中间表型，向cluster 1或cluster 7定义的终态发展，cluster1和cluster7之间的top差异表达基因未发现与TFH相关的基因，与cluster1相关的激活，INF反应以及与cluster7相关的记忆基因。
 
-![HNSCC_29.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_29.png)
+![HNSCC_30.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_30.png)
 接下来，作者评估了与每个Diffusion components相关的基因，并发现CXCR5和PDCD1与DC1的表达之间有很强的联系。热图显示了来自cluster1和cluster7的前50个差异表达基因，通过Diffusion分析显示了两个末端分支。cluster1与T滤泡辅助（TFH）表型相关，而cluster7具有效应记忆表型。
 
-![HNSCC_30.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_30.png)
+![HNSCC_31.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_31.png)
 把CXCR5和PDCD1放在三维图中与DC1和DPT一起查看时，发现CXCR5和PDCD1是双峰，相对于DPT在DC1的早期和晚期都有共表达，与早期激活过程中的表达以及处于分化的TFH状态一致。
 
 结果还显示在CXCR5和PDCD1共表达明显的同一点上其他已知抑制性受体（LAG3和HAVCR2）的共表达。这表明了在DPT早期的命运决定中，细胞既可以进展为CD4+ TFH；又可以采用与抑制受体共表达的表型，潜在抑制进一步分化。
@@ -200,25 +200,25 @@ CD8+ T细胞相关的`cluster 3`中co-simulation上调，`cluster 4`中缺氧信
 
 CD4+ Treg细胞可抑制TME中的抗肿瘤免疫反应，最近在肺癌和乳腺癌中的研究已经描述了TME中Treg细胞的独特转录状态。
 
-![HNSCC_31.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_31.png)
+![HNSCC_32.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_32.png)
 
 > `附件图为7个亚群，正文图6个亚群应该主要来自TIL Treg cells`
 
-![HNSCC_32.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_32.png)
+![HNSCC_33.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_33.png)
 CD4+ Treg细胞主要由来自TIL的细胞组成。
 
 ##### 使用DRAGON对CD4+ Treg细胞分成6个亚群
 对每个群做基因集富集分析，以表征每个群中的生物学功能。
-![HNSCC_33.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_33.png)
+![HNSCC_34.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_34.png)
 
 *  `clusters 2、4` 富含与IFNa应答相关的基因集（IFN应答基因[Browne]）和广普的IFN应答基因（IFN诱导的抗病毒模块[Bosco]）
 *  `clusters 3、6` 富含肿瘤坏死因子受体（TNFR）家族信号通路
 
 > IFN反应和TNFR信号传导相关的模块是互斥的，表明这些细胞对不同信号的反应取决于它们的分化状态。
 
-![HNSCC_34.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_34.png)
-CD4+ Treg细胞的Diffusion map显示DPT与DC1密切相关，在DPT早期，来自HPV- TILs的Treg细胞更多。
 ![HNSCC_35.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_35.png)
+CD4+ Treg细胞的Diffusion map显示DPT与DC1密切相关，在DPT早期，来自HPV- TILs的Treg细胞更多。
+![HNSCC_36.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_36.png)
 与基因集富集和簇cluster推断的表达模式一致，结果显示TNFRSF18（GITR），TNFRSF9（CD137，4-1BB）和TNFRSF4（OX40）与DC1正相关，并在DPT晚期共表达。这一结果支持了TNFR超家族对于维持效应Treg细胞群体很重要的观点。相反，结果显示IFN反应基因IFITM1，IFIT1，IFIT3和ISG20在DPT早期时表达，并随着伪时间的进展而关闭。**这表明IFN信号在Treg细胞的早期活化中具有潜在作用**。
 
 > 综上所述，该分析表明，Treg细胞在HPV–和HPV+ HNSCC之间具有相似的轨迹（尽管在不同状态下频率不同），并且在分化过程中IFN相关信号和TNFR家族信号相互相关。
@@ -227,7 +227,7 @@ CD4+ Treg细胞的Diffusion map显示DPT与DC1密切相关，在DPT早期，来�
 HPV+ TILs中发现了`生发中心B细胞`
 
 TME中的B细胞与人类肿瘤类型的总体生存呈正相关已经被广泛报道，并且会影响CD4+ Tconv细胞表型。
-![HNSCC_36.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_36.png)
+![HNSCC_37.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_37.png)
 
 ##### B细胞聚类为11个亚群
 
@@ -239,11 +239,11 @@ TME中的B细胞与人类肿瘤类型的总体生存呈正相关已经被广泛�
 
 细胞周期和生发中心基因集的重叠富集意味着cluster 3和cluster 4是中心母细胞，与在暗区中快速增殖的B细胞一致。相反，cluster 1和cluster 2也富集生发中心基因集，但缺乏细胞周期基因的表达，这表明这些细胞是亮区的中心细胞，在此处它们受到CD4+ TFH的选择。
 
-![HNSCC_36.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_36.png)
+![HNSCC_38.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_38.png)
 
 与HPV+ TIL相比，HPV- TIL中的B细胞通常是浆细胞（cluster 5）或switched memoryB细胞（cluster 7），在HPV–TIL状态下仅存在血浆或早期切换的记忆B细胞可能与缺乏CD4 + TFH帮助相一致。
 
-![HNSCC_37.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_37.png)
+![HNSCC_39.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_39.png)
 
 B细胞的Diffusion map显示了跨多轴分化的复杂过程：`DC4与从naive发展到memory B细胞的进展有关`。DC1在DC4的最小值和最大值之间与DC4相交，并且沿着DC1从右向左依次发育（最右`cluster 6、9`为naive细胞），与生发中心的形成有关。
 
@@ -256,13 +256,13 @@ B细胞的Diffusion map显示了跨多轴分化的复杂过程：`DC4与从naive
 
 ## A Common Trajectory Yields Divergent Myeloid States
 髓样细胞在形成TME中的免疫反应中起重要作用，可大致分为`肿瘤相关巨噬细胞`（TAM）和`树突状细胞`。TAM通常被认为是抗肿瘤或促肿瘤的（i.e., M1-like or M2-like, respectively）。 最近的研究揭示了TME中髓样细胞更广泛的异质性，例如：乳腺癌中TAM共同表达了M1和M2的特征（Azizi等人，2018），以及肺癌中髓样细胞的独特状态（Lavin 等人，2017）。
-![HNSCC_38.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_38.png)
+![HNSCC_40.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_40.png)
 ###### 髓样细胞分成了8个亚群
 
 * `cluster 2-4`主要存在于PBMC中
 * `cluster 1、5-8`主要存在于TIL中
 
-![HNSCC_39.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_39.png)
+![HNSCC_41.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_41.png)
 通过分析不同亚群top差异基因，对亚群进行了细分命名：
 
 * `cluster 2`鉴定为CD16+的单核细胞
@@ -281,8 +281,8 @@ B细胞的Diffusion map显示了跨多轴分化的复杂过程：`DC4与从naive
 在HPV- TILs中在第1和第8群比例更高，提示HPV-疾病患者具有潜在的免疫抑制作用。
 
 ###### 髓样细胞发育分析
-![HNSCC_40.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_40.png)
-![HNSCC_41.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_41.png)
+![HNSCC_42.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_42.png)
+![HNSCC_43.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_43.png)
 
 Diffusion map坚定了髓样细胞的几个分支。
 
@@ -301,7 +301,7 @@ TME中髓系谱系的鉴定表明，TAM超出了标准的M1或M2范式，细胞�
 https://www.nature.com/articles/ncomms8866
 为了绘制可能的细胞间相互作用，我们首先使用[708个独特的配体和691个独特的受体的清单](https://www.nature.com/articles/ncomms8866)来鉴定配体/受体的表达，它们可以共同形成2557个潜在的相互作用对。
 
-![HNSCC_42.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_42.png)
+![HNSCC_44.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_44.png)
 
 上图为HPV- 和HPV+ HNSCC中表达的顶级配体和受体。
 
@@ -309,7 +309,7 @@ https://www.nature.com/articles/ncomms8866
 
 使用CellTalker，作者鉴定了168个配体和194个受体，它们参与了481个独特的相互作用。
 
-![HNSCC_43.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_43.png)
+![HNSCC_45.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_45.png)
 
 CellTalker的结果展示在以上circos图中，每种相互作用都描绘为跨细胞类型配体与受体连接的线。
 
