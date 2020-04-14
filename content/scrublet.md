@@ -14,7 +14,7 @@ Summary: 单细胞数据质控-双细胞预测-scrublet使用教程
 
 通过这些QC协变量的分布图，可以通过阈值过滤掉离群峰。
 
-![scrublet_05.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_05.png)
+![scrublet_01.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_01.png)
 
 这些异常的barcodes对应着：
 
@@ -174,7 +174,7 @@ def _validate_lengths(narray, number_elements):
 ```
 
 ### scrublet使用教程
-![c3c3219a78fcddb420c75f025e00f9b4.jpeg](evernotecid://E11E235D-3BB5-4824-9E8B-DA78E1BF1D37/appyinxiangcom/19103585/ENResource/p914)
+![scrublet_02.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_02.png)
 
 
 我的测试执行环境是MACOS jupyter notebook，以下代码为python包的载入和画图设置：
@@ -229,7 +229,7 @@ scrub = scr.Scrublet(counts_matrix, expected_doublet_rate=0.06)
 ```python
 doublet_scores, predicted_doublets = scrub.scrub_doublets(min_counts=2, min_cells=3, min_gene_variability_pctl=85, n_prin_comps=30)
 ```
-![scrublet_02.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_02.png)
+![scrublet_03.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_03.png)
 
 ##### 绘制doublet score分布直方图
 Doublet score分布直方图包括观察到的转录组和模拟的doublet，模拟的doublet直方图通常是双峰的。
@@ -248,7 +248,7 @@ scrub.call_doublets(threshold=0.25)
 scrub.plot_histogram()
 ```
 
-![scrublet_03.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_03.png)
+![scrublet_04.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_04.png)
 
 ##### 降维可视化
 ###### 降维计算
@@ -264,7 +264,7 @@ scrub.plot_embedding('UMAP', order_points=True)
 ```
 下面左图黑色的点为预测的doublets。
 
-![scrublet_04.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_04.png)
+![scrublet_05.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_05.png)
 
 ```python
 # doublets占比
