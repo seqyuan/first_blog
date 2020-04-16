@@ -1,4 +1,4 @@
-Title: 以《致癌物或病毒介导的HNSCC免疫图谱》为例总结单细胞文章分析框架
+Title: 单细胞文章分析框架总结，以《致癌物和病毒介导的HNSCC免疫图谱》为例介绍
 Date: 2020-03-28
 Category: single-cell
 Tags: 细胞通讯
@@ -52,6 +52,33 @@ Diffusion map算法做轨迹推断分析在2016年发表的[destiny](https://aca
 
 ![HNSCC_03.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_03.png)
 
+#### 可以借鉴的分析方案或分析方法
+##### 1）样本取材
+这篇文章的取材及实验对比设计非常经典：致癌物和病毒介导的发生在同一部位的癌症，用来做单细胞免疫环境分析再合适不过了。
+##### 2）处理大细胞量项目的降维分群软件
+文章要处理的细胞数量非常多，用常规的分析软件处理的话在内存及时间消耗上会很大，作者开发的`DRAGON`包在处理大细胞量的项目上在内存和时间的消耗上会比较友好，作者拿`DRAGON`和`Seurat`的结果做过比较，相差不大。值得注意的是常用的`Seurat`用于单独分成一群的细胞需要30个左右；而`DRAGON`大约需要300个细胞才能独立成群。
+
+##### 3）大的分析策略
+如果分析免疫环境例如筛选过的CD45+细胞，可以先试着分成几个大的免疫细胞群做好大群命名，然后再对每一个大群进行细分小群，一看各样本组的细胞在各小群所占的比例，二看各小群之间的演化发育轨迹。再结合样本组对比设计一起来解读结果，提出假设。
+
+##### 4）单细胞多样本踢出离群样本
+对于动辄几十个样本的单细胞样本分析，如果某些样本对应的分组label有问题，则可能会对整体分析结果有影响。那怎样检验样本对应的分组信息是否合适呢？作者在文章中使用的Pseudobulk analysis分析方法是一个不错的选择。
+
+##### 5）亚群命名与功能鉴定
+对于所有亚群不一定要一个命名，把亚群对应的功能讲清楚即可。作者开发的`singleseqgset`用于基因集富集分析，分群之后可以用它结合marker基因做亚群的功能鉴定。
+
+##### 6）Diffusion map做细胞发育轨迹推断分析
+Diffusion map算法可以用于做拟时间分析，可以借鉴的软件包有以下几个，后续会有相关教程：
+
+* [scanpy](https://nbviewer.jupyter.org/github/theislab/scanpy_usage/blob/master/170501_moignard15/moignard15.ipynb)(python)，对应于scanpy.pp.neighbors、scanpy.tl.diffmap、scanpy.tl.dpt等方法组合。
+* [diffusionMap](https://github.com/rcannood/diffusionMap)(R)
+* [destiny](http://www.bioconductor.org/packages/release/bioc/html/destiny.html)(R)
+
+##### 7）配体和受体预测软件
+作者开发的`celltalker`可用于做预测配体受体分析。
+
+
+限于篇幅，文章的详细解读会放在同期的另一篇文章。
 
 # 文章详细解读
 ## Highlights
