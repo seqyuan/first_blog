@@ -92,16 +92,14 @@
 <h2>修改crouton</h2>
 <p>更改解压后的crouton中targets/audio文件:</p>
 <p>第47行：</p>
-<div class="highlight"><pre><span></span>( wget -O &quot;$archive&quot; &quot;$urlbase/$ADHD_HEAD.tar.gz&quot; 2&gt;&amp;1 \
+<div class="highlight"><pre><span></span><code>( wget -O &quot;$archive&quot; &quot;$urlbase/$ADHD_HEAD.tar.gz&quot; 2&gt;&amp;1 \
                                     || echo &quot;Error fetching CRAS&quot; ) | tee &quot;$log&quot;
-</pre></div>
-
+</code></pre></div>
 
 <p>改为：</p>
-<div class="highlight"><pre><span></span>( wget -O &quot;$archive&quot; &quot;http://t.cn/R46YOzM&quot; 2&gt;&amp;1 \
+<div class="highlight"><pre><span></span><code>( wget -O &quot;$archive&quot; &quot;http://t.cn/R46YOzM&quot; 2&gt;&amp;1 \
                                     || echo &quot;Error fetching CRAS&quot; ) | tee &quot;$log&quot;
-</pre></div>
-
+</code></pre></div>
 
 <h2>make crouton</h2>
 <p>继上一步更targets/audio后，在crouton目录中执行</p>
@@ -115,41 +113,39 @@
 <li>执行 sudo sh -e ~/Downloads/crouton -r trusty -t xfce -e 进行安装</li>
 <li>当出现下面的几行字符时，就表明安装成功：</li>
 </ol>
-<div class="highlight"><pre><span></span>Here&#39;s some tips:
+<div class="highlight"><pre><span></span><code><span class="n">Here</span><span class="s1">&#39;s some tips:</span>
 
-Audio from the chroot will now be forwarded to CRAS (Chromium OS audio server),
-through an ALSA plugin.
+<span class="s1">Audio from the chroot will now be forwarded to CRAS (Chromium OS audio server),</span>
+<span class="s1">through an ALSA plugin.</span>
 
-Future Chromium OS upgrades may break compatibility with the installed version
-of CRAS. Should this happen, simply update your chroot.
+<span class="s1">Future Chromium OS upgrades may break compatibility with the installed version</span>
+<span class="s1">of CRAS. Should this happen, simply update your chroot.</span>
 
-You can flip through your running chroot desktops and Chromium OS by hitting
-Ctrl+Alt+Shift+Back and Ctrl+Alt+Shift+Forward.
+<span class="s1">You can flip through your running chroot desktops and Chromium OS by hitting</span>
+<span class="s1">Ctrl+Alt+Shift+Back and Ctrl+Alt+Shift+Forward.</span>
 
-You already have the Chromium OS extension installed, so you&#39;re good to go!
+<span class="s1">You already have the Chromium OS extension installed, so you&#39;</span><span class="n">re</span><span class="w"> </span><span class="n">good</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">go</span><span class="err">!</span><span class="w"></span>
 
-You can open your running chroot desktops by clicking on the extension icon.
-Once in a crouton window, press fullscreen or the &quot;switch window&quot; key to switch
-back to Chromium OS.
+<span class="n">You</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="k">open</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="n">chroot</span><span class="w"> </span><span class="n">desktops</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">clicking</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">extension</span><span class="w"> </span><span class="n">icon</span><span class="p">.</span><span class="w"></span>
+<span class="n">Once</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">crouton</span><span class="w"> </span><span class="k">window</span><span class="p">,</span><span class="w"> </span><span class="n">press</span><span class="w"> </span><span class="n">fullscreen</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="ss">&quot;switch window&quot;</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">switch</span><span class="w"></span>
+<span class="n">back</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">Chromium</span><span class="w"> </span><span class="n">OS</span><span class="p">.</span><span class="w"></span>
 
-You can launch individual apps in crouton windows by using the &quot;xiwi&quot; command
-in the chroot shell. Use startxiwi to launch directly from the host shell.
-Use the startxiwi parameter -b to run in the background.
-Example: sudo startxiwi -b xterm
+<span class="n">You</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">launch</span><span class="w"> </span><span class="n">individual</span><span class="w"> </span><span class="n">apps</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">crouton</span><span class="w"> </span><span class="n">windows</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="ss">&quot;xiwi&quot;</span><span class="w"> </span><span class="n">command</span><span class="w"></span>
+<span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">chroot</span><span class="w"> </span><span class="n">shell</span><span class="p">.</span><span class="w"> </span><span class="k">Use</span><span class="w"> </span><span class="n">startxiwi</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">launch</span><span class="w"> </span><span class="n">directly</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">host</span><span class="w"> </span><span class="n">shell</span><span class="p">.</span><span class="w"></span>
+<span class="k">Use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">startxiwi</span><span class="w"> </span><span class="k">parameter</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">background</span><span class="p">.</span><span class="w"></span>
+<span class="nl">Example</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">startxiwi</span><span class="w"> </span><span class="o">-</span><span class="n">b</span><span class="w"> </span><span class="n">xterm</span><span class="w"></span>
 
-You can start Xfce via the startxfce4 host command: sudo startxfce4
-</pre></div>
-
+<span class="n">You</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="n">Xfce</span><span class="w"> </span><span class="n">via</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">startxfce4</span><span class="w"> </span><span class="k">host</span><span class="w"> </span><span class="nl">command</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">startxfce4</span><span class="w"></span>
+</code></pre></div>
 
 <h2>进入安装好的linux进行配置</h2>
 <p>执行以下命令进入linux桌面环境
 <code>sudo startxfce4</code></p>
 <h3>安装中文语言包</h3>
 <p>因为安装后是什么都不带的系统，因此是英文系统，要使用中文语言先安装语言包：</p>
-<div class="highlight"><pre><span></span>sudo apt-get install language-pack-zh-hans
+<div class="highlight"><pre><span></span><code>sudo apt-get install language-pack-zh-hans
 sudo apt-get install language-pack-gnome-zh-hans
-</pre></div>
-
+</code></pre></div>
 
 <p>接下来安装语言选择器：</p>
 <p><code>sudo apt-get install language-selector-gnome</code></p>

@@ -83,51 +83,45 @@
 <p>登陆<a href="https://www.anaconda.com/distribution/">Anaconda官网</a>下载、安装到你的Linux集群。Anaconda集成了Jupyter，安装Anaconda的过程会自动把Jupyter加入到你的环境变量。</p>
 <h4>2）生成jupyter配置文件</h4>
 <p>在Linux集群命令行输入以下命令。</p>
-<div class="highlight"><pre><span></span>jupyter notebook --generate-config
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>jupyter notebook --generate-config
+</code></pre></div>
 
 <p>以上命令执行成功后会在home目录生成jupyter notebook的配置文件<code>.jupyter/jupyter_notebook_config.py</code>。</p>
 <h4>3）生成密钥</h4>
 <p>在集群Linux命令行打开python3环境，执行以下两行命令生成密钥。</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">notebook.auth</span> <span class="kn">import</span> <span class="n">passwd</span>  
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">notebook.auth</span> <span class="kn">import</span> <span class="n">passwd</span>  
 <span class="n">passwd</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>在执行<code>passwd()</code>命令的时候会提示输入密码，这是jupyter服务的密码，可以设置简单点便于自己记住，例如<code>123456a</code></p>
 <h4>4）修改jupyter配置文件</h4>
-<div class="highlight"><pre><span></span>vim ~/.jupyter/jupyter_notebook_config.py
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>vim ~/.jupyter/jupyter_notebook_config.py
+</code></pre></div>
 
 <p>修改<code>~/.jupyter/jupyter_notebook_config.py</code>里的以下内容：</p>
-<div class="highlight"><pre><span></span><span class="c1"># 就是设置ip为 0.0.0.0</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 就是设置ip为 0.0.0.0</span>
 <span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">ip</span> <span class="o">=</span> <span class="s1">&#39;0.0.0.0&#39;</span>
 <span class="c1"># 刚才复制粘贴的那个密钥 </span>
 <span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s1">&#39;shal:dd...&#39;</span>
 <span class="c1"># 禁止自动打开浏览器 </span>
-<span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">open_browser</span> <span class="o">=</span> <span class="bp">False</span> 
+<span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">open_browser</span> <span class="o">=</span> <span class="kc">False</span> 
 <span class="c1"># 设置端口号</span>
 <span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">port</span> <span class="o">=</span> <span class="mi">7890</span>
 <span class="c1"># 设置默认的work dir</span>
 <span class="n">c</span><span class="o">.</span><span class="n">NotebookApp</span><span class="o">.</span><span class="n">notebook_dir</span> <span class="o">=</span> <span class="s1">&#39;/seqyuan/PMO/yuanzan&#39;</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="jupyter_1.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jupyter/jupyter_1.png"></p>
 <h4>5）启动jupyter notebook服务</h4>
 <p>在Linux命令行输入以下命令启动jupyter notebook服务</p>
-<div class="highlight"><pre><span></span>jupyter notebook
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>jupyter notebook
+</code></pre></div>
 
 <p>我公司Linux集群的IP地址是192.168.2.209，所以在公司电脑<code>浏览器地址栏</code>输入<code>192.168.2.209:7890</code>就能访问jupyter notebook服务了，如果是第一次打开会先提示我们输入密码，这个密码就是就是<code>步骤3）</code>我们设置的<code>123456a</code>。</p>
 <p><img alt="jupyter_2.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jupyter/jupyter_2.png"></p>
 <p>启动jupyter服务的时候可以指定工作目录</p>
-<div class="highlight"><pre><span></span>jupyter notebook --notebook-dir=&quot;/seqyuan/PMO/ahworld&quot;
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>jupyter notebook --notebook-dir=&quot;/seqyuan/PMO/ahworld&quot;
+</code></pre></div>
 
 <h2>后续更新</h2>
 <blockquote>

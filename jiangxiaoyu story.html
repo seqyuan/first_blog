@@ -106,44 +106,40 @@
 <blockquote>
 <p>安装好以上包之后，<em><code>在R中执行以下代码</code></em> ，实现第一步：<code>Seurat对象转换为loom文件</code></p>
 </blockquote>
-<div class="highlight"><pre><span></span><span class="c1">#读入seurat处理后的rds文件</span>
-<span class="kn">library</span><span class="p">(</span>Seurat<span class="p">)</span>
-<span class="kn">library</span><span class="p">(</span>loomR<span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1">#读入seurat处理后的rds文件</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
+<span class="nf">library</span><span class="p">(</span><span class="n">loomR</span><span class="p">)</span>
 
-sdata <span class="o">&lt;-</span> <span class="kp">readRDS</span><span class="p">(</span>file <span class="o">=</span> <span class="s">&quot;/Users/yuanzan/Desktop/tmp/seurat_project.rds&quot;</span><span class="p">)</span>
+<span class="n">sdata</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;/Users/yuanzan/Desktop/tmp/seurat_project.rds&quot;</span><span class="p">)</span>
 <span class="c1"># seurat对象转换为loop文件</span>
-sdata.loom <span class="o">&lt;-</span> as.loom<span class="p">(</span>x <span class="o">=</span> sdata<span class="p">,</span> filename <span class="o">=</span> <span class="s">&quot;/Users/yuanzan/Desktop/tmp/sdata.loom&quot;</span><span class="p">,</span> verbose <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">sdata.loom</span> <span class="o">&lt;-</span> <span class="nf">as.loom</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">sdata</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s">&quot;/Users/yuanzan/Desktop/tmp/sdata.loom&quot;</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
 <span class="c1"># Always remember to close loom files when done</span>
-sdata.loom<span class="o">$</span>close_all<span class="p">()</span>
-</pre></div>
-
+<span class="n">sdata.loom</span><span class="o">$</span><span class="nf">close_all</span><span class="p">()</span>
+</code></pre></div>
 
 <blockquote>
 <p>接着 <em><code>在jupyter中执行以下代码</code></em> ，实现第二步：<code>Scanpy读取loom文件转换为能够操作的anndata对象</code></p>
 </blockquote>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scanpy</span> <span class="kn">as</span> <span class="nn">sc</span>
-<span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_loom</span><span class="p">(</span><span class="s2">&quot;/Users/yuanzan/Desktop/tmp/sdata.loom&quot;</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">X_name</span><span class="o">=</span><span class="s1">&#39;spliced&#39;</span><span class="p">,</span> <span class="n">obs_names</span><span class="o">=</span><span class="s1">&#39;CellID&#39;</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="s1">&#39;Gene&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">scanpy</span> <span class="k">as</span> <span class="nn">sc</span>
+<span class="n">adata</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">read_loom</span><span class="p">(</span><span class="s2">&quot;/Users/yuanzan/Desktop/tmp/sdata.loom&quot;</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cleanup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">X_name</span><span class="o">=</span><span class="s1">&#39;spliced&#39;</span><span class="p">,</span> <span class="n">obs_names</span><span class="o">=</span><span class="s1">&#39;CellID&#39;</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="s1">&#39;Gene&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
 
 <span class="n">marker_genes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Stfa1&#39;</span><span class="p">,</span> <span class="s1">&#39;Ngp&#39;</span><span class="p">,</span> <span class="s1">&#39;Ccl5&#39;</span><span class="p">,</span> <span class="s1">&#39;Ccl4&#39;</span><span class="p">,</span> <span class="s1">&#39;BC100530&#39;</span><span class="p">,</span> <span class="s1">&#39;Gzma&#39;</span><span class="p">,</span> <span class="s1">&#39;Gata2&#39;</span><span class="p">,</span> <span class="s1">&#39;Cd74&#39;</span><span class="p">]</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">stacked_violin</span><span class="p">(</span><span class="n">adata</span><span class="p">,</span> <span class="n">marker_genes</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;ClusterName&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>初步产生的图和scanpy教程里一样，挑选的marker基因在各个亚群中的表达小提琴图，规则的排布在了一起，基本实现了当初的想法。</p>
 <p><img alt="4d2b58a4c8f94ba6f2acf69477bfc4b2.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_7.png"></p>
 <p>再调一下参数，转换X轴和Y轴标签：</p>
-<div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">stacked_violin</span><span class="p">(</span><span class="n">sdata</span><span class="p">,</span> <span class="n">marker_genes</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;ClusterName&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="n">swap_axes</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="s2">&quot;_tmp.png&quot;</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">ax</span> <span class="o">=</span> <span class="n">sc</span><span class="o">.</span><span class="n">pl</span><span class="o">.</span><span class="n">stacked_violin</span><span class="p">(</span><span class="n">sdata</span><span class="p">,</span> <span class="n">marker_genes</span><span class="p">,</span> <span class="n">groupby</span><span class="o">=</span><span class="s1">&#39;ClusterName&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span><span class="n">swap_axes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="s2">&quot;_tmp.png&quot;</span><span class="p">)</span>
+</code></pre></div>
 
 <p><img alt="91c7fc5e195e3fb0b29ce0d891ca9dca.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_8.png"></p>
 <p>到这里和文章里的图只差顺时针旋转90度了，于是查看了scanpy的源代码，发现是一个叫<code>stacked_violin</code>的函数调用的<code>seaborn.violinplot</code>实现的这个小提琴图，那我就copy一下这个函数，修改一些设置，让其由纵向增加小提琴图变为横向增加小提琴图就可以了。转念又一想还是不浪费时间了，“<code>用AI吧，简单操作一下就能搞定了</code>”，不知道从哪里冒出一个声音，真是可恶，那就用代码简单实现一下旋转吧：</p>
-<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;./figures/stacked_violin_tmp.png&#39;</span><span class="p">)</span>
 <span class="n">img</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">Image</span><span class="o">.</span><span class="n">ROTATE_270</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="9ad9428dec37767f78607bbc743fc123.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/jiangxiaoyu/jiangxiaoyu_9.png"></p>
 <p>多年以后，再次读起这些文字，我一定会回想起此时自己没等看到最后一行便已明白，自己不会再走出这故事。从一个围观的吃瓜群众到讲述这个故事再到成为故事一部分的我，应该很庆幸此时的参与。一切过往自永远至永远不会再重复，因为激发起相同兴趣的情形不会有第二次机会在大地上出现。</p>

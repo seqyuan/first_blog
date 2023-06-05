@@ -12,16 +12,16 @@
 
 <meta name="keywords" content="细胞通讯, single-cell, " />
 
-<meta property="og:title" content="以《致癌物或病毒介导的HNSCC免疫图谱》为例总结单细胞文章分析框架 "/>
+<meta property="og:title" content="单细胞文章分析框架总结，以《致癌物和病毒介导的HNSCC免疫图谱》为例介绍 "/>
 <meta property="og:url" content="/HNSCC.html" />
 <meta property="og:description" content="详细解读《致癌物或病毒介导的HNSCC免疫图谱》，总结单细胞文章分析框架" />
 <meta property="og:site_name" content="seqyuan" />
 <meta property="og:article:author" content="ahworld" />
 <meta property="og:article:published_time" content="2020-03-28T00:00:00+08:00" />
-<meta name="twitter:title" content="以《致癌物或病毒介导的HNSCC免疫图谱》为例总结单细胞文章分析框架 ">
+<meta name="twitter:title" content="单细胞文章分析框架总结，以《致癌物和病毒介导的HNSCC免疫图谱》为例介绍 ">
 <meta name="twitter:description" content="详细解读《致癌物或病毒介导的HNSCC免疫图谱》，总结单细胞文章分析框架">
 
-        <title>以《致癌物或病毒介导的HNSCC免疫图谱》为例总结单细胞文章分析框架  · seqyuan
+        <title>单细胞文章分析框架总结，以《致癌物和病毒介导的HNSCC免疫图谱》为例介绍  · seqyuan
 </title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet">
@@ -60,7 +60,7 @@
 <article>
 <div class="row-fluid">
     <header class="page-header span10 offset2">
-    <h1><a href="/HNSCC.html"> 以《致癌物或病毒介导的HNSCC免疫图谱》为例总结单细胞文章分析框架  </a></h1>
+    <h1><a href="/HNSCC.html"> 单细胞文章分析框架总结，以《致癌物和病毒介导的HNSCC免疫图谱》为例介绍  </a></h1>
     </header>
 </div>
 
@@ -113,6 +113,27 @@
 <li>Figure S2B，中间图的ylabel应该为FItSNE_2</li>
 </ul>
 <p><img alt="HNSCC_03.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/HNSCC/HNSCC_03.png"></p>
+<h4>可以借鉴的分析方案或分析方法</h4>
+<h5>1）样本取材</h5>
+<p>这篇文章的取材及实验对比设计非常经典：致癌物和病毒介导的发生在同一部位的癌症，用来做单细胞免疫环境分析再合适不过了。</p>
+<h5>2）处理大细胞量项目的降维分群软件</h5>
+<p>文章要处理的细胞数量非常多，用常规的分析软件处理的话在内存及时间消耗上会很大，作者开发的<code>DRAGON</code>包在处理大细胞量的项目上在内存和时间的消耗上会比较友好，作者拿<code>DRAGON</code>和<code>Seurat</code>的结果做过比较，相差不大。值得注意的是常用的<code>Seurat</code>用于单独分成一群的细胞需要30个左右；而<code>DRAGON</code>大约需要300个细胞才能独立成群。</p>
+<h5>3）大的分析策略</h5>
+<p>如果分析免疫环境例如筛选过的CD45+细胞，可以先试着分成几个大的免疫细胞群做好大群命名，然后再对每一个大群进行细分小群，一看各样本组的细胞在各小群所占的比例，二看各小群之间的演化发育轨迹。再结合样本组对比设计一起来解读结果，提出假设。</p>
+<h5>4）单细胞多样本踢出离群样本</h5>
+<p>对于动辄几十个样本的单细胞样本分析，如果某些样本对应的分组label有问题，则可能会对整体分析结果有影响。那怎样检验样本对应的分组信息是否合适呢？作者在文章中使用的Pseudobulk analysis分析方法是一个不错的选择。</p>
+<h5>5）亚群命名与功能鉴定</h5>
+<p>对于所有亚群不一定要一个命名，把亚群对应的功能讲清楚即可。作者开发的<code>singleseqgset</code>用于基因集富集分析，分群之后可以用它结合marker基因做亚群的功能鉴定。</p>
+<h5>6）Diffusion map做细胞发育轨迹推断分析</h5>
+<p>Diffusion map算法可以用于做拟时间分析，可以借鉴的软件包有以下几个，后续会有相关教程：</p>
+<ul>
+<li><a href="https://nbviewer.jupyter.org/github/theislab/scanpy_usage/blob/master/170501_moignard15/moignard15.ipynb">scanpy</a>(python)，对应于scanpy.pp.neighbors、scanpy.tl.diffmap、scanpy.tl.dpt等方法组合。</li>
+<li><a href="https://github.com/rcannood/diffusionMap">diffusionMap</a>(R)</li>
+<li><a href="http://www.bioconductor.org/packages/release/bioc/html/destiny.html">destiny</a>(R)</li>
+</ul>
+<h5>7）配体和受体预测软件</h5>
+<p>作者开发的<code>celltalker</code>可用于做预测配体受体分析。</p>
+<p>限于篇幅，文章的详细解读会放在同期的另一篇文章。</p>
 <h1>文章详细解读</h1>
 <h2>Highlights</h2>
 <ul>

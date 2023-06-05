@@ -68,20 +68,18 @@
         <div class="span8 offset2 article-content">
 
             
-            <div class="highlight"><pre><span></span>mkdir seqyuan_blog
+            <div class="highlight"><pre><span></span><code>mkdir seqyuan_blog
 cd blog
 pelican-quickstart
-</pre></div>
-
+</code></pre></div>
 
 <p><code>git clone --branch gh-pages git@github.com:seqyuan/blog.git output</code>
 <code>make html</code></p>
-<div class="highlight"><pre><span></span>cd output
+<div class="highlight"><pre><span></span><code>cd output
 git add -A
 git commit -m &quot;change log&quot;
 git push origin gh-pages
-</pre></div>
-
+</code></pre></div>
 
 <p>Makefile:1: *** missing separator.  Stop.</p>
 <p><code>perl -pi -e 's/^  */\t/' Makefile</code></p>

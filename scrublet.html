@@ -99,9 +99,8 @@
 <a href="https://github.com/AllonKleinLab/scrublet/blob/master/examples/scrublet_basics.ipynb">scrublet教程参考来源链接</a></p>
 <h3>安装</h3>
 <p>scrublet为python语言编写的包，用以下pip命令安装就可以。</p>
-<div class="highlight"><pre><span></span>pip install scrublet
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>pip install scrublet
+</code></pre></div>
 
 <h3>使用注意事项</h3>
 <ul>
@@ -112,23 +111,21 @@
 <h3>准备工作</h3>
 <h4>数据准备</h4>
 <p>下载来自<a href="http://cf.10xgenomics.com/samples/cell-exp/2.1.0/pbmc8k/pbmc8k_filtered_gene_bc_matrices.tar.gz">10X Genomics8k的PBMC数据集</a>并解压。</p>
-<div class="highlight"><pre><span></span>wget http://cf.10xgenomics.com/samples/cell-exp/2.1.0/pbmc8k/pbmc8k_filtered_gene_bc_matrices.tar.gz
+<div class="highlight"><pre><span></span><code>wget http://cf.10xgenomics.com/samples/cell-exp/2.1.0/pbmc8k/pbmc8k_filtered_gene_bc_matrices.tar.gz
 tar xfz pbmc8k_filtered_gene_bc_matrices.tar.gz
-</pre></div>
-
+</code></pre></div>
 
 <h4>numpy兼容性报错修复</h4>
 <p>高版本numpy带来的<code>cannot import name '_validate_lenghs'</code>报错修复方案</p>
 <p><code>scrublet</code>包的开发依赖的是比较低版本的numpy，会用到<code>arraypad.py</code>中的<a href="https://www.cnblogs.com/lixiansheng/p/10293323.html">_validate_lenghs</a>函数，这个函数在比较高的numpy版本中已经弃用，如果安装的是高版本numpy，可能在运行scrublet时会有报错导致中断：<code>cannot import name '_validate_lenghs'</code>。</p>
 <p>考虑到一般其他软件包依赖高版本numpy的情况比较多，不想再降低numpy的版本，所以让scrublet能够运行下去的修复方案为如下：</p>
 <p>打开终端，进入Python环境，输入以下代码，查看Python安装位置。</p>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
-<span class="k">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+</code></pre></div>
 
 <p>找到arraypad.py的位置 ~/anaconda3/lib/python3.6/site-packages/numpy/lib/arraypad.py，打开文件，在文件最后添加以下代码，保存退出，问题解决。</p>
-<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">_normalize_shape</span><span class="p">(</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">cast_to_int</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_normalize_shape</span><span class="p">(</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">cast_to_int</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Private function which does some checks and normalizes the possibly</span>
 <span class="sd">    much simpler representations of ‘pad_width‘, ‘stat_length‘,</span>
@@ -168,8 +165,8 @@ tar xfz pbmc8k_filtered_gene_bc_matrices.tar.gz
     <span class="n">ndims</span> <span class="o">=</span> <span class="n">ndarray</span><span class="o">.</span><span class="n">ndim</span>
 
     <span class="c1"># Shortcut shape=None</span>
-    <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">((</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span> <span class="p">)</span> <span class="o">*</span> <span class="n">ndims</span>
+    <span class="k">if</span> <span class="n">shape</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">((</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="p">)</span> <span class="o">*</span> <span class="n">ndims</span>
 
     <span class="c1"># Convert any input `info` to a NumPy array</span>
     <span class="n">shape_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
@@ -181,7 +178,7 @@ tar xfz pbmc8k_filtered_gene_bc_matrices.tar.gz
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="n">shape</span><span class="p">,))</span>
 
     <span class="c1"># Cast if necessary</span>
-    <span class="k">if</span> <span class="n">cast_to_int</span> <span class="ow">is</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cast_to_int</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
         <span class="n">shape_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">shape_arr</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="c1"># Convert list of lists to tuple of tuples</span>
@@ -221,44 +218,41 @@ tar xfz pbmc8k_filtered_gene_bc_matrices.tar.gz
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">normshp</span> <span class="o">=</span> <span class="n">_normalize_shape</span><span class="p">(</span><span class="n">narray</span><span class="p">,</span> <span class="n">number_elements</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">normshp</span><span class="p">:</span>
-        <span class="n">chk</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
+        <span class="n">chk</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">i</span><span class="p">]</span>
         <span class="n">chk</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">chk</span><span class="p">]</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">chk</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">chk</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
             <span class="n">fmt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> cannot contain negative values.&quot;</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">fmt</span> <span class="o">%</span> <span class="p">(</span><span class="n">number_elements</span><span class="p">,))</span>
     <span class="k">return</span> <span class="n">normshp</span>
-</pre></div>
-
+</code></pre></div>
 
 <h3>scrublet使用教程</h3>
 <p><img alt="scrublet_02.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_02.png"></p>
 <p>我的测试执行环境是MACOS jupyter notebook，以下代码为python包的载入和画图设置：</p>
-<div class="highlight"><pre><span></span><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-<span class="kn">import</span> <span class="nn">scrublet</span> <span class="kn">as</span> <span class="nn">scr</span>
+<div class="highlight"><pre><span></span><code><span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">scrublet</span> <span class="k">as</span> <span class="nn">scr</span>
 <span class="kn">import</span> <span class="nn">scipy.io</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Arial&#39;</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;font&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;pdf.fonttype&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>读入10X的scRNA-seq矩阵，读入raw counts矩阵为scipy sparse矩阵，cells作为行，genes作为列：</p>
-<div class="highlight"><pre><span></span><span class="n">input_dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/yuanzan/Desktop/doublets/filtered_gene_bc_matrices/GRCh38/&#39;</span>
+<div class="highlight"><pre><span></span><code><span class="n">input_dir</span> <span class="o">=</span> <span class="s1">&#39;/Users/yuanzan/Desktop/doublets/filtered_gene_bc_matrices/GRCh38/&#39;</span>
 <span class="n">counts_matrix</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">mmread</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s1">&#39;/matrix.mtx&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">tocsc</span><span class="p">()</span>
 <span class="n">genes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scr</span><span class="o">.</span><span class="n">load_genes</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s1">&#39;/genes.tsv&#39;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">out_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s1">&#39;/barcodes.tsv&#39;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;barcode&#39;</span><span class="p">])</span>
+<span class="n">out_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s1">&#39;/barcodes.tsv&#39;</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;barcode&#39;</span><span class="p">])</span>
 
 
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Counts matrix shape: {} rows, {} columns&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counts_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">counts_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of genes in gene list: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">genes</span><span class="p">)))</span>
-</pre></div>
-
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Counts matrix shape: </span><span class="si">{}</span><span class="s1"> rows, </span><span class="si">{}</span><span class="s1"> columns&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">counts_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">counts_matrix</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of genes in gene list: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">genes</span><span class="p">)))</span>
+</code></pre></div>
 
 <p>Counts matrix shape: 8381 rows, 33694 columns
 Number of genes in gene list: 33694</p>
@@ -267,9 +261,8 @@ Number of genes in gene list: 33694</p>
 * <code>expected_doublet_rate</code>，doublets的预期占比，通常为0.05-0.1，结果对该参数不是特别敏感。 对于此示例数据，预期的doublets占比来自<a href="https://support.10xgenomics.com/permalink/3vzDu3zQjY0o2AqkkkI4CC">Chromium用户指南</a>
 * <code>sim_doublet_ratio</code>，要模拟的doublets数量相对于转录组的观测值的比例。此值应该足够高，以使所有的doublet状态都能很好地由模拟doublets表示。设置得太高会使计算量增大，默认值是2（尽管设置低至0.5的值也对测试的数据集产生非常相似的结果。
 * <code>n_neighbors</code>，用于构造转录组观测值和模拟doublets的KNN分类器的邻居数。 默认值为round（0.5 * sqrt（n_cells）），通常表现比较好。</p>
-<div class="highlight"><pre><span></span><span class="n">scrub</span> <span class="o">=</span> <span class="n">scr</span><span class="o">.</span><span class="n">Scrublet</span><span class="p">(</span><span class="n">counts_matrix</span><span class="p">,</span> <span class="n">expected_doublet_rate</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">scrub</span> <span class="o">=</span> <span class="n">scr</span><span class="o">.</span><span class="n">Scrublet</span><span class="p">(</span><span class="n">counts_matrix</span><span class="p">,</span> <span class="n">expected_doublet_rate</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span>
+</code></pre></div>
 
 <h5>计算doublet score</h5>
 <p>运行下面的代码计算doublet score，内部处理过程包括:</p>
@@ -279,9 +272,8 @@ Number of genes in gene list: 33694</p>
 <li>Doublet score calculation</li>
 <li>Doublet score threshold detection and doublet calling</li>
 </ol>
-<div class="highlight"><pre><span></span><span class="n">doublet_scores</span><span class="p">,</span> <span class="n">predicted_doublets</span> <span class="o">=</span> <span class="n">scrub</span><span class="o">.</span><span class="n">scrub_doublets</span><span class="p">(</span><span class="n">min_counts</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_cells</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">min_gene_variability_pctl</span><span class="o">=</span><span class="mi">85</span><span class="p">,</span> <span class="n">n_prin_comps</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">doublet_scores</span><span class="p">,</span> <span class="n">predicted_doublets</span> <span class="o">=</span> <span class="n">scrub</span><span class="o">.</span><span class="n">scrub_doublets</span><span class="p">(</span><span class="n">min_counts</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">min_cells</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">min_gene_variability_pctl</span><span class="o">=</span><span class="mi">85</span><span class="p">,</span> <span class="n">n_prin_comps</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</code></pre></div>
 
 <p><img alt="scrublet_03.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_03.png"></p>
 <h5>绘制doublet score分布直方图</h5>
@@ -291,45 +283,39 @@ Number of genes in gene list: 33694</p>
 <li><code>右图模式</code>对应"neotypic" doublets，由具有不同基因表达的细胞（例如，不同类型的细胞）产生，这些会在下游分析中引入更多的假象。<code>Scrublet只能检测"neotypic" doublets</code>。</li>
 </ul>
 <p>要call doublets vs. singlets，我们必须设置一个doublet score阈值，理想情况下，阈值应在模拟doublet直方图的两种模式之间设置最小值。<code>scrub_doublets()</code>函数尝试自动识别这一点，在这个测试数据示例中表现比较好。如果自动阈值检测效果不佳，则可以使用<code>call_doublets()</code>函数调整阈值，例如：</p>
-<div class="highlight"><pre><span></span><span class="n">scrub</span><span class="o">.</span><span class="n">call_doublets</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
-</pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">scrub</span><span class="o">.</span><span class="n">call_doublets</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="c1"># 画doublet score直方图</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># 画doublet score直方图</span>
 <span class="n">scrub</span><span class="o">.</span><span class="n">plot_histogram</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <p><img alt="scrublet_04.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_04.png"></p>
 <h5>降维可视化</h5>
 <h6>降维计算</h6>
 <p>这个示例采用UMAP降维，还有tSNE可选，作者不推荐用tSNE，因为运行比较慢。</p>
-<div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Running UMAP...&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Running UMAP...&#39;</span><span class="p">)</span>
 <span class="n">scrub</span><span class="o">.</span><span class="n">set_embedding</span><span class="p">(</span><span class="s1">&#39;UMAP&#39;</span><span class="p">,</span> <span class="n">scr</span><span class="o">.</span><span class="n">get_umap</span><span class="p">(</span><span class="n">scrub</span><span class="o">.</span><span class="n">manifold_obs_</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">min_dist</span><span class="o">=</span><span class="mf">0.3</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Done.&#39;</span><span class="p">)</span>
-</pre></div>
-
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Done.&#39;</span><span class="p">)</span>
+</code></pre></div>
 
 <h6>UMAP可视化</h6>
-<div class="highlight"><pre><span></span><span class="n">scrub</span><span class="o">.</span><span class="n">plot_embedding</span><span class="p">(</span><span class="s1">&#39;UMAP&#39;</span><span class="p">,</span> <span class="n">order_points</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">scrub</span><span class="o">.</span><span class="n">plot_embedding</span><span class="p">(</span><span class="s1">&#39;UMAP&#39;</span><span class="p">,</span> <span class="n">order_points</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
 
 <p>下面左图黑色的点为预测的doublets。</p>
 <p><img alt="scrublet_05.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/scrublet/scrublet_05.png"></p>
-<div class="highlight"><pre><span></span><span class="c1"># doublets占比</span>
-<span class="k">print</span> <span class="p">(</span><span class="n">scrub</span><span class="o">.</span><span class="n">detected_doublet_rate_</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># doublets占比</span>
+<span class="nb">print</span> <span class="p">(</span><span class="n">scrub</span><span class="o">.</span><span class="n">detected_doublet_rate_</span><span class="p">)</span>
 <span class="c1"># 0.043789523923159525</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>把doublets预测结果保存到文件，后续用Seurat等软件处理的时候可以导入doublets的预测结果对barcode进行筛选。</p>
-<div class="highlight"><pre><span></span><span class="n">out_df</span><span class="p">[</span><span class="s1">&#39;doublet_scores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">doublet_scores</span>
+<div class="highlight"><pre><span></span><code><span class="n">out_df</span><span class="p">[</span><span class="s1">&#39;doublet_scores&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">doublet_scores</span>
 <span class="n">out_df</span><span class="p">[</span><span class="s1">&#39;predicted_doublets&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predicted_doublets</span>
-<span class="n">out_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s1">&#39;/doublet.txt&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">out_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">input_dir</span> <span class="o">+</span> <span class="s1">&#39;/doublet.txt&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">out_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-
+</code></pre></div>
 
 <table>
 <thead>
