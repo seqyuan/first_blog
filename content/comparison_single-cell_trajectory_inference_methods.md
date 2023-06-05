@@ -29,7 +29,9 @@ Summary: 单细胞领域的新用户在做拟时间分析的时候大多选择�
 
 # 不同TI方法结果的比较策略
 ![9fcdeb36008b8b5229b6b11e8607e04e.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/TI/ti_2.png)
+
 为了使不同TI方法的输出彼此直接可比，作者开发了一个通用的概率模型来表示来自所有可能来源的轨迹，如上图所示。在这个模型中。
+
 #### 一 整体拓扑结构由`里程碑`(milestones)网络表示
 细胞被放置在每组相互连接的里程碑所形成的空间内。
 #### 二 不同TI结果标准化归类输出

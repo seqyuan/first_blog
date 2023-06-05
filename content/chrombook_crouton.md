@@ -39,7 +39,7 @@ crouton 是比较流行的安装方法，主要特点如下：
 
 下载后解压
 
-##修改crouton
+## 修改crouton
 
 更改解压后的crouton中targets/audio文件:
 

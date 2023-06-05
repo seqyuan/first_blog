@@ -82,7 +82,7 @@ plt.show()
 geopandas结合了pandas和shapely的功能，扩展了pandas在空间数据操作方面的能力，使得可以轻松的用python实现空间数据分析，`geometry`列为地图坐标信息。
 
 ![feiyan_6.png](https://raw.githubusercontent.com/seqyuan/blog/master/images/feiyan/feiyan_6.png)
- 
+
 ##### 1）下载中国地图，并整理
 我们从[GADM](https://gadm.org/download_country_v3.html)网站下载中国行政区划分地图，以下是我下载的地图，，解压后使用，具体下载链接参考文末的`Reference`
 
