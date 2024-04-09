@@ -111,8 +111,8 @@
 <h3>准备工作</h3>
 <h4>数据准备</h4>
 <p>下载来自<a href="http://cf.10xgenomics.com/samples/cell-exp/2.1.0/pbmc8k/pbmc8k_filtered_gene_bc_matrices.tar.gz">10X Genomics8k的PBMC数据集</a>并解压。</p>
-<div class="highlight"><pre><span></span><code>wget http://cf.10xgenomics.com/samples/cell-exp/2.1.0/pbmc8k/pbmc8k_filtered_gene_bc_matrices.tar.gz
-tar xfz pbmc8k_filtered_gene_bc_matrices.tar.gz
+<div class="highlight"><pre><span></span><code>wget<span class="w"> </span>http://cf.10xgenomics.com/samples/cell-exp/2.1.0/pbmc8k/pbmc8k_filtered_gene_bc_matrices.tar.gz
+tar<span class="w"> </span>xfz<span class="w"> </span>pbmc8k_filtered_gene_bc_matrices.tar.gz
 </code></pre></div>
 
 <h4>numpy兼容性报错修复</h4>
@@ -126,7 +126,7 @@ tar xfz pbmc8k_filtered_gene_bc_matrices.tar.gz
 
 <p>找到arraypad.py的位置 ~/anaconda3/lib/python3.6/site-packages/numpy/lib/arraypad.py，打开文件，在文件最后添加以下代码，保存退出，问题解决。</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">_normalize_shape</span><span class="p">(</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">cast_to_int</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Private function which does some checks and normalizes the possibly</span>
 <span class="sd">    much simpler representations of ‘pad_width‘, ‘stat_length‘,</span>
 <span class="sd">    ‘constant_values‘, ‘end_values‘.</span>
@@ -186,7 +186,7 @@ tar xfz pbmc8k_filtered_gene_bc_matrices.tar.gz
 
 
 <span class="k">def</span> <span class="nf">_validate_lengths</span><span class="p">(</span><span class="n">narray</span><span class="p">,</span> <span class="n">number_elements</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Private function which does some checks and reformats pad_width and</span>
 <span class="sd">    stat_length using _normalize_shape.</span>
 

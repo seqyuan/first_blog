@@ -180,16 +180,16 @@
 
 <p><img alt="quickly plot" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/quickly_plot.png"></p>
 <p>通过快速预览图我们对<code>LOC_X</code>和<code>LOC_Y</code>有了一个大概的认识，有一点需要注意：<code>LOC_X</code>其实是观众视野从中场面向篮筐来说的，<code>LOC_X</code>是正值则在篮筐的左边。所以最终绘图时需要按以下代码做调整，我们以shot log中Right Side(R) 投篮区域(投篮区域划分请参考前文<code>Shot Zones</code>图)的出手作为示例说明。</p>
-<div class="highlight"><pre><span></span><code><span class="nv">right_shot_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">shot_df</span>[<span class="nv">shot_df</span>.<span class="nv">SHOT_ZONE_AREA</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Right Side(R)&quot;</span>]<span class="w"></span>
-<span class="nv">other_shot_df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">shot_df</span>[<span class="o">~</span><span class="ss">(</span><span class="nv">shot_df</span>.<span class="nv">SHOT_ZONE_AREA</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Right Side(R)&quot;</span><span class="ss">)</span>]<span class="w"></span>
+<div class="highlight"><pre><span></span><code>right_shot_df = shot_df[shot_df.SHOT_ZONE_AREA == &quot;Right Side(R)&quot;]
+other_shot_df = shot_df[~(shot_df.SHOT_ZONE_AREA == &quot;Right Side(R)&quot;)]
 
-<span class="nv">fig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">4</span>.<span class="mi">3</span>,<span class="mi">4</span><span class="ss">))</span><span class="w"></span>
-<span class="nv">ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">fig</span>.<span class="nv">add_subplot</span><span class="ss">(</span><span class="mi">111</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">right_shot_df</span>.<span class="nv">LOC_X</span>,<span class="w"> </span><span class="nv">right_shot_df</span>.<span class="nv">LOC_Y</span>,<span class="w"> </span><span class="nv">s</span><span class="o">=</span><span class="mi">1</span>,<span class="w"> </span><span class="nv">c</span><span class="o">=</span><span class="s1">&#39;red&#39;</span>,<span class="w"> </span><span class="nv">label</span><span class="o">=</span><span class="s1">&#39;Right Side(R)&#39;</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">other_shot_df</span>.<span class="nv">LOC_X</span>,<span class="w"> </span><span class="nv">other_shot_df</span>.<span class="nv">LOC_Y</span>,<span class="w"> </span><span class="nv">s</span><span class="o">=</span><span class="mi">1</span>,<span class="w"> </span><span class="nv">c</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span>,<span class="w"> </span><span class="nv">label</span><span class="o">=</span><span class="s1">&#39;Other AREA&#39;</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">set_ylim</span><span class="ss">(</span><span class="nv">top</span><span class="o">=-</span><span class="mi">50</span>,<span class="nv">bottom</span><span class="o">=</span><span class="mi">580</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">legend</span><span class="ss">()</span><span class="w"></span>
-<span class="nv">plt</span>.<span class="k">show</span><span class="ss">()</span><span class="w"></span>
+fig = plt.figure(figsize=(4.3,4))
+ax = fig.add_subplot(111)
+ax.scatter(right_shot_df.LOC_X, right_shot_df.LOC_Y, s=1, c=&#39;red&#39;, label=&#39;Right Side(R)&#39;)
+ax.scatter(other_shot_df.LOC_X, other_shot_df.LOC_Y, s=1, c=&#39;blue&#39;, label=&#39;Other AREA&#39;)
+ax.set_ylim(top=-50,bottom=580)
+ax.legend()
+plt.show()
 </code></pre></div>
 
 <p><img alt="right side" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/right_side.png"></p>
@@ -274,38 +274,38 @@
 </code></pre></div>
 
 <p>画图：</p>
-<div class="highlight"><pre><span></span><code><span class="nv">fig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">9</span>,<span class="mi">9</span><span class="ss">))</span><span class="w"></span>
-<span class="nv">ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">fig</span>.<span class="nv">add_subplot</span><span class="ss">(</span><span class="mi">111</span>,<span class="nv">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">set_xlim</span><span class="ss">(</span><span class="o">-</span><span class="mi">330</span>,<span class="mi">330</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">set_ylim</span><span class="ss">(</span><span class="o">-</span><span class="mi">200</span>,<span class="mi">600</span><span class="ss">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code>fig = plt.figure(figsize=(9,9))
+ax = fig.add_subplot(111,aspect=&#39;equal&#39;)
+ax.set_xlim(-330,330)
+ax.set_ylim(-200,600)
 
-<span class="nv">draw_half_court</span><span class="ss">(</span><span class="nv">ax</span><span class="o">=</span><span class="nv">ax</span><span class="ss">)</span><span class="w"></span>
+draw_half_court(ax=ax)
 
-<span class="nv">plt</span>.<span class="k">show</span><span class="ss">()</span><span class="w"></span>
+plt.show()
 </code></pre></div>
 
 <p><img alt="court" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/court.png"></p>
 <p>添加上投篮数据</p>
-<div class="highlight"><pre><span></span><code><span class="nv">fig</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">plt</span>.<span class="nv">figure</span><span class="ss">(</span><span class="nv">figsize</span><span class="o">=</span><span class="ss">(</span><span class="mi">9</span>,<span class="mi">8</span><span class="ss">))</span><span class="w"></span>
-<span class="nv">ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">fig</span>.<span class="nv">add_subplot</span><span class="ss">(</span><span class="mi">111</span>,<span class="nv">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">set_xlim</span><span class="ss">(</span><span class="o">-</span><span class="mi">330</span>,<span class="mi">330</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">set_ylim</span><span class="ss">(</span><span class="nv">top</span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">100</span>,<span class="nv">bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">500</span><span class="ss">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code>fig = plt.figure(figsize=(9,8))
+ax = fig.add_subplot(111,aspect=&#39;equal&#39;)
+ax.set_xlim(-330,330)
+ax.set_ylim(top= -100,bottom = 500)
 
-<span class="nv">draw_half_court</span><span class="ss">(</span><span class="nv">ax</span><span class="o">=</span><span class="nv">ax</span>,<span class="nv">unit</span><span class="o">=</span><span class="mi">10</span><span class="o">/</span><span class="mi">12</span><span class="ss">)</span><span class="w"></span>
+draw_half_court(ax=ax,unit=10/12)
 
-<span class="nv">df_missed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">shot_df</span>[<span class="nv">shot_df</span>.<span class="nv">EVENT_TYPE</span><span class="o">==</span><span class="s1">&#39;Missed Shot&#39;</span>][[<span class="s1">&#39;LOC_X&#39;</span>,<span class="s1">&#39;LOC_Y&#39;</span>]]<span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">df_missed</span>.<span class="nv">LOC_X</span>,<span class="w"> </span><span class="nv">df_missed</span>.<span class="nv">LOC_Y</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">2</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span>,<span class="nv">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Missed Shot&#39;</span>,<span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">5</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">df_made</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">shot_df</span>[<span class="nv">shot_df</span>.<span class="nv">EVENT_TYPE</span><span class="o">==</span><span class="s1">&#39;Made Shot&#39;</span>][[<span class="s1">&#39;LOC_X&#39;</span>,<span class="s1">&#39;LOC_Y&#39;</span>]]<span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">scatter</span><span class="ss">(</span><span class="nv">df_made</span>.<span class="nv">LOC_X</span>,<span class="w"> </span><span class="nv">df_made</span>.<span class="nv">LOC_Y</span>,<span class="nv">s</span><span class="o">=</span><span class="mi">2</span>,<span class="nv">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span>,<span class="nv">label</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Made Shot&#39;</span>,<span class="nv">alpha</span><span class="o">=</span><span class="mi">0</span>.<span class="mi">5</span><span class="ss">)</span><span class="w"></span>
+df_missed = shot_df[shot_df.EVENT_TYPE==&#39;Missed Shot&#39;][[&#39;LOC_X&#39;,&#39;LOC_Y&#39;]]
+ax.scatter(df_missed.LOC_X, df_missed.LOC_Y,s=2,color=&#39;r&#39;,label = &#39;Missed Shot&#39;,alpha=0.5)
+df_made = shot_df[shot_df.EVENT_TYPE==&#39;Made Shot&#39;][[&#39;LOC_X&#39;,&#39;LOC_Y&#39;]]
+ax.scatter(df_made.LOC_X, df_made.LOC_Y,s=2,color=&#39;b&#39;,label = &#39;Made Shot&#39;,alpha=0.5)
 
-<span class="nv">legend</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">ax</span>.<span class="nv">legend</span><span class="ss">(</span><span class="nv">bbox_to_anchor</span><span class="o">=</span><span class="ss">(</span><span class="mi">0</span>.<span class="mi">49</span>,<span class="w"> </span><span class="mi">0</span>.<span class="mi">13</span><span class="ss">)</span>,<span class="w"> </span><span class="nv">loc</span><span class="o">=</span><span class="mi">2</span>,<span class="w"> </span><span class="nv">borderaxespad</span><span class="o">=</span><span class="mi">0</span>.,<span class="nv">prop</span><span class="o">=</span>{<span class="s1">&#39;size&#39;</span>:<span class="mi">8</span>},<span class="nv">ncol</span><span class="o">=</span><span class="mi">2</span>,<span class="nv">frameon</span><span class="o">=</span><span class="nv">False</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">plt</span>.<span class="nv">axis</span><span class="ss">(</span><span class="s1">&#39;off&#39;</span><span class="ss">)</span><span class="w"></span>
+legend = ax.legend(bbox_to_anchor=(0.49, 0.13), loc=2, borderaxespad=0.,prop={&#39;size&#39;:8},ncol=2,frameon=False)
+plt.axis(&#39;off&#39;)
 
-<span class="nv">FG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;%.1f&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="ss">((</span><span class="nv">df_made</span>.<span class="nv">shape</span>[<span class="mi">0</span>]<span class="o">/</span><span class="nv">shot_df</span>.<span class="nv">shape</span>[<span class="mi">0</span>]<span class="ss">)</span><span class="o">*</span><span class="mi">100</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">text</span><span class="ss">(</span><span class="o">-</span><span class="mi">250</span>,<span class="mi">440</span>,<span class="s1">&#39;FG%:{0}%({1}-{2})&#39;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">FG</span>,<span class="nv">df_made</span>.<span class="nv">shape</span>[<span class="mi">0</span>],<span class="nv">shot_df</span>.<span class="nv">shape</span>[<span class="mi">0</span>]<span class="ss">)</span>,<span class="w"> </span><span class="nv">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="ss">)</span><span class="w"></span>
-<span class="nv">ax</span>.<span class="nv">text</span><span class="ss">(</span><span class="o">-</span><span class="mi">250</span>,<span class="o">-</span><span class="mi">63</span>,<span class="s1">&#39;FGA for Harden, James during the 2017-18 Regular Season&#39;</span>.<span class="nv">format</span><span class="ss">(</span><span class="nv">FG</span>,<span class="nv">df_made</span>.<span class="nv">shape</span>[<span class="mi">0</span>],<span class="nv">shot_df</span>.<span class="nv">shape</span>[<span class="mi">0</span>]<span class="ss">)</span>,<span class="w"> </span><span class="nv">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="ss">)</span><span class="w"></span>
+FG = &quot;%.1f&quot; % ((df_made.shape[0]/shot_df.shape[0])*100)
+ax.text(-250,440,&#39;FG%:{0}%({1}-{2})&#39;.format(FG,df_made.shape[0],shot_df.shape[0]), fontsize=8)
+ax.text(-250,-63,&#39;FGA for Harden, James during the 2017-18 Regular Season&#39;.format(FG,df_made.shape[0],shot_df.shape[0]), fontsize=8)
 
-<span class="nv">plt</span>.<span class="k">show</span><span class="ss">()</span><span class="w"></span>
+plt.show()
 </code></pre></div>
 
 <p><img alt="court_shotlog" src="https://raw.githubusercontent.com/seqyuan/programs/master/plot/NBAshotlog/court_shotlog.png"></p>

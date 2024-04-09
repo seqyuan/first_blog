@@ -110,9 +110,9 @@
 <span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">loomR</span><span class="p">)</span>
 
-<span class="n">sdata</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;/Users/yuanzan/Desktop/tmp/seurat_project.rds&quot;</span><span class="p">)</span>
+<span class="n">sdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/Users/yuanzan/Desktop/tmp/seurat_project.rds&quot;</span><span class="p">)</span>
 <span class="c1"># seurat对象转换为loop文件</span>
-<span class="n">sdata.loom</span> <span class="o">&lt;-</span> <span class="nf">as.loom</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">sdata</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s">&quot;/Users/yuanzan/Desktop/tmp/sdata.loom&quot;</span><span class="p">,</span> <span class="n">verbose</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span>
+<span class="n">sdata.loom</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">as.loom</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sdata</span><span class="p">,</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/Users/yuanzan/Desktop/tmp/sdata.loom&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">verbose</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span>
 <span class="c1"># Always remember to close loom files when done</span>
 <span class="n">sdata.loom</span><span class="o">$</span><span class="nf">close_all</span><span class="p">()</span>
 </code></pre></div>

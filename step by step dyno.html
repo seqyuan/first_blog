@@ -92,8 +92,8 @@
 </ol>
 <h2><code>dyno</code>安装</h2>
 <p>dyno是一个R包，需要R/Rstudio运行环境，目前的存放地址是在<code>github</code>- <code>https://github.com/dynverse/dyno</code>，所以我们用devtools进行安装，打开Rstudio，输入以下命令：</p>
-<div class="highlight"><pre><span></span><code><span class="c1">#install.packages(&quot;devtools&quot;)</span><span class="w"></span>
-<span class="n">devtools</span><span class="p">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">&quot;dynverse/dyno&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="c1">#install.packages(&quot;devtools&quot;)</span>
+<span class="n">devtools</span><span class="p">::</span><span class="n">install_github</span><span class="p">(</span><span class="s2">&quot;dynverse/dyno&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 <p>在这个过程中会安装一系列dynverse R包(dynwrap, dynplot, dynmethods, …)。</p>
@@ -153,32 +153,32 @@
 <p>dynwrap要求raw counts和normalised(log2)表达数据，低表达的细胞、双细胞、坏细胞应该被提前过滤。使用Seurat处理后的数据一般都包含了这些步骤。</p>
 <p><code>wrap_expression</code>要求raw counts和normalised表达为 sparse matrix (dgCMatrix）(<code>列</code>为genes/features，<code>行</code>为细胞) </p>
 <div class="highlight"><pre><span></span><code><span class="c1">#读入seurat处理后的rds文件</span>
-<span class="n">sdata</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;/Users/yuanzan/Desktop/tmp/seurat_project.rds&quot;</span><span class="p">)</span>
+<span class="n">sdata</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/Users/yuanzan/Desktop/tmp/seurat_project.rds&quot;</span><span class="p">)</span>
 
 <span class="c1">#添加raw counts和normalised expression</span>
 <span class="c1">#seurat的矩阵需要进行行列转换，以使行为细胞，列为基因</span>
-<span class="n">dataset</span> <span class="o">&lt;-</span> <span class="nf">wrap_expression</span><span class="p">(</span>
-  <span class="n">counts</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">sdata</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">),</span>
-  <span class="n">expression</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">sdata</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">data</span><span class="p">)</span>
+<span class="n">dataset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">wrap_expression</span><span class="p">(</span>
+<span class="w">  </span><span class="n">counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="n">sdata</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">),</span>
+<span class="w">  </span><span class="n">expression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="n">sdata</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">data</span><span class="p">)</span>
 <span class="p">)</span>
 
 <span class="c1">#添加先验信息，这里添加的是开始转换的“细胞id”，后期可视化可以根据具体的轨迹推断结果进行调整</span>
-<span class="n">dataset</span> <span class="o">&lt;-</span> <span class="nf">add_prior_information</span><span class="p">(</span>
-  <span class="n">dataset</span><span class="p">,</span>
-  <span class="n">start_id</span> <span class="o">=</span> <span class="s">&quot;TTTGTTGCAACTCATG.wt&quot;</span>
+<span class="n">dataset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">add_prior_information</span><span class="p">(</span>
+<span class="w">  </span><span class="n">dataset</span><span class="p">,</span>
+<span class="w">  </span><span class="n">start_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;TTTGTTGCAACTCATG.wt&quot;</span>
 <span class="p">)</span>
 
 <span class="c1">#添加数据的cluster信息，这里我们直接用“seurat_clusters”即可</span>
-<span class="n">dataset</span> <span class="o">&lt;-</span> <span class="nf">add_grouping</span><span class="p">(</span>
-   <span class="n">dataset</span><span class="p">,</span>
-   <span class="n">sdata</span><span class="o">$</span><span class="n">seurat_clusters</span>
+<span class="n">dataset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">add_grouping</span><span class="p">(</span>
+<span class="w">   </span><span class="n">dataset</span><span class="p">,</span>
+<span class="w">   </span><span class="n">sdata</span><span class="o">$</span><span class="n">seurat_clusters</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <h3>为数据集选择最佳方法</h3>
 <p>如果是MACOS，可以执行以下命令以获取推荐的最佳TI方法</p>
-<div class="highlight"><pre><span></span><code><span class="n">guidelines</span> <span class="o">&lt;-</span> <span class="nf">guidelines_shiny</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
-<span class="n">methods_selected</span> <span class="o">&lt;-</span> <span class="n">guidelines</span><span class="o">$</span><span class="n">methods_selected</span>
+<div class="highlight"><pre><span></span><code><span class="n">guidelines</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">guidelines_shiny</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="n">methods_selected</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">guidelines</span><span class="o">$</span><span class="n">methods_selected</span>
 </code></pre></div>
 
 <p>执行<code>guidelines &lt;- guidelines_shiny(dataset)</code>命令之后会弹出一个<code>shiny</code>页面，如下图
@@ -198,10 +198,10 @@
 <img alt="ca6a6e1e4eb26018cf28f1f5d64430a3.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_6.png"></li>
 </ol>
 <h3>运行TI方法</h3>
-<div class="highlight"><pre><span></span><code><span class="n">model_slingshot</span> <span class="o">&lt;-</span> <span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">methods_selected</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
-<span class="n">model_paga_tree</span> <span class="o">&lt;-</span> <span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">methods_selected</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
-<span class="n">model_paga</span> <span class="o">&lt;-</span> <span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">methods_selected</span><span class="p">[</span><span class="m">3</span><span class="p">])</span>
-<span class="n">model_mst</span> <span class="o">&lt;-</span> <span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">methods_selected</span><span class="p">[</span><span class="m">4</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="n">model_slingshot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="w"> </span><span class="n">methods_selected</span><span class="p">[</span><span class="m">1</span><span class="p">])</span>
+<span class="n">model_paga_tree</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="w"> </span><span class="n">methods_selected</span><span class="p">[</span><span class="m">2</span><span class="p">])</span>
+<span class="n">model_paga</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="w"> </span><span class="n">methods_selected</span><span class="p">[</span><span class="m">3</span><span class="p">])</span>
+<span class="n">model_mst</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="w"> </span><span class="n">methods_selected</span><span class="p">[</span><span class="m">4</span><span class="p">])</span>
 </code></pre></div>
 
 <blockquote>
@@ -210,11 +210,11 @@
 <p>目前作者封装的59种TI方法列表见网址：https://github.com/dynverse/dynmethods#list-of-included-methods，用到代码中的调用一般是单词的所有字母都小写，单词之间加下划线。</p>
 <p>guidelines推荐给我的<code>methods_selected</code>包含4个TI方法，本文开头介绍了《<a href="https://mp.weixin.qq.com/s/6ZVTR3wpXrI2tdQpQEVwlQ" title="单细胞轨迹分析知多少--拟时间分析比较">单细胞轨迹分析知多少--拟时间分析比较</a>》得出了几项重要结论，理论指导实践，所以我打算把4中TI方法都试一下，看看结果怎么样。</p>
 <h4>简单可视化</h4>
-<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">&lt;-</span> <span class="n">model_slingshot</span>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model_slingshot</span>
 <span class="nf">plot_dimred</span><span class="p">(</span>
-  <span class="n">model</span><span class="p">,</span> 
-  <span class="n">expression_source</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span> 
-  <span class="n">grouping</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">grouping</span>
+<span class="w">  </span><span class="n">model</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">expression_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">grouping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">grouping</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -231,35 +231,35 @@ paga_tree
 <p>大多数方法没有直接的方法来推断轨迹的方向性。在这种情况下，应该使用一些外部信息来“确定”轨迹，例如使用一组marker基因</p>
 <p>添加rooting gene列表，这里需要根据具体的生物学问题来定，为了更快速的演示，我不再深究，这里仅给一个示例作为演示用</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 初步来看我认为slingshot方法得到的结果和我的预期比较相近，后续将以此方法得到的model进行后续演示</span>
-<span class="n">model</span> <span class="o">&lt;-</span> <span class="n">model_slingshot</span>
-<span class="n">model</span> <span class="o">&lt;-</span> <span class="n">model</span> <span class="o">%&gt;%</span> 
-  <span class="nf">add_root_using_expression</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;KLRB1&quot;</span><span class="p">),</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model_slingshot</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">add_root_using_expression</span><span class="p">(</span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;KLRB1&quot;</span><span class="p">),</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
 </code></pre></div>
 
 <h4>Milestone labelling</h4>
 <p>可以使用marker基因标记里程碑，这些标签随后可用于后续分析和可视化</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 通过model$milestone_ids我们知道了有4个里程碑</span>
 <span class="c1"># 这个示例我们标记3个里程碑，此处仅为示例，请忽略标签意义</span>
-<span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">label_milestones_markers</span><span class="p">(</span>
-  <span class="n">model</span><span class="p">,</span>
-  <span class="n">markers</span> <span class="o">=</span> <span class="nf">list</span><span class="p">(</span>
-    <span class="n">Tn</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;CCR7&quot;</span><span class="p">),</span>
-    <span class="n">NK</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;KLRD1&quot;</span><span class="p">),</span>
-    <span class="n">CTL</span> <span class="o">=</span> <span class="nf">c</span><span class="p">(</span><span class="s">&quot;GZMK&quot;</span><span class="p">)</span>
-  <span class="p">),</span>
-  <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">label_milestones_markers</span><span class="p">(</span>
+<span class="w">  </span><span class="n">model</span><span class="p">,</span>
+<span class="w">  </span><span class="n">markers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">list</span><span class="p">(</span>
+<span class="w">    </span><span class="n">Tn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;CCR7&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">NK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;KLRD1&quot;</span><span class="p">),</span>
+<span class="w">    </span><span class="n">CTL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="s">&quot;GZMK&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">),</span>
+<span class="w">  </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <h3>轨迹可视化</h3>
 <p>dyno提供了降维、轨迹模型和细胞聚类等可视化展示方法</p>
 <h4>细胞亚群在轨迹上的展示</h4>
-<div class="highlight"><pre><span></span><code><span class="n">model</span> <span class="o">&lt;-</span> <span class="n">model</span> <span class="o">%&gt;%</span> <span class="nf">add_dimred</span><span class="p">(</span><span class="n">dyndimred</span><span class="o">::</span><span class="n">dimred_mds</span><span class="p">,</span> <span class="n">expression_source</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">add_dimred</span><span class="p">(</span><span class="n">dyndimred</span><span class="o">::</span><span class="n">dimred_mds</span><span class="p">,</span><span class="w"> </span><span class="n">expression_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
 <span class="nf">plot_dimred</span><span class="p">(</span>
-  <span class="n">model</span><span class="p">,</span> 
-  <span class="n">expression_source</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span> 
-  <span class="n">grouping</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">grouping</span><span class="p">,</span>
-  <span class="n">label_milestones</span> <span class="o">=</span> <span class="kc">TRUE</span>
+<span class="w">  </span><span class="n">model</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">expression_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">grouping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">grouping</span><span class="p">,</span>
+<span class="w">  </span><span class="n">label_milestones</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span>
 <span class="p">)</span>
 </code></pre></div>
 
@@ -289,59 +289,59 @@ paga_tree
 <h4>最具预测性的基因的全球概述</h4>
 <p>默认情况下，绘制热图时会计算总体上最重要的基因</p>
 <div class="highlight"><pre><span></span><code><span class="nf">plot_heatmap</span><span class="p">(</span>
-  <span class="n">model</span><span class="p">,</span>
-  <span class="n">expression_source</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span>
-  <span class="n">grouping</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">grouping</span><span class="p">,</span>
-  <span class="n">features_oi</span> <span class="o">=</span> <span class="m">50</span>
+<span class="w">  </span><span class="n">model</span><span class="p">,</span>
+<span class="w">  </span><span class="n">expression_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span>
+<span class="w">  </span><span class="n">grouping</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">grouping</span><span class="p">,</span>
+<span class="w">  </span><span class="n">features_oi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">50</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <p><img alt="1481b75d008fed605270e71e36cec8bc.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_16.png"></p>
 <h3>Lineage/branch markers</h3>
 <p>dyno还有提取特定分支的功能，例如：当细胞分化成神经元时改变的基因</p>
-<div class="highlight"><pre><span></span><code><span class="n">branch_feature_importance</span> <span class="o">&lt;-</span> <span class="nf">calculate_branch_feature_importance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expression_source</span><span class="o">=</span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">branch_feature_importance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">calculate_branch_feature_importance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">expression_source</span><span class="o">=</span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
 
-<span class="n">select_features</span> <span class="o">&lt;-</span> <span class="n">branch_feature_importance</span> <span class="o">%&gt;%</span> 
-  <span class="nf">filter</span><span class="p">(</span><span class="n">to</span> <span class="o">==</span> <span class="nf">which</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">milestone_labelling</span> <span class="o">==</span><span class="s">&quot;CTL&quot;</span><span class="p">))</span> <span class="o">%&gt;%</span> 
-  <span class="nf">top_n</span><span class="p">(</span><span class="m">30</span><span class="p">,</span> <span class="n">importance</span><span class="p">)</span> <span class="o">%&gt;%</span> 
-  <span class="nf">pull</span><span class="p">(</span><span class="n">feature_id</span><span class="p">)</span>
+<span class="n">select_features</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">branch_feature_importance</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">filter</span><span class="p">(</span><span class="n">to</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nf">which</span><span class="p">(</span><span class="n">model</span><span class="o">$</span><span class="n">milestone_labelling</span><span class="w"> </span><span class="o">==</span><span class="s">&quot;CTL&quot;</span><span class="p">))</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">top_n</span><span class="p">(</span><span class="m">30</span><span class="p">,</span><span class="w"> </span><span class="n">importance</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span>
+<span class="w">  </span><span class="nf">pull</span><span class="p">(</span><span class="n">feature_id</span><span class="p">)</span>
 
 <span class="nf">plot_heatmap</span><span class="p">(</span>
-  <span class="n">model</span><span class="p">,</span> 
-  <span class="n">expression_source</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span> 
-  <span class="n">features_oi</span> <span class="o">=</span> <span class="n">select_features</span>
+<span class="w">  </span><span class="n">model</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">expression_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span><span class="w"> </span>
+<span class="w">  </span><span class="n">features_oi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">select_features</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <p><img alt="793e06efdff94d4fa90b0bd3132b39c5.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_17.png"></p>
 <h4>分叉点重要的基因</h4>
 <p>提取在分支点发生变化的特征/基因</p>
-<div class="highlight"><pre><span></span><code><span class="n">branching_milestone</span> <span class="o">&lt;-</span> <span class="n">model</span><span class="o">$</span><span class="n">milestone_network</span> <span class="o">%&gt;%</span> <span class="nf">group_by</span><span class="p">(</span><span class="n">from</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">filter</span><span class="p">(</span><span class="nf">n</span><span class="p">()</span> <span class="o">&gt;</span> <span class="m">1</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">(</span><span class="n">from</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">first</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">branching_milestone</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">model</span><span class="o">$</span><span class="n">milestone_network</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">group_by</span><span class="p">(</span><span class="n">from</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">filter</span><span class="p">(</span><span class="nf">n</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">1</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">pull</span><span class="p">(</span><span class="n">from</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">first</span><span class="p">()</span>
 
-<span class="n">branch_feature_importance</span> <span class="o">&lt;-</span> <span class="nf">calculate_branching_point_feature_importance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">expression_source</span><span class="o">=</span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span> <span class="n">milestones_oi</span> <span class="o">=</span> <span class="n">branching_milestone</span><span class="p">)</span>
+<span class="n">branch_feature_importance</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">calculate_branching_point_feature_importance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">expression_source</span><span class="o">=</span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span><span class="w"> </span><span class="n">milestones_oi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">branching_milestone</span><span class="p">)</span>
 
-<span class="n">branching_point_features</span> <span class="o">&lt;-</span> <span class="n">branch_feature_importance</span> <span class="o">%&gt;%</span> <span class="nf">top_n</span><span class="p">(</span><span class="m">20</span><span class="p">,</span> <span class="n">importance</span><span class="p">)</span> <span class="o">%&gt;%</span> <span class="nf">pull</span><span class="p">(</span><span class="n">feature_id</span><span class="p">)</span>
+<span class="n">branching_point_features</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">branch_feature_importance</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">top_n</span><span class="p">(</span><span class="m">20</span><span class="p">,</span><span class="w"> </span><span class="n">importance</span><span class="p">)</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="nf">pull</span><span class="p">(</span><span class="n">feature_id</span><span class="p">)</span>
 
 <span class="nf">plot_heatmap</span><span class="p">(</span>
-  <span class="n">model</span><span class="p">,</span>
-  <span class="n">expression_source</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span>
-  <span class="n">features_oi</span> <span class="o">=</span> <span class="n">branching_point_features</span>
+<span class="w">  </span><span class="n">model</span><span class="p">,</span>
+<span class="w">  </span><span class="n">expression_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span>
+<span class="w">  </span><span class="n">features_oi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">branching_point_features</span>
 <span class="p">)</span>
 </code></pre></div>
 
 <p><img alt="7ee4adbc0789dca82102908e6c448b6f.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_18.png"></p>
-<div class="highlight"><pre><span></span><code><span class="n">space</span> <span class="o">&lt;-</span> <span class="n">dyndimred</span><span class="o">::</span><span class="nf">dimred_mds</span><span class="p">(</span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
-<span class="nf">map</span><span class="p">(</span><span class="n">branching_point_features</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">],</span> <span class="nf">function</span><span class="p">(</span><span class="n">feature_oi</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nf">plot_dimred</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">dimred</span> <span class="o">=</span> <span class="n">space</span><span class="p">,</span> <span class="n">expression_source</span> <span class="o">=</span> <span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span> <span class="n">feature_oi</span> <span class="o">=</span> <span class="n">feature_oi</span><span class="p">,</span> <span class="n">label_milestones</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">)</span> <span class="o">+</span>
-    <span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span> <span class="o">=</span> <span class="s">&quot;none&quot;</span><span class="p">)</span> <span class="o">+</span>
-    <span class="nf">ggtitle</span><span class="p">(</span><span class="n">feature_oi</span><span class="p">)</span>
-<span class="p">})</span> <span class="o">%&gt;%</span> <span class="n">patchwork</span><span class="o">::</span><span class="nf">wrap_plots</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><span class="n">space</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">dyndimred</span><span class="o">::</span><span class="nf">dimred_mds</span><span class="p">(</span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">)</span>
+<span class="nf">map</span><span class="p">(</span><span class="n">branching_point_features</span><span class="p">[</span><span class="m">1</span><span class="o">:</span><span class="m">12</span><span class="p">],</span><span class="w"> </span><span class="nf">function</span><span class="p">(</span><span class="n">feature_oi</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nf">plot_dimred</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">dimred</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">space</span><span class="p">,</span><span class="w"> </span><span class="n">expression_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dataset</span><span class="o">$</span><span class="n">expression</span><span class="p">,</span><span class="w"> </span><span class="n">feature_oi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">feature_oi</span><span class="p">,</span><span class="w"> </span><span class="n">label_milestones</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">theme</span><span class="p">(</span><span class="n">legend.position</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="nf">ggtitle</span><span class="p">(</span><span class="n">feature_oi</span><span class="p">)</span>
+<span class="p">})</span><span class="w"> </span><span class="o">%&gt;%</span><span class="w"> </span><span class="n">patchwork</span><span class="o">::</span><span class="nf">wrap_plots</span><span class="p">()</span>
 </code></pre></div>
 
 <p><img alt="d383855a6a239ea4944257d23db8f26d.png" src="https://raw.githubusercontent.com/seqyuan/blog/master/images/dyno/dyno_19.png"></p>
 <h2>快速免安装体验方式</h2>
 <p>对于MACOS或者有root权限的用户，如果想快速体验dyno，可以在安装并启动docker之后，执行以下命令行进入docker环境命令行，然后打开<code>R</code>终端。</p>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">-</span><span class="n">swap</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">oom</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">disable</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">zanyuan</span><span class="p">:</span><span class="o">/</span><span class="n">zanyuan</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">tmp</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">dockerbin</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="w"> </span><span class="n">seqyuan</span><span class="o">/</span><span class="n">seqyuan</span><span class="o">-</span><span class="n">r</span><span class="p">:</span><span class="n">v0</span><span class="o">.</span><span class="mf">0.1</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">-</span><span class="n">swap</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">oom</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">disable</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">zanyuan</span><span class="p">:</span><span class="o">/</span><span class="n">zanyuan</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">tmp</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">dockerbin</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="w"> </span><span class="n">seqyuan</span><span class="o">/</span><span class="n">seqyuan</span><span class="o">-</span><span class="n">r</span><span class="p">:</span><span class="n">v0</span><span class="o">.</span><span class="mf">0.1</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
 </code></pre></div>
 
 <p>理解上面的代码可能需要一些docker方面的知识，其中<code>-v /home/zanyuan:/zanyuan</code> 这一行指的是本地的存储挂载为docker容器里的<code>/zanyuan</code>地址；<code>-v /tmp:/tmp</code>是临时存储目录挂载；<code>-v /usr/bin/:/dockerbin</code>指的是docker所在本地路径挂载为容器里的<code>/dockerbin</code>；<code>seqyuan/seqyuan-r:v0.0.1</code>这个是docker启动的镜像名称，我构建的<a href="https://hub.docker.com/repository/docker/seqyuan/seqyuan-r" title="dockerfile">dockerfile</a>请见docker hub官网。</p>
@@ -351,26 +351,26 @@ paga_tree
 <span class="nf">library</span><span class="p">(</span><span class="n">Matrix</span><span class="p">)</span>
 <span class="nf">library</span><span class="p">(</span><span class="n">Seurat</span><span class="p">)</span>
 
-<span class="n">pso</span> <span class="o">&lt;-</span> <span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s">&quot;/zanyuan/data/cd8_t1.rds&quot;</span><span class="p">)</span>
+<span class="n">pso</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">readRDS</span><span class="p">(</span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/zanyuan/data/cd8_t1.rds&quot;</span><span class="p">)</span>
 
-<span class="n">dataset</span> <span class="o">&lt;-</span> <span class="nf">wrap_expression</span><span class="p">(</span>
-  <span class="n">counts</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">pso</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">),</span>
-  <span class="n">expression</span> <span class="o">=</span> <span class="nf">t</span><span class="p">(</span><span class="n">pso</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">data</span><span class="p">)</span>
+<span class="n">dataset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">wrap_expression</span><span class="p">(</span>
+<span class="w">  </span><span class="n">counts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="n">pso</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">counts</span><span class="p">),</span>
+<span class="w">  </span><span class="n">expression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">t</span><span class="p">(</span><span class="n">pso</span><span class="o">@</span><span class="n">assays</span><span class="o">$</span><span class="n">RNA</span><span class="o">@</span><span class="n">data</span><span class="p">)</span>
 <span class="p">)</span>
 
 
-<span class="n">dataset</span> <span class="o">&lt;-</span> <span class="nf">add_prior_information</span><span class="p">(</span>
-  <span class="n">dataset</span><span class="p">,</span>
-  <span class="n">start_id</span> <span class="o">=</span> <span class="s">&quot;AGCGTCGTCCCTAACC.5&quot;</span>
+<span class="n">dataset</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">add_prior_information</span><span class="p">(</span>
+<span class="w">  </span><span class="n">dataset</span><span class="p">,</span>
+<span class="w">  </span><span class="n">start_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;AGCGTCGTCCCTAACC.5&quot;</span>
 <span class="p">)</span>
 
-<span class="n">model</span> <span class="o">&lt;-</span> <span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s">&quot;paga&quot;</span><span class="p">)</span>
+<span class="n">model</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">infer_trajectory</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;paga&quot;</span><span class="p">)</span>
 
-<span class="nf">saveRDS</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s">&quot;/zanyuan/data/cd8_paga.model&quot;</span><span class="p">,</span> <span class="n">ascii</span> <span class="o">=</span> <span class="kc">FALSE</span><span class="p">,</span> <span class="n">version</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">,</span> <span class="n">compress</span> <span class="o">=</span> <span class="kc">TRUE</span><span class="p">,</span> <span class="n">refhook</span> <span class="o">=</span> <span class="kc">NULL</span><span class="p">)</span>
+<span class="nf">saveRDS</span><span class="p">(</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;/zanyuan/data/cd8_paga.model&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ascii</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">FALSE</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">compress</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">,</span><span class="w"> </span><span class="n">refhook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">NULL</span><span class="p">)</span>
 </code></pre></div>
 
 <p>然后执行</p>
-<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">-</span><span class="n">swap</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">oom</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">disable</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">zanyuan</span><span class="p">:</span><span class="o">/</span><span class="n">zanyuan</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">tmp</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">dockerbin</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="w"> </span><span class="n">seqyuan</span><span class="o">/</span><span class="n">seqyuan</span><span class="o">-</span><span class="n">r</span><span class="p">:</span><span class="n">v0</span><span class="o">.</span><span class="mf">0.1</span><span class="w"> </span><span class="n">Rscript</span><span class="w"> </span><span class="o">/</span><span class="n">zanyuan</span><span class="o">/</span><span class="n">test_ti</span><span class="o">.</span><span class="n">R</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">memory</span><span class="o">-</span><span class="n">swap</span><span class="o">=</span><span class="mi">20</span><span class="n">G</span><span class="w"> </span><span class="o">--</span><span class="n">oom</span><span class="o">-</span><span class="n">kill</span><span class="o">-</span><span class="n">disable</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">zanyuan</span><span class="p">:</span><span class="o">/</span><span class="n">zanyuan</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">tmp</span><span class="p">:</span><span class="o">/</span><span class="n">tmp</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="p">:</span><span class="o">/</span><span class="n">dockerbin</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="p">:</span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">run</span><span class="o">/</span><span class="n">docker</span><span class="o">.</span><span class="n">sock</span><span class="w"> </span><span class="n">seqyuan</span><span class="o">/</span><span class="n">seqyuan</span><span class="o">-</span><span class="n">r</span><span class="p">:</span><span class="n">v0</span><span class="o">.</span><span class="mf">0.1</span><span class="w"> </span><span class="n">Rscript</span><span class="w"> </span><span class="o">/</span><span class="n">zanyuan</span><span class="o">/</span><span class="n">test_ti</span><span class="o">.</span><span class="n">R</span>
 </code></pre></div>
 
 <h2>后续</h2>
