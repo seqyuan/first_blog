@@ -1,4 +1,4 @@
-# 博客名称seqyuan
+# seqyuan的第一个博客-pelican
 为生物信息学技术交流分享创建
 
 
@@ -12,3 +12,5 @@
 - python
 - golang
 - machine learning
+
+从2017年3月13更新到2020年4月13
